@@ -1,0 +1,77 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+    color:#333;
+}
+
+header{
+    background:#0b6b3a;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+nav{
+    background:#084d2a;
+    text-align:center;
+    padding:15px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+.hero{
+    text-align:center;
+    padding:80px 20px;
+    background:linear-gradient(to right,#0b6b3a,#1c8f52);
+    color:white;
+}
+
+.hero button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:5px;
+    background:#ffd700;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.products{
+    padding:50px 20px;
+    text-align:center;
+}
+
+.card{
+    display:inline-block;
+    width:280px;
+    background:white;
+    margin:15px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    transition:.3s;
+}
+
+footer{
+    background:#0b6b3a;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
