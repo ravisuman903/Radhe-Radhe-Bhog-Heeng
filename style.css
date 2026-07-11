@@ -155,16 +155,18 @@ margin-top:40px;
 
 .card{
 background:#fff;
-border-radius:15px;
+border-radius:20px;
 overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-transition:.3s;
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+transition:.4s;
 text-align:center;
 padding-bottom:20px;
+border:2px solid transparent;
 }
 
 .card:hover{
-transform:translateY(-8px);
+transform:translateY(-12px) scale(1.03);
+border-color:#FFD700;
 }
 
 .card img{
@@ -205,8 +207,18 @@ padding:20px;
 @media(max-width:768px){
 
 .navbar{
-flex-direction:column;
-padding:15px;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+background:linear-gradient(90deg,#6b0000,#8B0000,#B8860B);
+backdrop-filter:blur(10px);
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+z-index:1000;
 }
 
 .menu{
@@ -217,15 +229,14 @@ margin-top:10px;
 }
 
 .hero h1{
-font-size:34px;
-}
-
-.hero p{
-font-size:16px;
-}
-
-.logo-box h2{
-font-size:20px;
+font-size:58px;
+font-weight:700;
+color:#fff;
+text-shadow:
+0 0 10px rgba(255,215,0,.6),
+0 0 20px rgba(255,215,0,.5),
+0 0 30px rgba(255,215,0,.4);
+margin-bottom:20px;
 }
 
 }
