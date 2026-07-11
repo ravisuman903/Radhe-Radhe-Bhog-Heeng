@@ -336,3 +336,12 @@ transform:translateY(-8px);
 margin-top:15px;
 color:#6b0000;
 }
+
+.contact .btn{
+display:inline-block;
+margin:10px;
+}
+
+.contact p{
+margin:12px 0;
+}
