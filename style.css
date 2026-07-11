@@ -367,3 +367,30 @@ text-align:center;
 margin-bottom:30px;
 color:#6b0000;
 }
+
+.counter{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+padding:60px 8%;
+background:#6b0000;
+}
+
+.counter-box{
+background:#fff;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+.counter-box h2{
+font-size:38px;
+color:#B8860B;
+margin-bottom:10px;
+}
+
+.counter-box p{
+font-size:18px;
+font-weight:600;
+}
