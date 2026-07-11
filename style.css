@@ -266,3 +266,38 @@ transform:translateY(0);
 }
 
 }
+
+features{
+padding:80px 0;
+background:#fff7e6;
+}
+
+.features h2{
+text-align:center;
+color:#6b0000;
+margin-bottom:40px;
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.feature-card{
+background:#fff;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-8px);
+}
+
+.feature-card h3{
+color:#6b0000;
+margin-bottom:12px;
+}
