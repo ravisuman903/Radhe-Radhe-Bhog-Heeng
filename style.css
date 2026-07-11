@@ -345,3 +345,14 @@ margin:10px;
 .contact p{
 margin:12px 0;
 }
+
+.map{
+padding:80px 0;
+background:#f8f8f8;
+}
+
+.map h2{
+text-align:center;
+margin-bottom:30px;
+color:#6b0000;
+}
