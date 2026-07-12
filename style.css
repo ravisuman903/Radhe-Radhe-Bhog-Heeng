@@ -527,3 +527,38 @@ transform:scale(1.08);
 .hero{
 animation:heroZoom 10s ease-in-out infinite alternate;
 }
+
+.cart-icon{
+background:#FFD700;
+color:#222;
+padding:8px 15px;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+#cartCount{
+background:#B00020;
+color:#fff;
+padding:2px 8px;
+border-radius:50%;
+margin-left:5px;
+}
+
+.cart-btn{
+width:100%;
+margin-top:10px;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#6b0000;
+color:#fff;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.cart-btn:hover{
+background:#8b0000;
+}
