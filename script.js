@@ -35,3 +35,20 @@ const menu=document.querySelector(".menu");
 menuToggle.addEventListener("click",function(){
 menu.classList.toggle("active");
 });
+
+const fadeElements = document.querySelectorAll(
+".card,.feature-card,.review-card,.gallery-grid img,.counter-box"
+);
+
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+});
+
+fadeElements.forEach(el=>{
+el.classList.add("fade-up");
+observer.observe(el);
+});
