@@ -164,7 +164,10 @@ cartItems.innerHTML+=`
 <h4>${item.product}</h4>
 <p>${item.qty} × ₹${item.price}</p>
 </div>
-<div>₹${itemTotal}</div>
+<div>
+₹${itemTotal}
+<button onclick="removeItem(${index})">🗑️</button>
+</div>
 </div>
 `;
 
