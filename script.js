@@ -92,15 +92,26 @@ alert("Your cart is empty!");
 return;
 }
 
-let message = "🛒 *My Order*%0A%0A";
-let total = 0;
+let message="🛒 *My Order*%0A%0A";
+let total=0;
 
 cart.forEach((item,index)=>{
-message += (index+1)+". "+item.product+" - ₹"+item.price+"%0A";
-total += item.price;
+
+let itemTotal=item.price*item.qty;
+
+message += (index+1)+". "
++item.product
++" × "
++item.qty
++" = ₹"
++itemTotal
++"%0A";
+
+total += itemTotal;
+
 });
 
-message += "%0A💰 Total = ₹"+total;
+message += "%0A💰 *Total = ₹"+total+"*";
 
 window.open(
 "https://wa.me/917733816532?text="+message,
