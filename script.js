@@ -61,11 +61,17 @@ let qty = parseInt(
 button.parentElement.querySelector(".qty").innerText
 );
 
+let existingItem = cart.find(item => item.product === product);
+
+if(existingItem){
+existingItem.qty += qty;
+}else{
 cart.push({
 product: product,
 price: price,
 qty: qty
 });
+}
 
 document.getElementById("cartCount").innerText = cart.length;
 
