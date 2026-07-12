@@ -167,3 +167,13 @@ cartItems.innerHTML+=`
 cartTotal.innerText=total;
 
 }
+document.getElementById("checkoutBtn").addEventListener("click", function(){
+
+if(cart.length===0){
+alert("Your cart is empty!");
+return;
+}
+
+showCart();
+
+});
