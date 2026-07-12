@@ -160,7 +160,14 @@ We believe every meal deserves freshness and trust.
 <h3>Premium Heeng 5g</h3>
 <p>₹150</p>
 <a class="btn" href="https://wa.me/917733816532?text=Hello%20Ravi%20Ji,%20Mujhe%20Premium%20Heeng%205g%20Order%20karni%20hai.">Order Now</a>
-<button class="cart-btn" onclick="addToCart('Premium Heeng 5g',150)">
+<div class="quantity-box">
+<button onclick="decreaseQty(this)">−</button>
+
+<span class="qty">1</span>
+
+<button onclick="increaseQty(this)">+</button>
+</div>
+<button class="cart-btn" onclick="addToCart(this,'Premium Heeng 5g',150)">
 🛒 Add to Cart
 </button>
 <p class="delivery-tag">🚚 Delivery Only in Kota</p>
@@ -172,7 +179,7 @@ We believe every meal deserves freshness and trust.
 <h3>Premium Heeng 10g</h3>
 <p>₹280</p>
 <a class="btn" href="https://wa.me/917733816532?text=Hello%20Ravi%20Ji,%20Mujhe%20Premium%20Heeng%2010g%20Order%20karni%20hai.">Order Now</a>
-<button class="cart-btn" onclick="addToCart('Premium Heeng 10g',280)">
+<button class="cart-btn" onclick="addToCart(this,'Premium Heeng 10g',280)">
 🛒 Add to Cart
 </button>
 <p class="delivery-tag">🚚 Delivery Only in Kota</p>
@@ -183,7 +190,7 @@ We believe every meal deserves freshness and trust.
 <h3>Kachori Special 10g</h3>
 <p>₹350</p>
 <a class="btn" href="https://wa.me/917733816532?text=Hello%20Ravi%20Ji,%20Mujhe%20Kachori%20Special%2010g%20Order%20karni%20hai.">Order Now</a>
-<button class="cart-btn" onclick="addToCart('Kachori Special 10g',350)">
+<button class="cart-btn" onclick="addToCart(this,'Kachori Special 10g',350)">
 🛒 Add to Cart
 </button>
 <p class="delivery-tag">🚚 Delivery Only in Kota</p>
@@ -194,7 +201,7 @@ We believe every meal deserves freshness and trust.
 <h3>Premium Heeng 50g</h3>
 <p>₹1350</p>
 <a class="btn" href="https://wa.me/917733816532?text=Hello%20Ravi%20Ji,%20Mujhe%20Premium%20Heeng%2050g%20Order%20karni%20hai.">Order Now</a>
-<button class="cart-btn" onclick="addToCart('Premium Heeng 50g',1350)">
+<button class="cart-btn" onclick="addToCart(this,'Premium Heeng 50g',350)">
 🛒 Add to Cart
 </button>
 <p class="delivery-tag">🚚 Delivery Only in Kota</p>
