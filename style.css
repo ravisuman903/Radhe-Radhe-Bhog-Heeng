@@ -24,6 +24,7 @@ padding:15px 8%;
 background:#6b0000;
 z-index:1000;
 box-shadow:0 3px 10px rgba(0,0,0,.2);
+border-bottom:2px solid rgba(255,215,0,.25);
 }
 
 .logo-box{
@@ -207,6 +208,7 @@ text-align:center;
 padding:40px 20px;
 line-height:2;
 border-top:4px solid #FFD700;
+font-size:16px;
 }
 
 @media(max-width:768px){
@@ -510,4 +512,18 @@ transition:all .8s ease;
 .fade-up.show{
 opacity:1;
 transform:translateY(0);
+}
+
+@keyframes heroZoom{
+0%{
+transform:scale(1);
+}
+
+100%{
+transform:scale(1.08);
+}
+}
+
+.hero{
+animation:heroZoom 10s ease-in-out infinite alternate;
 }
