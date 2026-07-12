@@ -70,6 +70,7 @@ qty: qty
 document.getElementById("cartCount").innerText = cart.length;
 
 alert(product + " x " + qty + " added to cart!");
+updateCartPopup();
 }
 
 function increaseQty(btn){
