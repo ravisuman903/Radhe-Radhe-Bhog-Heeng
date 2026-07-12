@@ -55,16 +55,34 @@ observer.observe(el);
 
 let cart = [];
 
-function addToCart(product, price){
+function addToCart(button, product, price){
+
+let qty = parseInt(
+button.parentElement.querySelector(".qty").innerText
+);
 
 cart.push({
 product: product,
-price: price
+price: price,
+qty: qty
 });
 
 document.getElementById("cartCount").innerText = cart.length;
 
-alert(product + " added to cart!");
+alert(product + " x " + qty + " added to cart!");
+}
+
+function increaseQty(btn){
+let qty = btn.parentElement.querySelector(".qty");
+qty.innerText = parseInt(qty.innerText) + 1;
+}
+
+function decreaseQty(btn){
+let qty = btn.parentElement.querySelector(".qty");
+
+if(parseInt(qty.innerText) > 1){
+qty.innerText = parseInt(qty.innerText) - 1;
+}
 }
 
 function showCart(){
