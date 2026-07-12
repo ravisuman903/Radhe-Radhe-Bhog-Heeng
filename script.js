@@ -119,3 +119,20 @@ window.open(
 );
 
 }
+
+const cartModal = document.getElementById("cartModal");
+const closeCart = document.getElementById("closeCart");
+
+document.querySelector(".cart-icon").addEventListener("click", function () {
+  cartModal.style.display = "block";
+});
+
+closeCart.addEventListener("click", function () {
+  cartModal.style.display = "none";
+});
+
+window.addEventListener("click", function (e) {
+  if (e.target === cartModal) {
+    cartModal.style.display = "none";
+  }
+});
