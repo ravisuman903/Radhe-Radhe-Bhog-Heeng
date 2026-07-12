@@ -562,3 +562,29 @@ transition:.3s;
 .cart-btn:hover{
 background:#8b0000;
 }
+
+.quantity-box{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin:12px 0;
+}
+
+.quantity-box button{
+width:35px;
+height:35px;
+border:none;
+border-radius:50%;
+background:#6b0000;
+color:#fff;
+font-size:20px;
+cursor:pointer;
+}
+
+.qty{
+font-size:18px;
+font-weight:bold;
+min-width:25px;
+text-align:center;
+}
