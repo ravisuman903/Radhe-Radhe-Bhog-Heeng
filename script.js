@@ -179,3 +179,13 @@ cartTotal.innerText=total;
 document.getElementById("checkoutBtn").onclick = function () {
     showCart();
 };
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+document.getElementById("cartCount").innerText=cart.length;
+
+updateCartPopup();
+
+}
