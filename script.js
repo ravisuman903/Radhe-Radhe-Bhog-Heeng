@@ -136,3 +136,33 @@ window.addEventListener("click", function (e) {
     cartModal.style.display = "none";
   }
 });
+
+function updateCartPopup(){
+
+const cartItems=document.getElementById("cartItems");
+const cartTotal=document.getElementById("cartTotal");
+
+cartItems.innerHTML="";
+
+let total=0;
+
+cart.forEach((item,index)=>{
+
+let itemTotal=item.price*item.qty;
+total+=itemTotal;
+
+cartItems.innerHTML+=`
+<div class="cart-item">
+<div>
+<h4>${item.product}</h4>
+<p>${item.qty} × ₹${item.price}</p>
+</div>
+<div>₹${itemTotal}</div>
+</div>
+`;
+
+});
+
+cartTotal.innerText=total;
+
+}
