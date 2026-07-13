@@ -656,3 +656,33 @@ transition:.5s;
 .hero-slider img:hover{
 transform:scale(1.03);
 }
+
+.hero-slider{
+position:relative;
+}
+
+.slider-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:#8B0000;
+color:#fff;
+border:none;
+padding:10px 14px;
+border-radius:50%;
+cursor:pointer;
+font-size:18px;
+opacity:.85;
+}
+
+.slider-btn:hover{
+opacity:1;
+}
+
+.left{
+left:10px;
+}
+
+.right{
+right:10px;
+}
