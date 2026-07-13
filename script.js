@@ -220,3 +220,27 @@ document.getElementById("sliderImage").src =
 sliderImages[currentSlide];
 
 },3000);
+
+function nextSlide(){
+
+currentSlide++;
+
+if(currentSlide>=sliderImages.length){
+currentSlide=0;
+}
+
+document.getElementById("sliderImage").src=sliderImages[currentSlide];
+
+}
+
+function prevSlide(){
+
+currentSlide--;
+
+if(currentSlide<0){
+currentSlide=sliderImages.length-1;
+}
+
+document.getElementById("sliderImage").src=sliderImages[currentSlide];
+
+}
