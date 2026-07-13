@@ -53,7 +53,7 @@ el.classList.add("fade-up");
 observer.observe(el);
 });
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function addToCart(button, product, price){
 
@@ -77,6 +77,7 @@ document.getElementById("cartCount").innerText = cart.length;
 
 alert(product + " x " + qty + " added to cart!");
 updateCartPopup();
+saveCart();
 }
 
 function increaseQty(btn){
@@ -187,5 +188,14 @@ cart.splice(index,1);
 document.getElementById("cartCount").innerText=cart.length;
 
 updateCartPopup();
+saveCart();
 
 }
+
+function saveCart(){
+localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+updateCartPopup();
+
+document.getElementById("cartCount").innerText = cart.length;
