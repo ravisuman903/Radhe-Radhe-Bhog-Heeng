@@ -640,3 +640,19 @@ color:#444;
 width:100%;
 margin-top:12px;
 }
+
+.hero-slider{
+margin:25px auto;
+max-width:350px;
+}
+
+.hero-slider img{
+width:100%;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+transition:.5s;
+}
+
+.hero-slider img:hover{
+transform:scale(1.03);
+}
