@@ -344,10 +344,12 @@ border-radius:15px;
 box-shadow:0 5px 20px rgba(0,0,0,.12);
 text-align:center;
 transition:.3s;
+cursor:pointer;
 }
 
 .review-card:hover{
-transform:translateY(-8px);
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 15px 35px rgba(0,0,0,.18);
 }
 
 .review-card h4{
