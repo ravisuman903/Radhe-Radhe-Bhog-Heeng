@@ -199,3 +199,24 @@ localStorage.setItem("cart", JSON.stringify(cart));
 updateCartPopup();
 
 document.getElementById("cartCount").innerText = cart.length;
+
+const sliderImages = [
+"images/IMG-20260710-WA0004.jpg",
+"images/IMG-20260710-WA0004.jpg",
+"images/IMG-20260710-WA0004.jpg"
+];
+
+let currentSlide = 0;
+
+setInterval(function(){
+
+currentSlide++;
+
+if(currentSlide >= sliderImages.length){
+currentSlide = 0;
+}
+
+document.getElementById("sliderImage").src =
+sliderImages[currentSlide];
+
+},3000);
