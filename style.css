@@ -749,3 +749,23 @@ transition:.3s;
 .offer-banner .btn:hover{
 transform:scale(1.05);
 }
+
+@keyframes pulseOffer{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.02);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.offer-banner{
+animation:pulseOffer 2.5s infinite;
+}
