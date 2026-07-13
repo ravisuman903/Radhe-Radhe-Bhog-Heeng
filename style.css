@@ -718,3 +718,34 @@ transform:translateY(-8px);
 margin-top:15px;
 color:#8B0000;
 }
+
+.offer-banner{
+background:linear-gradient(135deg,#8B0000,#C62828);
+color:#fff;
+text-align:center;
+padding:40px 20px;
+}
+
+.offer-banner h2{
+font-size:32px;
+margin-bottom:15px;
+}
+
+.offer-banner p{
+font-size:18px;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+.offer-banner .btn{
+background:#FFD700;
+color:#8B0000;
+font-weight:bold;
+border-radius:30px;
+padding:12px 28px;
+transition:.3s;
+}
+
+.offer-banner .btn:hover{
+transform:scale(1.05);
+}
