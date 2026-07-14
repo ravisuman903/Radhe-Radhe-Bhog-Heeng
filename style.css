@@ -769,3 +769,22 @@ transform:scale(1);
 .offer-banner{
 animation:pulseOffer 2.5s infinite;
 }
+
+.search-box{
+width:100%;
+max-width:450px;
+display:block;
+margin:20px auto 35px;
+padding:14px 18px;
+font-size:16px;
+border:2px solid #8B0000;
+border-radius:30px;
+outline:none;
+transition:.3s;
+box-sizing:border-box;
+}
+
+.search-box:focus{
+box-shadow:0 0 12px rgba(139,0,0,.3);
+border-color:#C62828;
+}
