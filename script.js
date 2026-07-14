@@ -364,25 +364,24 @@ upiBox.style.display="none";
 });
 function buyNow(btn, product, price){
 
-    let qty = parseInt(
-        btn.parentElement.querySelector(".qty").innerText
-    );
+let qty = parseInt(
+btn.parentElement.querySelector(".qty").innerText
+);
 
-    cart = [];
+cart = [];
 
-    cart.push({
-        product: product,
-        price: price,
-        qty: qty
-    });
+cart.push({
+product: product,
+price: price,
+qty: qty
+});
 
-    saveCart();
+document.getElementById("cartCount").innerText = 1;
 
-    document.getElementById("cartCount").innerText = cart.length;
+updateCartPopup();
 
-    updateCartPopup();
+document.getElementById("cartModal").style.display = "block";
 
-    document.getElementById("cartModal").style.display = "block";
 }
 document.getElementById("cartCount").innerText = 1;
 
