@@ -332,3 +332,26 @@ updateCartPopup();
 document.getElementById("cartModal").style.display = "block";
 
 }
+
+let discount = 0;
+
+document.getElementById("applyCouponBtn").onclick = function(){
+
+let code = document.getElementById("couponCode").value.toUpperCase();
+
+if(code==="SAVE50"){
+discount=50;
+alert("₹50 Discount Applied!");
+}
+else if(code==="WELCOME10"){
+discount=10;
+alert("10% Discount Applied!");
+}
+else{
+discount=0;
+alert("Invalid Coupon Code");
+}
+
+updateCartPopup();
+
+};
