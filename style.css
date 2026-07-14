@@ -843,3 +843,20 @@ z-index:10;
 background:#ff5722;
 box-shadow:0 4px 10px rgba(0,0,0,.25);
 }
+.stock{
+font-size:14px;
+font-weight:600;
+margin:8px 0;
+}
+
+.in-stock{
+color:#2e7d32;
+}
+
+.low-stock{
+color:#ff9800;
+}
+
+.out-stock{
+color:#d32f2f;
+}
