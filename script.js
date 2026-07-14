@@ -54,6 +54,7 @@ observer.observe(el);
 });
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let discount = 0;
 
 function addToCart(button, product, price){
 
@@ -382,8 +383,6 @@ updateCartPopup();
 document.getElementById("cartModal").style.display = "block";
 
 }
-
-let discount = 0;
 
 document.getElementById("applyCouponBtn").onclick = function(){
 
