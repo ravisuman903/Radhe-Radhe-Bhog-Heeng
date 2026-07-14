@@ -104,7 +104,20 @@ let message="🛒 *My Order*%0A%0A";
 let name = document.getElementById("customerName").value;
 let phone = document.getElementById("customerPhone").value;
 let address = document.getElementById("customerAddress").value;
+if(name.trim()===""){
+alert("Please enter your name.");
+return;
+}
 
+if(phone.trim()===""){
+alert("Please enter your mobile number.");
+return;
+}
+
+if(phone.length<10){
+alert("Please enter a valid 10-digit mobile number.");
+return;
+}
 message += "👤 Name: " + name + "%0A";
 message += "📱 Mobile: " + phone + "%0A";
 message += "📍 Address: " + address + "%0A%0A";
