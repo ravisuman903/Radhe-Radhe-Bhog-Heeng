@@ -208,7 +208,21 @@ cartItems.innerHTML+=`
 
 });
 
-cartTotal.innerText=total;
+let finalTotal = total;
+
+if(discount===50){
+finalTotal = total - 50;
+}
+
+if(discount===10){
+finalTotal = total - (total * 0.10);
+}
+
+if(finalTotal<0){
+finalTotal=0;
+}
+
+cartTotal.innerText = Math.round(finalTotal);
 
 }
 document.getElementById("checkoutBtn").onclick = function () {
