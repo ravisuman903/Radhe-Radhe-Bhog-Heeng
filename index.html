@@ -459,7 +459,13 @@ id="customerAddress"
 placeholder="📍 Delivery Address"
 class="cart-input"
 rows="3"></textarea>
-  
+<label for="paymentMethod"><strong>💳 Select Payment Method</strong></label>
+
+<select id="paymentMethod" class="cart-input">
+<option value="Cash on Delivery">💵 Cash on Delivery</option>
+<option value="UPI">📱 UPI (Google Pay / PhonePe / Paytm)</option>
+<option value="Online Payment">💳 Pay Online</option>
+</select>
 <button id="checkoutBtn" class="btn">
 Proceed to WhatsApp
 </button>
