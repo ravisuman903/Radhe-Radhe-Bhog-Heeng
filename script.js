@@ -311,3 +311,24 @@ upiBox.style.display="none";
 }
 
 });
+function buyNow(btn, product, price){
+
+let qty = parseInt(
+btn.parentElement.querySelector(".qty").innerText
+);
+
+cart = [];
+
+cart.push({
+product: product,
+price: price,
+qty: qty
+});
+
+document.getElementById("cartCount").innerText = 1;
+
+updateCartPopup();
+
+document.getElementById("cartModal").style.display = "block";
+
+}
