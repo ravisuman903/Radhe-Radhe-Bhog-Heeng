@@ -874,3 +874,29 @@ transition:.3s;
 .wishlist:hover{
 transform:scale(1.2);
 }
+
+.order-popup{
+position:fixed;
+left:20px;
+bottom:20px;
+background:#fff;
+padding:12px 18px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,.2);
+display:none;
+z-index:9999;
+max-width:300px;
+font-size:14px;
+animation:slideUp .5s ease;
+}
+
+@keyframes slideUp{
+from{
+transform:translateY(40px);
+opacity:0;
+}
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
