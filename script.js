@@ -121,6 +121,9 @@ return;
 message += "👤 Name: " + name + "%0A";
 message += "📱 Mobile: " + phone + "%0A";
 message += "📍 Address: " + address + "%0A%0A";
+let orderId = "RRBH-" + Date.now();
+
+message += "🧾 Order ID: " + orderId + "%0A%0A";
 let total=0;
 
 cart.forEach((item,index)=>{
