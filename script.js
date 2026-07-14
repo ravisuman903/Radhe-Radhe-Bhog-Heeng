@@ -421,9 +421,13 @@ document.querySelectorAll(".card").forEach(card=>{
 
 let name = card.querySelector("h3").innerText;
 
+document.querySelectorAll(".card").forEach(card=>{
+
+let name = card.querySelector("h3").innerText;
+
 let heart = card.querySelector(".wishlist");
 
-if(localStorage.getItem(name)){
+if(heart && localStorage.getItem(name)){
 heart.innerText="❤️";
 }
 
