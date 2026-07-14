@@ -428,3 +428,33 @@ heart.innerText="❤️";
 }
 
 });
+
+const popup = document.getElementById("orderPopup");
+const popupText = document.getElementById("popupText");
+
+const recentOrders = [
+"🛒 Ravi from Kota purchased Premium Heeng 50g • 2 min ago",
+"🛒 Mohit from Kota purchased Premium Heeng 10g • 5 min ago",
+"🛒 Priya from Kota purchased Kachori Special 10g • 8 min ago",
+"🛒 Aman from Kota purchased Premium Heeng 5g • 12 min ago",
+"🛒 Neha from Kota purchased Premium Heeng 50g • 15 min ago"
+];
+
+function showOrderPopup(){
+
+let random =
+recentOrders[Math.floor(Math.random()*recentOrders.length)];
+
+popupText.innerText = random;
+
+popup.style.display = "block";
+
+setTimeout(function(){
+popup.style.display = "none";
+},4000);
+
+}
+
+setInterval(showOrderPopup,10000);
+
+setTimeout(showOrderPopup,3000);
