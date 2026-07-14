@@ -208,7 +208,7 @@ function updateCartPopup(){
 
 const cartItems=document.getElementById("cartItems");
 const cartTotal=document.getElementById("cartTotal");
-
+console.log(cart);
 cartItems.innerHTML="";
 
 let total=0;
