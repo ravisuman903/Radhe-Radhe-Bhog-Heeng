@@ -101,6 +101,13 @@ return;
 }
 
 let message="🛒 *My Order*%0A%0A";
+let name = document.getElementById("customerName").value;
+let phone = document.getElementById("customerPhone").value;
+let address = document.getElementById("customerAddress").value;
+
+message += "👤 Name: " + name + "%0A";
+message += "📱 Mobile: " + phone + "%0A";
+message += "📍 Address: " + address + "%0A%0A";
 let total=0;
 
 cart.forEach((item,index)=>{
