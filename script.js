@@ -169,7 +169,15 @@ finalTotal=0;
 
 message += "%0A🎟️ Discount Applied = ₹" + (total-finalTotal) + "%0A";
 
-message += "💰 *Final Total = ₹"+Math.round(finalTotal)+"*";
+let delivery = 0;
+
+if(finalTotal < 500){
+delivery = 50;
+}
+
+message += "🚚 Delivery Charge = ₹" + delivery + "%0A";
+
+message += "💰 *Grand Total = ₹" + Math.round(finalTotal + delivery) + "*";
 
 window.open(
 "https://wa.me/917733816532?text="+message,
