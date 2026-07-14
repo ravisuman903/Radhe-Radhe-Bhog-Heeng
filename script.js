@@ -244,3 +244,23 @@ currentSlide=sliderImages.length-1;
 document.getElementById("sliderImage").src=sliderImages[currentSlide];
 
 }
+
+function searchProducts(){
+
+let input = document.getElementById("searchProduct").value.toLowerCase();
+
+let cards = document.querySelectorAll(".product-grid .card");
+
+cards.forEach(function(card){
+
+let productName = card.querySelector("h3").innerText.toLowerCase();
+
+if(productName.includes(input)){
+card.style.display = "block";
+}else{
+card.style.display = "none";
+}
+
+});
+
+}
