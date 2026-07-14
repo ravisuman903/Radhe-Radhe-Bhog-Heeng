@@ -383,13 +383,6 @@ updateCartPopup();
 document.getElementById("cartModal").style.display = "block";
 
 }
-document.getElementById("cartCount").innerText = 1;
-
-updateCartPopup();
-
-document.getElementById("cartModal").style.display = "block";
-
-}
 
 document.getElementById("applyCouponBtn").onclick = function(){
 
