@@ -429,9 +429,6 @@ heart.innerText="❤️";
 
 });
 
-const popup = document.getElementById("orderPopup");
-const popupText = document.getElementById("popupText");
-
 const recentOrders = [
 "🛒 Ravi from Kota purchased Premium Heeng 50g • 2 min ago",
 "🛒 Mohit from Kota purchased Premium Heeng 10g • 5 min ago",
@@ -440,21 +437,27 @@ const recentOrders = [
 "🛒 Neha from Kota purchased Premium Heeng 50g • 15 min ago"
 ];
 
-function showOrderPopup(){
+window.addEventListener("load", function () {
 
-let random =
-recentOrders[Math.floor(Math.random()*recentOrders.length)];
+const popup = document.getElementById("orderPopup");
+const popupText = document.getElementById("popupText");
+
+if (!popup || !popupText) return;
+
+function showOrderPopup() {
+
+const random = recentOrders[Math.floor(Math.random() * recentOrders.length)];
 
 popupText.innerText = random;
-
 popup.style.display = "block";
 
-setTimeout(function(){
+setTimeout(function () {
 popup.style.display = "none";
-},4000);
+}, 4000);
 
 }
 
-setInterval(showOrderPopup,10000);
+setTimeout(showOrderPopup, 3000);
+setInterval(showOrderPopup, 10000);
 
-setTimeout(showOrderPopup,3000);
+});
