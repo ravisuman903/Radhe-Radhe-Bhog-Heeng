@@ -416,11 +416,7 @@ localStorage.removeItem(el.parentElement.querySelector("h3").innerText);
 }
 
 }
-document.querySelectorAll(".card").forEach(card=>{
-
-let name = card.querySelector("h3").innerText;
-
-document.querySelectorAll(".card").forEach(card=>{
+document.querySelectorAll(".card").forEach(card => {
 
 let name = card.querySelector("h3").innerText;
 
@@ -431,7 +427,6 @@ heart.innerText="❤️";
 }
 
 });
-
 const recentOrders = [
 "🛒 Ravi from Kota purchased Premium Heeng 50g • 2 min ago",
 "🛒 Mohit from Kota purchased Premium Heeng 10g • 5 min ago",
