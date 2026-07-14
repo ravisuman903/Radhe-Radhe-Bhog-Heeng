@@ -860,3 +860,17 @@ color:#ff9800;
 .out-stock{
 color:#d32f2f;
 }
+.wishlist{
+position:absolute;
+top:12px;
+right:12px;
+font-size:26px;
+cursor:pointer;
+z-index:10;
+user-select:none;
+transition:.3s;
+}
+
+.wishlist:hover{
+transform:scale(1.2);
+}
