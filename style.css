@@ -822,3 +822,24 @@ transition:.3s;
 .buy-btn:hover{
 background:#e68900;
 }
+
+.card{
+position:relative;
+}
+
+.badge{
+position:absolute;
+top:12px;
+left:12px;
+padding:6px 12px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;
+color:#fff;
+z-index:10;
+}
+
+.bestseller{
+background:#ff5722;
+box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
