@@ -239,6 +239,18 @@ finalTotal=0;
 }
 
 cartTotal.innerText = Math.round(finalTotal);
+let delivery = 0;
+
+if(finalTotal < 500){
+delivery = 50;
+document.getElementById("deliveryCharge").innerText =
+"🚚 Delivery Charge: ₹50";
+}else{
+document.getElementById("deliveryCharge").innerText =
+"🚚 Delivery Charge: FREE";
+}
+
+cartTotal.innerText = Math.round(finalTotal + delivery);
 
 }
 document.getElementById("checkoutBtn").onclick = function () {
