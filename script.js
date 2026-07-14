@@ -105,6 +105,12 @@ let name = document.getElementById("customerName").value;
 let phone = document.getElementById("customerPhone").value;
 let address = document.getElementById("customerAddress").value;
 let paymentMethod = document.getElementById("paymentMethod").value;
+let transactionId = document.getElementById("transactionId").value;
+
+if(paymentMethod==="UPI" && transactionId.trim()===""){
+alert("Please enter your UPI Transaction ID.");
+return;
+}
 if(name.trim()===""){
 alert("Please enter your name.");
 return;
