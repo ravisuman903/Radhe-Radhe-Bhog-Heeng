@@ -104,6 +104,7 @@ let message="🛒 *My Order*%0A%0A";
 let name = document.getElementById("customerName").value;
 let phone = document.getElementById("customerPhone").value;
 let address = document.getElementById("customerAddress").value;
+let paymentMethod = document.getElementById("paymentMethod").value;
 if(name.trim()===""){
 alert("Please enter your name.");
 return;
