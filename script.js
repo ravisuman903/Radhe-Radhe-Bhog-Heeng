@@ -153,7 +153,23 @@ total += itemTotal;
 
 });
 
-message += "%0A💰 *Total = ₹"+total+"*";
+let finalTotal = total;
+
+if(discount===50){
+finalTotal = total - 50;
+}
+
+if(discount===10){
+finalTotal = total - (total * 0.10);
+}
+
+if(finalTotal<0){
+finalTotal=0;
+}
+
+message += "%0A🎟️ Discount Applied = ₹" + (total-finalTotal) + "%0A";
+
+message += "💰 *Final Total = ₹"+Math.round(finalTotal)+"*";
 
 window.open(
 "https://wa.me/917733816532?text="+message,
