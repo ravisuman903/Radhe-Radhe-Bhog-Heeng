@@ -289,3 +289,16 @@ card.style.display = "none";
 });
 
 }
+
+const paymentSelect = document.getElementById("paymentMethod");
+const upiBox = document.getElementById("upiBox");
+
+paymentSelect.addEventListener("change", function(){
+
+if(paymentSelect.value==="UPI"){
+upiBox.style.display="block";
+}else{
+upiBox.style.display="none";
+}
+
+});
