@@ -405,3 +405,15 @@ alert("Invalid Coupon Code");
 updateCartPopup();
 
 };
+function toggleWishlist(el){
+
+if(el.innerText==="🤍"){
+el.innerText="❤️";
+localStorage.setItem(el.parentElement.querySelector("h3").innerText,"❤️");
+}
+else{
+el.innerText="🤍";
+localStorage.removeItem(el.parentElement.querySelector("h3").innerText);
+}
+
+}
