@@ -522,3 +522,14 @@ function logout(){
     location.reload();
 
 }
+function showOrders(){
+
+    document.getElementById("ordersModal").style.display = "block";
+
+}
+
+function closeOrders(){
+
+    document.getElementById("ordersModal").style.display = "none";
+
+}
