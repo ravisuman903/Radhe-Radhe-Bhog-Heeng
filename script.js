@@ -284,7 +284,21 @@ localStorage.setItem("cart", JSON.stringify(cart));
 updateCartPopup();
 
 document.getElementById("cartCount").innerText = cart.length;
+// Auto Fill Customer Details
+window.addEventListener("load", function(){
 
+    let savedName = localStorage.getItem("customerName");
+    let savedPhone = localStorage.getItem("customerPhone");
+
+    if(savedName){
+        document.getElementById("customerName").value = savedName;
+    }
+
+    if(savedPhone){
+        document.getElementById("customerPhone").value = savedPhone;
+    }
+
+});
 const sliderImages = [
 "images/IMG-20260710-WA0004.jpg",
 "images/IMG-20260710-WA0004.jpg",
