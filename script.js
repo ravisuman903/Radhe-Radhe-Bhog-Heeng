@@ -179,7 +179,15 @@ delivery = 50;
 message += "🚚 Delivery Charge = ₹" + delivery + "%0A";
 
 message += "💰 *Grand Total = ₹" + Math.round(finalTotal + delivery) + "*";
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
+orders.push({
+    id: orderId,
+    total: Math.round(finalTotal + delivery),
+    date: new Date().toLocaleString()
+});
+
+localStorage.setItem("orders", JSON.stringify(orders));
 window.open(
 "https://wa.me/917733816532?text="+message,
 "_blank"
