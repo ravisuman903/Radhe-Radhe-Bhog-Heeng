@@ -504,9 +504,10 @@ window.addEventListener("load", function(){
 
     if(name){
 
-        document.getElementById("loginMenu").innerHTML = `
-        <a href="#">👋 Welcome, ${name}</a>
-        `;
+document.getElementById("loginMenu").innerHTML = `
+<a href="#">👋 ${name}</a>
+<a href="#" onclick="logout(); return false;">🚪 Logout</a>
+`;
 
     }
 
