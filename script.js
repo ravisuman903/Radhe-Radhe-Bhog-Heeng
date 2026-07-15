@@ -511,3 +511,13 @@ window.addEventListener("load", function(){
     }
 
 });
+function logout(){
+
+    localStorage.removeItem("customerName");
+    localStorage.removeItem("customerPhone");
+
+    alert("Logged Out Successfully");
+
+    location.reload();
+
+}
