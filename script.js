@@ -532,7 +532,36 @@ function logout(){
 }
 function showOrders(){
 
-    document.getElementById("ordersModal").style.display = "block";
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    let html = "";
+
+    if(orders.length==0){
+        html = "No Orders Yet";
+    }else{
+
+        orders.forEach(function(order){
+
+            html += `
+            <div class="cart-item">
+                <div>
+                    <h4>${order.id}</h4>
+                    <p>${order.date}</p>
+                </div>
+
+                <div>
+                    ₹${order.total}
+                </div>
+            </div>
+            `;
+
+        });
+
+    }
+
+    document.getElementById("ordersList").innerHTML = html;
+
+    document.getElementById("ordersModal").style.display="block";
 
 }
 
