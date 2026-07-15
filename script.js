@@ -498,3 +498,16 @@ document.getElementById("loginBtn").onclick = function(){
 
     document.getElementById("loginModal").style.display = "none";
 }
+window.addEventListener("load", function(){
+
+    let name = localStorage.getItem("customerName");
+
+    if(name){
+
+        document.getElementById("loginMenu").innerHTML = `
+        <a href="#">👋 Welcome, ${name}</a>
+        `;
+
+    }
+
+});
