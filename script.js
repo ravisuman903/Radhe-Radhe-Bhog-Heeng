@@ -459,3 +459,28 @@ setTimeout(showOrderPopup, 3000);
 setInterval(showOrderPopup, 10000);
 
 });
+function openLogin(){
+    document.getElementById("loginModal").style.display = "block";
+}
+
+document.getElementById("closeLogin").onclick = function(){
+    document.getElementById("loginModal").style.display = "none";
+}
+
+document.getElementById("loginBtn").onclick = function(){
+
+    let name = document.getElementById("loginName").value;
+    let phone = document.getElementById("loginPhone").value;
+
+    if(name==="" || phone===""){
+        alert("Please fill all details");
+        return;
+    }
+
+    localStorage.setItem("customerName", name);
+    localStorage.setItem("customerPhone", phone);
+
+    alert("Login Successful!");
+
+    document.getElementById("loginModal").style.display = "none";
+}
