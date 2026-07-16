@@ -727,3 +727,19 @@ function deleteOrder(orderId){
 
     openAdmin();
 }
+window.addToCart = addToCart;
+window.buyNow = buyNow;
+window.increaseQty = increaseQty;
+window.decreaseQty = decreaseQty;
+window.toggleWishlist = toggleWishlist;
+window.openLogin = openLogin;
+window.logout = logout;
+window.showOrders = showOrders;
+window.closeOrders = closeOrders;
+window.openAdmin = openAdmin;
+window.closeAdmin = closeAdmin;
+window.deleteOrder = deleteOrder;
+window.closeSuccess = closeSuccess;
+window.prevSlide = prevSlide;
+window.nextSlide = nextSlide;
+window.searchProducts = searchProducts;
