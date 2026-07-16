@@ -675,3 +675,20 @@ if(pass !== "Radhe2026"){
 function closeAdmin(){
     document.getElementById("adminModal").style.display = "none";
 }
+function searchAdminOrders(){
+
+    let input = document.getElementById("adminSearch").value.toLowerCase();
+
+    let items = document.querySelectorAll("#adminOrders .cart-item");
+
+    items.forEach(function(item){
+
+        if(item.innerText.toLowerCase().includes(input)){
+            item.style.display = "flex";
+        }else{
+            item.style.display = "none";
+        }
+
+    });
+
+}
