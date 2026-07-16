@@ -636,3 +636,37 @@ document.getElementById("invoiceBtn").onclick = function () {
     doc.save("Invoice.pdf");
 
 };
+function openAdmin(){
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    let totalSales = 0;
+    let html = "";
+
+    orders.forEach(function(order){
+
+        totalSales += order.total;
+
+        html += `
+        <div class="cart-item">
+            <div>
+                <h4>${order.id}</h4>
+                <p>${order.date}</p>
+            </div>
+            <div>
+                ₹${order.total}
+            </div>
+        </div>
+        `;
+    });
+
+    document.getElementById("totalOrders").innerText = orders.length;
+    document.getElementById("totalSales").innerText = totalSales;
+    document.getElementById("adminOrders").innerHTML = html;
+
+    document.getElementById("adminModal").style.display = "block";
+}
+
+function closeAdmin(){
+    document.getElementById("adminModal").style.display = "none";
+}
