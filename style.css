@@ -900,3 +900,28 @@ transform:translateY(0);
 opacity:1;
 }
 }
+.admin-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:15px;
+margin:20px 0;
+}
+
+.stat-card{
+background:#fff7e6;
+padding:15px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.stat-card h3{
+color:#8B0000;
+font-size:24px;
+margin-bottom:5px;
+}
+
+.stat-card p{
+font-size:14px;
+font-weight:bold;
+}
