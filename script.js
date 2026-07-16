@@ -637,7 +637,12 @@ document.getElementById("invoiceBtn").onclick = function () {
 
 };
 function openAdmin(){
+let pass = prompt("Enter Admin Password");
 
+if(pass !== "Radhe2026"){
+    alert("Wrong Password");
+    return;
+}
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
     let totalSales = 0;
