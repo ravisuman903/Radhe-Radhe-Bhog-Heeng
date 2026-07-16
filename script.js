@@ -570,18 +570,7 @@ function closeOrders(){
     document.getElementById("ordersModal").style.display = "none";
 
 }
-window.onload = function(){
 
-    let customer = localStorage.getItem("customerName");
-
-    if(customer){
-
-        document.getElementById("loginMenu").innerHTML =
-        <a href="#" onclick="logout(); return false;">👋 ${customer} (Logout)</a>;
-
-    }
-
-}
 function logout(){
 
     localStorage.removeItem("customerName");
