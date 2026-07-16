@@ -1,23 +1,22 @@
-// Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
 import {
   getFirestore,
   collection,
   addDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-// Firebase Config
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDHFc3TuBAjAhAWrmVzQdX5eLFoKTYulmI",
-  authDomain: "radhe-radhe-bhog-heeng.firebaseapp.com",
-  projectId: "radhe-radhe-bhog-heeng",
-  storageBucket: "radhe-radhe-bhog-heeng.firebasestorage.app",
-  messagingSenderId: "438530440845",
-  appId: "1:438530440845:web:c222af6c9319d2690bacc4"
+  apiKey: "...",
+  authDomain: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "..."
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
 
 export { db, collection, addDoc };
-console.log("✅ Firebase Connected Successfully");
