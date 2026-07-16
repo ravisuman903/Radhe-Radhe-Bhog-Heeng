@@ -583,3 +583,56 @@ function closeOrders(){
 function closeSuccess(){
     document.getElementById("successModal").style.display = "none";
 }
+document.getElementById("invoiceBtn").onclick = function () {
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let name = document.getElementById("customerName").value;
+    let phone = document.getElementById("customerPhone").value;
+    let address = document.getElementById("customerAddress").value;
+
+    let y = 20;
+
+    doc.setFontSize(18);
+    doc.text("Radhe Radhe Bhog Heeng", 20, y);
+
+    y += 10;
+    doc.setFontSize(12);
+    doc.text("Invoice", 20, y);
+
+    y += 10;
+    doc.text("Customer: " + name, 20, y);
+
+    y += 8;
+    doc.text("Mobile: " + phone, 20, y);
+
+    y += 8;
+    doc.text("Address: " + address, 20, y);
+
+    y += 12;
+    doc.text("------------------------------", 20, y);
+
+    let total = 0;
+
+    cart.forEach(function(item){
+        y += 8;
+        let itemTotal = item.price * item.qty;
+        total += itemTotal;
+        doc.text(item.product + " x " + item.qty + " = Rs " + itemTotal, 20, y);
+    });
+
+    y += 12;
+    doc.text("------------------------------", 20, y);
+
+    y += 10;
+    doc.setFontSize(14);
+    doc.text("Total = Rs " + total, 20, y);
+
+    y += 10;
+    doc.setFontSize(10);
+    doc.text("Thank you for shopping!", 20, y);
+
+    doc.save("Invoice.pdf");
+
+};
