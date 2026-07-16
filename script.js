@@ -558,9 +558,14 @@ function showOrders(){
                     <p>${order.date}</p>
                 </div>
 
-                <div>
-                    ₹${order.total}
-                </div>
+ <div>
+    ₹${order.total}
+    <br><br>
+    <button class="btn"
+        onclick="deleteOrder('${order.id}')">
+        🗑️ Delete
+    </button>
+</div>
             </div>
             `;
 
