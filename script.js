@@ -697,3 +697,17 @@ function searchAdminOrders(){
     });
 
 }
+function deleteOrder(orderId){
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders = orders.filter(function(order){
+        return order.id !== orderId;
+    });
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    alert("Order Deleted Successfully!");
+
+    openAdmin();
+}
