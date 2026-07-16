@@ -197,7 +197,7 @@ window.open(
 "https://wa.me/917733816532?text="+message,
 "_blank"
 );
-
+document.getElementById("successModal").style.display = "block";
 }
 
 const cartModal = document.getElementById("cartModal");
