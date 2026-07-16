@@ -619,6 +619,20 @@ Close
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<div id="adminModal" class="cart-modal" style="display:none;">
+    <div class="cart-content">
+        <h2>📊 Admin Dashboard</h2>
+
+        <p><strong>Total Orders:</strong> <span id="totalOrders">0</span></p>
+        <p><strong>Total Sales:</strong> ₹<span id="totalSales">0</span></p>
+
+        <div id="adminOrders"></div>
+
+        <button class="btn" onclick="closeAdmin()">
+            Close
+        </button>
+    </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
