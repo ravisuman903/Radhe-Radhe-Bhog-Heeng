@@ -674,7 +674,6 @@ document.getElementById("totalOrders").innerText = orders.length;
         </div>
         `;
     });
-document.getElementById("totalSalesCard").innerText = "₹" + totalSales;
     document.getElementById("totalOrders").innerText = orders.length;
     document.getElementById("totalSales").innerText = "₹" + totalSales;
     document.getElementById("adminOrders").innerHTML = html;
