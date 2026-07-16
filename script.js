@@ -310,7 +310,11 @@ window.addEventListener("load", function(){
     if(savedPhone){
         document.getElementById("customerPhone").value = savedPhone;
     }
+let savedAddress = localStorage.getItem("customerAddress");
 
+if(savedAddress){
+    document.getElementById("customerAddress").value = savedAddress;
+}
 });
 const sliderImages = [
 "images/IMG-20260710-WA0004.jpg",
