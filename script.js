@@ -570,3 +570,15 @@ function closeOrders(){
     document.getElementById("ordersModal").style.display = "none";
 
 }
+window.onload = function(){
+
+    let customer = localStorage.getItem("customerName");
+
+    if(customer){
+
+        document.getElementById("loginMenu").innerHTML =
+        <a href="#" onclick="showOrders(); return false;">👋 ${customer}</a>;
+
+    }
+
+}
