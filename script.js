@@ -577,7 +577,7 @@ window.onload = function(){
     if(customer){
 
         document.getElementById("loginMenu").innerHTML =
-        <a href="#" onclick="showOrders(); return false;">👋 ${customer}</a>;
+        <a href="#" onclick="logout(); return false;">👋 ${customer} (Logout)</a>;
 
     }
 
