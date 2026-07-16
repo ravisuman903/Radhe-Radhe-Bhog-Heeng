@@ -580,3 +580,6 @@ function closeOrders(){
 
 }
 
+function closeSuccess(){
+    document.getElementById("successModal").style.display = "none";
+}
