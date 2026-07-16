@@ -1,3 +1,4 @@
+import { db, collection, addDoc } from "./firebase.js";
 // Smooth scroll for menu links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener("click", function(e) {
