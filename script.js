@@ -660,46 +660,51 @@ document.getElementById("invoiceBtn").onclick = function () {
     doc.save("Invoice.pdf");
 
 };
-function openAdmin(){
-let pass = prompt("Enter Admin Password");
+async function openAdmin(){
 
-if(pass !== "Radhe2026"){
-    alert("Wrong Password");
-    return;
-}
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    let pass = prompt("Enter Admin Password");
+
+    if(pass !== "Radhe2026"){
+        alert("Wrong Password");
+        return;
+    }
+
+    const querySnapshot = await getDocs(collection(db, "orders"));
 
     let totalSales = 0;
     let html = "";
-document.getElementById("totalOrders").innerText = orders.length;
 
-    orders.forEach(function(order){
+    querySnapshot.forEach((doc) => {
+
+        const order = doc.data();
 
         totalSales += order.total;
 
         html += `
         <div class="cart-item">
             <div>
-                <h4>${order.id}</h4>
+                <h4>${order.orderId}</h4>
+                <p>${order.customer}</p>
+                <p>${order.phone}</p>
                 <p>${order.date}</p>
             </div>
-<div>
-    ₹${order.total}
-    <br><br>
-    <button class="btn" onclick="deleteOrder('${order.id}')">
-        🗑️ Delete
-    </button>
-</div>
+
+            <div>
+                ₹${order.total}
+            </div>
         </div>
         `;
     });
-    document.getElementById("totalOrders").innerText = orders.length;
-    document.getElementById("totalSales").innerText = "₹" + totalSales;
+
+    document.getElementById("totalOrders").innerText = querySnapshot.size;
+    document.getElementById("totalOrdersCard").innerText = querySnapshot.size;
+    document.getElementById("totalSales").innerText = totalSales;
+    document.getElementById("totalSalesCard").innerText = "₹" + totalSales;
+
     document.getElementById("adminOrders").innerHTML = html;
 
     document.getElementById("adminModal").style.display = "block";
 }
-
 function closeAdmin(){
     document.getElementById("adminModal").style.display = "none";
 }
