@@ -652,6 +652,8 @@ if(pass !== "Radhe2026"){
 
     let totalSales = 0;
     let html = "";
+document.getElementById("totalOrders").innerText = orders.length;
+document.getElementById("totalSales").innerText = "₹" + totalSales;
 
     orders.forEach(function(order){
 
