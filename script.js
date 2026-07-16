@@ -665,9 +665,13 @@ document.getElementById("totalSales").innerText = "₹" + totalSales;
                 <h4>${order.id}</h4>
                 <p>${order.date}</p>
             </div>
-            <div>
-                ₹${order.total}
-            </div>
+<div>
+    ₹${order.total}
+    <br><br>
+    <button class="btn" onclick="deleteOrder('${order.id}')">
+        🗑️ Delete
+    </button>
+</div>
         </div>
         `;
     });
