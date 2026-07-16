@@ -20,14 +20,16 @@ window.addEventListener("scroll", function() {
 
 // Welcome message
 console.log("Welcome to Radhe Radhe Bhog Heeng");
-const topBtn=document.getElementById("topBtn");
+const topBtn = document.getElementById("topBtn");
 
-topBtn.onclick=function(){
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-};
+if (topBtn) {
+    topBtn.onclick = function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+}
 
 const menuToggle=document.querySelector(".menu-toggle");
 const menu=document.querySelector(".menu");
