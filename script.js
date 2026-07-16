@@ -194,6 +194,17 @@ orders.push({
 });
 
 localStorage.setItem("orders", JSON.stringify(orders));
+addDoc(collection(db, "orders"), {
+    orderId: orderId,
+    customer: name,
+    phone: phone,
+    address: address,
+    total: Math.round(finalTotal + delivery),
+    payment: paymentMethod,
+    date: new Date().toLocaleString()
+})
+.then(() => console.log("Order saved to Firebase"))
+.catch((error) => console.error(error));
 window.open(
 "https://wa.me/917733816532?text="+message,
 "_blank"
