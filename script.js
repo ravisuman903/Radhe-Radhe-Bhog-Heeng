@@ -32,12 +32,14 @@ if (topBtn) {
     };
 }
 
-const menuToggle=document.querySelector(".menu-toggle");
-const menu=document.querySelector(".menu");
+const menuToggle = document.querySelector(".menu-toggle");
+const menu = document.querySelector(".menu");
 
-menuToggle.addEventListener("click",function(){
-menu.classList.toggle("active");
-});
+if (menuToggle && menu) {
+    menuToggle.addEventListener("click", function () {
+        menu.classList.toggle("active");
+    });
+}
 
 const fadeElements = document.querySelectorAll(
 ".card,.feature-card,.review-card,.gallery-grid img,.counter-box"
