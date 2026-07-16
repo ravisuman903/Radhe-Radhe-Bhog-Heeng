@@ -107,6 +107,9 @@ let message="🛒 *My Order*%0A%0A";
 let name = document.getElementById("customerName").value;
 let phone = document.getElementById("customerPhone").value;
 let address = document.getElementById("customerAddress").value;
+localStorage.setItem("customerName", name);
+localStorage.setItem("customerPhone", phone);
+localStorage.setItem("customerAddress", address);
 let paymentMethod = document.getElementById("paymentMethod").value;
 let transactionId = document.getElementById("transactionId").value;
 
