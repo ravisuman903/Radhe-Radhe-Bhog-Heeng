@@ -700,25 +700,37 @@ async function openAdmin(){
 
     totalSales += Number(order.total || 0);
 
-    html += `
-    <div class="cart-item">
-        <div>
-            <h4>${order.orderId}</h4>
-            <p>${order.customer}</p>
-            <p>${order.phone}</p>
-            <p>${order.date}</p>
-        </div>
-
-        <div>
-            ₹${order.total}
-            <br><br>
-            <button class="btn"
-                onclick="deleteOrder('${document.id}')">
-                🗑️ Delete
-            </button>
-        </div>
+   html += `
+<div class="cart-item">
+    <div>
+        <h4>${order.orderId}</h4>
+        <p>👤 ${order.customer}</p>
+        <p>📞 ${order.phone}</p>
+        <p>📅 ${order.date}</p>
+        <p>📍 ${order.address}</p>
+        <p>💳 ${order.payment}</p>
     </div>
-    `;
+
+    <div>
+        <h4>₹${order.total}</h4>
+
+        <select onchange="updateOrderStatus('${document.id}', this.value)">
+            <option ${order.status=="Pending"?"selected":""}>Pending</option>
+            <option ${order.status=="Packed"?"selected":""}>Packed</option>
+            <option ${order.status=="Shipped"?"selected":""}>Shipped</option>
+            <option ${order.status=="Delivered"?"selected":""}>Delivered</option>
+            <option ${order.status=="Cancelled"?"selected":""}>Cancelled</option>
+        </select>
+
+        <br><br>
+
+        <button class="btn"
+            onclick="deleteOrder('${document.id}')">
+            🗑️ Delete
+        </button>
+    </div>
+</div>
+`;
 });
 
     document.getElementById("totalOrders").innerText = querySnapshot.size;
