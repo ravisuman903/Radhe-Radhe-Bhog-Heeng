@@ -99,7 +99,7 @@ qty.innerText = parseInt(qty.innerText) - 1;
 }
 }
 
-async function showCart(){
+function showCart(){
 
 if(cart.length===0){
 alert("Your cart is empty!");
