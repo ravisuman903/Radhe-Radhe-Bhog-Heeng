@@ -224,8 +224,6 @@ addDoc(collection(db, "orders"), {
         "_blank"
     );
 });
-document.getElementById("successModal").style.display = "block";
-}
 
 const cartModal = document.getElementById("cartModal");
 const closeCart = document.getElementById("closeCart");
