@@ -692,27 +692,32 @@ async function openAdmin(){
     let totalSales = 0;
     let html = "";
 
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((document) => {
 
-        const order = doc.data();
+    const order = document.data();
 
-        totalSales += order.total;
+    totalSales += Number(order.total || 0);
 
-        html += `
-        <div class="cart-item">
-            <div>
-                <h4>${order.orderId}</h4>
-                <p>${order.customer}</p>
-                <p>${order.phone}</p>
-                <p>${order.date}</p>
-            </div>
-
-            <div>
-                ₹${order.total}
-            </div>
+    html += `
+    <div class="cart-item">
+        <div>
+            <h4>${order.orderId}</h4>
+            <p>${order.customer}</p>
+            <p>${order.phone}</p>
+            <p>${order.date}</p>
         </div>
-        `;
-    });
+
+        <div>
+            ₹${order.total}
+            <br><br>
+            <button class="btn"
+                onclick="deleteOrder('${document.id}')">
+                🗑️ Delete
+            </button>
+        </div>
+    </div>
+    `;
+});
 
     document.getElementById("totalOrders").innerText = querySnapshot.size;
     document.getElementById("totalOrdersCard").innerText = querySnapshot.size;
