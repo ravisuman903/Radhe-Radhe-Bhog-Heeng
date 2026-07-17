@@ -743,19 +743,27 @@ function searchAdminOrders(){
     });
 
 }
-function deleteOrder(orderId){
+async function deleteOrder(docId) {
 
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    if (!confirm("Delete this order?")) {
+        return;
+    }
 
-    orders = orders.filter(function(order){
-        return order.id !== orderId;
-    });
+    try {
 
-    localStorage.setItem("orders", JSON.stringify(orders));
+        await deleteDoc(doc(db, "orders", docId));
 
-    alert("Order Deleted Successfully!");
+        alert("Order Deleted Successfully!");
 
-    openAdmin();
+        openAdmin();
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Unable to delete order.");
+
+    }
+
 }
 window.addToCart = addToCart;
 window.buyNow = buyNow;
