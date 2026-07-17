@@ -784,6 +784,24 @@ async function deleteOrder(docId) {
     }
 
 }
+async function updateOrderStatus(docId, status) {
+
+    try {
+
+        await updateDoc(doc(db, "orders", docId), {
+            status: status
+        });
+
+        alert("Order Status Updated!");
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Unable to update status.");
+
+    }
+
+}
 window.addToCart = addToCart;
 window.buyNow = buyNow;
 window.increaseQty = increaseQty;
