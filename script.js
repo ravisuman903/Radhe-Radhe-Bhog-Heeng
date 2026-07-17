@@ -814,6 +814,7 @@ window.closeOrders = closeOrders;
 window.openAdmin = openAdmin;
 window.closeAdmin = closeAdmin;
 window.deleteOrder = deleteOrder;
+window.updateOrderStatus = updateOrderStatus;
 window.closeSuccess = closeSuccess;
 window.prevSlide = prevSlide;
 window.nextSlide = nextSlide;
