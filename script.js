@@ -205,13 +205,25 @@ addDoc(collection(db, "orders"), {
     payment: paymentMethod,
     date: new Date().toLocaleString()
 })
-.then(() => console.log("Order saved to Firebase"))
-.catch((error) => console.error(error));
+.then(() => {
+    console.log("Order Saved");
 
-}window.open(
-"https://wa.me/917733816532?text="+message,
-"_blank"
-);
+    window.open(
+        "https://wa.me/917733816532?text=" + message,
+        "_blank"
+    );
+
+    document.getElementById("successModal").style.display = "block";
+})
+.catch((error) => {
+    console.error(error);
+
+    // Firebase fail ho tab bhi WhatsApp open hoga
+    window.open(
+        "https://wa.me/917733816532?text=" + message,
+        "_blank"
+    );
+});
 document.getElementById("successModal").style.display = "block";
 }
 
