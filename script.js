@@ -864,3 +864,4 @@ window.closeSuccess = closeSuccess;
 window.prevSlide = prevSlide;
 window.nextSlide = nextSlide;
 window.searchProducts = searchProducts;
+liveOrders();
