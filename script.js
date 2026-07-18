@@ -701,7 +701,9 @@ async function openAdmin(){
 
     let totalSales = 0;
     let html = "";
-
+  
+    let todayOrders = 0;
+    let todaySales = 0;
     querySnapshot.forEach((document) => {
 
     const order = document.data();
