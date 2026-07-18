@@ -752,7 +752,8 @@ if (order.date && order.date.includes(today)) {
     document.getElementById("totalOrdersCard").innerText = querySnapshot.size;
     document.getElementById("totalSales").innerText = totalSales;
     document.getElementById("totalSalesCard").innerText = "₹" + totalSales;
-
+document.getElementById("todayOrders").innerText = todayOrders;
+document.getElementById("todaySales").innerText = "₹" + todaySales;
     document.getElementById("adminOrders").innerHTML = html;
 
     document.getElementById("adminModal").style.display = "block";
