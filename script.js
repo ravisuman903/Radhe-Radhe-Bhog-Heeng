@@ -861,6 +861,7 @@ window.showOrders = showOrders;
 window.closeOrders = closeOrders;
 window.openAdmin = openAdmin;
 window.closeAdmin = closeAdmin;
+window.exportOrders = exportOrders;
 window.deleteOrder = deleteOrder;
 window.updateOrderStatus = updateOrderStatus;
 window.closeSuccess = closeSuccess;
