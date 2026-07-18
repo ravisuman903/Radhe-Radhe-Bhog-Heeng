@@ -214,7 +214,8 @@ addDoc(collection(db, "orders"), {
     total: Math.round(finalTotal + delivery),
     payment: paymentMethod,
     date: new Date().toLocaleString(),
-    status: "Pending"
+orderDate: new Date().toISOString().split("T")[0],
+status: "Pending"
 })
 .then(() => {
     console.log("Order Saved");
