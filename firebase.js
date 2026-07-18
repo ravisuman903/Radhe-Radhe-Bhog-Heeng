@@ -5,13 +5,8 @@ import {
   collection,
   addDoc,
   getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
-  query,
-  where
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyDHFc3TuBAjAhAWrmVzQdX5eLFoKTYulmI",
   authDomain: "radhe-radhe-bhog-heeng.firebaseapp.com",
@@ -24,14 +19,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export {
-  db,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
-  query,
-  where
-};
+export { db, collection, addDoc, getDocs, onSnapshot };
