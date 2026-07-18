@@ -1,13 +1,9 @@
 import {
-  db,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
-  query,
-  where
+    db,
+    collection,
+    addDoc,
+    getDocs,
+    onSnapshot
 } from "./firebase.js";
 // Smooth scroll for menu links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
