@@ -31,5 +31,7 @@ export {
   getDocs,
   deleteDoc,
   doc,
-  updateDoc
+  updateDoc,
+  query,
+  where
 };
