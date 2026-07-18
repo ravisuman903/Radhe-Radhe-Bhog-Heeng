@@ -764,7 +764,7 @@ function liveOrders() {
             firstLoad = false;
             return;
         }
-
+console.log("Popup Triggered");
         const popup = document.getElementById("newOrderPopup");
 
         if (popup) {
