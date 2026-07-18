@@ -754,6 +754,21 @@ document.getElementById("todaySales").innerText = "₹" + todaySales;
 
     document.getElementById("adminModal").style.display = "block";
 }
+function liveOrders() {
+
+    onSnapshot(collection(db, "orders"), () => {
+
+        if (document.getElementById("adminModal").style.display === "block") {
+
+            openAdmin();
+
+            console.log("New Order Received");
+
+        }
+
+    });
+
+}
 function closeAdmin(){
     document.getElementById("adminModal").style.display = "none";
 }
