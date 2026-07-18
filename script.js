@@ -5,7 +5,10 @@ import {
     getDocs,
     onSnapshot,
     query,
-    where
+    where,
+    deleteDoc,
+    doc,
+    updateDoc
 } from "./firebase.js";
 // Smooth scroll for menu links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
