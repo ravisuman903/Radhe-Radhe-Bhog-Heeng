@@ -764,20 +764,24 @@ function liveOrders() {
             firstLoad = false;
             return;
         }
-console.log("Popup Triggered");
+
         const popup = document.getElementById("newOrderPopup");
 
         if (popup) {
+            popup.innerHTML = "🔔 New Order Received!";
             popup.style.display = "block";
+            popup.style.opacity = "1";
 
-            setTimeout(() => {
+            setTimeout(function () {
                 popup.style.display = "none";
             }, 4000);
         }
 
-        if (document.getElementById("adminModal").style.display === "block") {
-            openAdmin();
-        }
+        setTimeout(function () {
+            if (document.getElementById("adminModal").style.display === "block") {
+                openAdmin();
+            }
+        }, 500);
 
     });
 
