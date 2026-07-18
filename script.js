@@ -900,6 +900,7 @@ window.addToCart = addToCart;
 window.buyNow = buyNow;
 window.increaseQty = increaseQty;
 window.decreaseQty = decreaseQty;
+window.removeItem = removeItem;
 window.toggleWishlist = toggleWishlist;
 window.openLogin = openLogin;
 window.logout = logout;
