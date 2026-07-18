@@ -5,7 +5,9 @@ import {
   collection,
   addDoc,
   getDocs,
-  onSnapshot
+  onSnapshot,
+  query,
+  where
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyDHFc3TuBAjAhAWrmVzQdX5eLFoKTYulmI",
