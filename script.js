@@ -580,33 +580,42 @@ function logout(){
     location.reload();
 
 }
-function showOrders(){
+async function showOrders() {
 
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    let phone = localStorage.getItem("customerPhone");
+
+    if (!phone) {
+        alert("Please Login First");
+        return;
+    }
+
+    const q = query(
+        collection(db, "orders"),
+        where("phone", "==", phone)
+    );
+
+    const querySnapshot = await getDocs(q);
 
     let html = "";
 
-    if(orders.length==0){
-        html = "No Orders Yet";
-    }else{
+    if (querySnapshot.empty) {
 
-        orders.forEach(function(order){
+        html = "<h3>No Orders Found</h3>";
+
+    } else {
+
+        querySnapshot.forEach((document) => {
+
+            const order = document.data();
 
             html += `
             <div class="cart-item">
                 <div>
-                    <h4>${order.id}</h4>
+                    <h4>${order.orderId}</h4>
+                    <p>₹${order.total}</p>
                     <p>${order.date}</p>
+                    <p><b>Status:</b> ${order.status || "Pending"}</p>
                 </div>
-
- <div>
-    ₹${order.total}
-    <br><br>
-    <button class="btn"
-        onclick="deleteOrder('${order.id}')">
-        🗑️ Delete
-    </button>
-</div>
             </div>
             `;
 
@@ -615,11 +624,8 @@ function showOrders(){
     }
 
     document.getElementById("ordersList").innerHTML = html;
-
-    document.getElementById("ordersModal").style.display="block";
-
+    document.getElementById("ordersModal").style.display = "block";
 }
-
 function closeOrders(){
 
     document.getElementById("ordersModal").style.display = "none";
