@@ -1,14 +1,18 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  onSnapshot,
-  query,
-  where
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+getFirestore,
+collection,
+addDoc,
+getDocs,
+onSnapshot,
+query,
+where,
+deleteDoc,
+doc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyDHFc3TuBAjAhAWrmVzQdX5eLFoKTYulmI",
   authDomain: "radhe-radhe-bhog-heeng.firebaseapp.com",
@@ -22,11 +26,14 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export {
-  db,
-  collection,
-  addDoc,
-  getDocs,
-  onSnapshot,
-  query,
-  where
+db,
+collection,
+addDoc,
+getDocs,
+onSnapshot,
+query,
+where,
+deleteDoc,
+doc,
+updateDoc
 };
