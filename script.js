@@ -710,13 +710,12 @@ async function openAdmin(){
     const order = document.data();
 
     totalSales += Number(order.total || 0);
-let today = new Date().toLocaleDateString();
+let today = new Date().toISOString().split("T")[0];
 
-if (order.date && order.date.includes(today)) {
+if (order.orderDate === today) {
     todayOrders++;
     todaySales += Number(order.total || 0);
-}
-   html += `
+}   html += `
 <div class="cart-item">
     <div>
         <h4>${order.orderId}</h4>
