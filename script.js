@@ -778,6 +778,38 @@ function searchAdminOrders(){
     });
 
 }
+async function exportOrders() {
+
+    const querySnapshot = await getDocs(collection(db, "orders"));
+
+    let data = [];
+
+    querySnapshot.forEach((document) => {
+
+        const order = document.data();
+
+        data.push({
+            "Order ID": order.orderId,
+            "Customer": order.customer,
+            "Phone": order.phone,
+            "Address": order.address,
+            "Payment": order.payment,
+            "Status": order.status,
+            "Total": order.total,
+            "Date": order.date
+        });
+
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Orders");
+
+    XLSX.writeFile(workbook, "Radhe_Radhe_Bhog_Orders.xlsx");
+
+}
+
 async function deleteOrder(docId) {
 
     if (!confirm("Delete this order?")) {
