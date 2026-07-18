@@ -7,12 +7,25 @@ import {
 } from "./firebase.js";
 // Smooth scroll for menu links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener("click", function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth"
+
+    link.addEventListener("click", function(e) {
+
+        const target = this.getAttribute("href");
+
+        if (target === "#") return;
+
+        e.preventDefault();
+
+        const element = document.querySelector(target);
+
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
     });
-  });
+
 });
 
 // Navbar shadow on scroll
