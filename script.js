@@ -756,14 +756,27 @@ document.getElementById("todaySales").innerText = "₹" + todaySales;
 }
 function liveOrders() {
 
+    let firstLoad = true;
+
     onSnapshot(collection(db, "orders"), () => {
 
+        if (firstLoad) {
+            firstLoad = false;
+            return;
+        }
+
+        const popup = document.getElementById("newOrderPopup");
+
+        if (popup) {
+            popup.style.display = "block";
+
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 4000);
+        }
+
         if (document.getElementById("adminModal").style.display === "block") {
-
             openAdmin();
-
-            console.log("New Order Received");
-
         }
 
     });
