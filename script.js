@@ -957,15 +957,10 @@ async function loadProducts() {
                 productGrid.innerHTML += `
                     <div class="card">
 
-                        ${
-                            product.bestseller === true
-                            ? `
-                                <span class="badge bestseller">
-                                    🔥 Best Seller
-                                </span>
-                              `
-                            : ""
-                        }
+                      ${product.bestseller === true
+    ? <span class="badge bestseller">🔥 Best Seller</span>
+    : ""
+}
 
                         <img
                             src="${product.image}"
