@@ -974,14 +974,21 @@ async function loadProducts() {
 
             snapshot.forEach((productDoc) => {
 
-                const product = productDoc.data();
+    const product = productDoc.data();
 
-                console.log(
-                    "Product:",
-                    collectionName,
-                    productDoc.id,
-                    product
-                );
+    console.log(
+        "Product:",
+        collectionName,
+        productDoc.id,
+        product
+    );
+
+    console.log("Rendering Product:", product.name);
+
+    // PRODUCT DETAILS
+
+    const productName =
+        String(product.name || "Product");
 
 
                 // =====================================
