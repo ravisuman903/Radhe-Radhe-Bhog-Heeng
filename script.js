@@ -924,11 +924,10 @@ async function loadProducts() {
     const productGrid = document.getElementById("productGrid");
 
     if (!productGrid) {
-        console.error("productGrid not found in HTML");
+        console.error("Product Grid not found!");
         return;
     }
 
-    // Firebase collections
     const productCollections = [
         "Products",
         "Products_1",
@@ -938,43 +937,33 @@ async function loadProducts() {
 
     try {
 
-        // Clear existing products
         productGrid.innerHTML = "";
 
-        let totalProducts = 0;
-
-        // Load all collections one by one
         for (const collectionName of productCollections) {
-
-            console.log("Loading collection:", collectionName);
 
             const snapshot = await getDocs(
                 collection(db, collectionName)
-            );
-
-            console.log(
-                collectionName,
-                "products found:",
-                snapshot.size
             );
 
             snapshot.forEach((productDoc) => {
 
                 const product = productDoc.data();
 
-                // If product is inactive, don't show it
+                // If active is false, don't show product
                 if (product.active === false) {
                     return;
                 }
 
-                totalProducts++;
+                const productName = product.name || "Product";
+                const productPrice = Number(product.price) || 0;
+                const productImage = product.image || "";
 
                 productGrid.innerHTML += `
-
+                
                 <div class="card">
 
                     ${
-                        product.bestseller
+                        product.bestseller === true
                         ? `<span class="badge bestseller">
                             🔥 Best Seller
                            </span>`
@@ -982,8 +971,8 @@ async function loadProducts() {
                     }
 
                     <img
-                        src="${product.image || ""}"
-                        alt="${product.name || "Product"}"
+                        src="${productImage}"
+                        alt="${productName}"
                     >
 
                     <span
@@ -993,9 +982,9 @@ async function loadProducts() {
                         🤍
                     </span>
 
-                    <h3>${product.name || "Unnamed Product"}</h3>
+                    <h3>${productName}</h3>
 
-                    <p>₹${product.price || 0}</p>
+                    <p>₹${productPrice}</p>
 
                     <p class="stock in-stock">
                         🟢 In Stock
@@ -1021,8 +1010,8 @@ async function loadProducts() {
                         class="cart-btn"
                         onclick="addToCart(
                             this,
-                            '${product.name}',
-                            ${product.price || 0}
+                            '${productName.replace(/'/g, "\\'")}',
+                            ${productPrice}
                         )"
                     >
                         🛒 Add to Cart
@@ -1032,8 +1021,8 @@ async function loadProducts() {
                         class="buy-btn"
                         onclick="buyNow(
                             this,
-                            '${product.name}',
-                            ${product.price || 0}
+                            '${productName.replace(/'/g, "\\'")}',
+                            ${productPrice}
                         )"
                     >
                         ⚡ Buy Now
@@ -1051,25 +1040,7 @@ async function loadProducts() {
 
         }
 
-        // No products found
-        if (totalProducts === 0) {
-
-            productGrid.innerHTML = `
-                <p style="
-                    text-align:center;
-                    width:100%;
-                    padding:30px;
-                ">
-                    No Products Available
-                </p>
-            `;
-
-        }
-
-        // ===============================
-        // RESTORE WISHLIST
-        // ===============================
-
+        // Restore Wishlist
         document.querySelectorAll(".product-grid .card").forEach(card => {
 
             const nameElement = card.querySelector("h3");
@@ -1087,27 +1058,14 @@ async function loadProducts() {
 
         });
 
-        // Update cart count
-        document.getElementById("cartCount").innerText = cart.length;
-
-        console.log(
-            "All products loaded successfully:",
-            totalProducts
-        );
+        console.log("All Firebase products loaded successfully!");
 
     } catch (error) {
 
-        console.error(
-            "Error loading products:",
-            error
-        );
+        console.error("Error loading products:", error);
 
         productGrid.innerHTML = `
-            <p style="
-                text-align:center;
-                color:red;
-                padding:30px;
-            ">
+            <p style="text-align:center;color:red;">
                 Unable to load products.
             </p>
         `;
@@ -1116,8 +1074,10 @@ async function loadProducts() {
 
 }
 
-// Load products when page opens
-loadProducts();
 
-// Start live order listener
+// ===============================
+// START
+// ===============================
+
+loadProducts();
 liveOrders();
