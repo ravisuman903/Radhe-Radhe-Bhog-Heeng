@@ -919,3 +919,205 @@ window.searchProducts = searchProducts;
 // LOAD ALL PRODUCTS FROM FIREBASE
 // ===============================
 
+async function loadProducts() {
+
+    const productGrid = document.getElementById("productGrid");
+
+    if (!productGrid) {
+        console.error("productGrid not found in HTML");
+        return;
+    }
+
+    // Firebase collections
+    const productCollections = [
+        "Products",
+        "Products_1",
+        "Products_2",
+        "Products_3"
+    ];
+
+    try {
+
+        // Clear existing products
+        productGrid.innerHTML = "";
+
+        let totalProducts = 0;
+
+        // Load all collections one by one
+        for (const collectionName of productCollections) {
+
+            console.log("Loading collection:", collectionName);
+
+            const snapshot = await getDocs(
+                collection(db, collectionName)
+            );
+
+            console.log(
+                collectionName,
+                "products found:",
+                snapshot.size
+            );
+
+            snapshot.forEach((productDoc) => {
+
+                const product = productDoc.data();
+
+                // If product is inactive, don't show it
+                if (product.active === false) {
+                    return;
+                }
+
+                totalProducts++;
+
+                productGrid.innerHTML += `
+
+                <div class="card">
+
+                    ${
+                        product.bestseller
+                        ? `<span class="badge bestseller">
+                            🔥 Best Seller
+                           </span>`
+                        : ""
+                    }
+
+                    <img
+                        src="${product.image || ""}"
+                        alt="${product.name || "Product"}"
+                    >
+
+                    <span
+                        class="wishlist"
+                        onclick="toggleWishlist(this)"
+                    >
+                        🤍
+                    </span>
+
+                    <h3>${product.name || "Unnamed Product"}</h3>
+
+                    <p>₹${product.price || 0}</p>
+
+                    <p class="stock in-stock">
+                        🟢 In Stock
+                    </p>
+
+                    <div class="quantity-box">
+
+                        <button onclick="decreaseQty(this)">
+                            −
+                        </button>
+
+                        <span class="qty">
+                            1
+                        </span>
+
+                        <button onclick="increaseQty(this)">
+                            +
+                        </button>
+
+                    </div>
+
+                    <button
+                        class="cart-btn"
+                        onclick="addToCart(
+                            this,
+                            '${product.name}',
+                            ${product.price || 0}
+                        )"
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyNow(
+                            this,
+                            '${product.name}',
+                            ${product.price || 0}
+                        )"
+                    >
+                        ⚡ Buy Now
+                    </button>
+
+                    <p class="delivery-tag">
+                        🚚 Delivery Only in Kota
+                    </p>
+
+                </div>
+
+                `;
+
+            });
+
+        }
+
+        // No products found
+        if (totalProducts === 0) {
+
+            productGrid.innerHTML = `
+                <p style="
+                    text-align:center;
+                    width:100%;
+                    padding:30px;
+                ">
+                    No Products Available
+                </p>
+            `;
+
+        }
+
+        // ===============================
+        // RESTORE WISHLIST
+        // ===============================
+
+        document.querySelectorAll(".product-grid .card").forEach(card => {
+
+            const nameElement = card.querySelector("h3");
+            const heart = card.querySelector(".wishlist");
+
+            if (nameElement && heart) {
+
+                const name = nameElement.innerText;
+
+                if (localStorage.getItem(name)) {
+                    heart.innerText = "❤️";
+                }
+
+            }
+
+        });
+
+        // Update cart count
+        document.getElementById("cartCount").innerText = cart.length;
+
+        console.log(
+            "All products loaded successfully:",
+            totalProducts
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Error loading products:",
+            error
+        );
+
+        productGrid.innerHTML = `
+            <p style="
+                text-align:center;
+                color:red;
+                padding:30px;
+            ">
+                Unable to load products.
+            </p>
+        `;
+
+    }
+
+}
+
+// Load products when page opens
+loadProducts();
+
+// Start live order listener
+liveOrders();
