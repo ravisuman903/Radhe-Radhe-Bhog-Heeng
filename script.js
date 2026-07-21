@@ -931,521 +931,203 @@ async function loadProducts() {
 
     const productGrid = document.getElementById("productGrid");
 
-    if (!productGrid) {
-        console.error("Product Grid not found!");
-        return;
-    }
+    if (!productGrid) return;
 
-    // Show loading message
-    productGrid.innerHTML = `
-        <p style="
-            text-align:center;
-            width:100%;
-            font-size:18px;
-            color:#6b0000;
-            grid-column:1/-1;
-        ">
-            Loading Products...
-        </p>
-    `;
+    productGrid.innerHTML = "";
 
-    // All Firebase product collections
-    const productCollections = [
+    const collections = [
         "products",
         "products_1",
         "products_2",
         "products_3"
     ];
 
-    let allProducts = [];
+    let totalProducts = 0;
 
     try {
 
-        // ==========================================
-        // GET PRODUCTS FROM ALL COLLECTIONS
-        // ==========================================
+        for (const collectionName of collections) {
 
-        for (const collectionName of productCollections) {
+            console.log("Loading collection:", collectionName);
 
-            console.log("Checking Collection:", collectionName);
+            const snapshot = await getDocs(
+                collection(db, collectionName)
+            );
 
-            try {
+            console.log(
+                collectionName,
+                "Documents:",
+                snapshot.size
+            );
 
-                const snapshot = await getDocs(
-                    collection(db, collectionName)
-                );
+            snapshot.forEach((productDoc) => {
+
+                const product = productDoc.data();
 
                 console.log(
+                    "Product Found:",
                     collectionName,
-                    "Documents:",
-                    snapshot.size
+                    productDoc.id,
+                    product
                 );
 
-                snapshot.forEach((productDoc) => {
+                // Only active products
+                if (product.active === false) {
+                    return;
+                }
 
-                    const product = productDoc.data();
+                const name = product.name || "Product";
 
-                    console.log(
-                        "Product Found:",
-                        collectionName,
-                        productDoc.id,
-                        product
-                    );
+                const price = Number(product.price || 0);
 
-                    // ==========================================
-                    // ACTIVE CHECK
-                    // Only hide if active is explicitly false
-                    // ==========================================
+                const stock = Number(product.stock || 0);
 
-                    if (product.active === false) {
-                        console.log(
-                            "Product skipped because active=false:",
-                            product.name
-                        );
-                        return;
-                    }
+                const description =
+                    product.description || "";
 
-                    // ==========================================
-                    // PRODUCT DATA
-                    // ==========================================
+                const image =
+                    product.image ||
+                    "images/IMG-20260710-WA0004.jpg";
 
-                    const productName =
-                        String(product.name || "Unnamed Product");
+                totalProducts++;
 
-                    const productPrice =
-                        Number(product.price || 0);
+                const safeName =
+                    name.replace(/'/g, "\\'");
 
-                    const productStock =
-                        Number(product.stock ?? 0);
+                productGrid.innerHTML += `
 
-                    const productDescription =
-                        String(product.description || "");
+                <div class="card">
 
-                    // ==========================================
-                    // IMAGE PATH FIX
-                    // Firebase has image/
-                    // Website folder is images/
-                    // ==========================================
-
-                    let productImage =
-                        product.image ||
-                        "images/IMG-20260710-WA0004.jpg";
-
-                    if (
-                        productImage.startsWith("image/")
-                    ) {
-                        productImage =
-                            productImage.replace(
-                                "image/",
-                                "images/"
-                            );
-                    }
-
-                    // If image path starts with /image/
-                    if (
-                        productImage.startsWith("/image/")
-                    ) {
-                        productImage =
-                            productImage.replace(
-                                "/image/",
-                                "/images/"
-                            );
-                    }
-
-                    // ==========================================
-                    // SAVE PRODUCT
-                    // ==========================================
-
-                    allProducts.push({
-
-                        id: productDoc.id,
-
-                        collection:
-                            collectionName,
-
-                        name:
-                            productName,
-
-                        price:
-                            productPrice,
-
-                        stock:
-                            productStock,
-
-                        description:
-                            productDescription,
-
-                        image:
-                            productImage
-
-                    });
-
-                });
-
-            } catch (collectionError) {
-
-                console.error(
-                    "Error loading collection:",
-                    collectionName,
-                    collectionError
-                );
-
-            }
-
-        }
-
-        // ==========================================
-        // CLEAR PRODUCT GRID
-        // ==========================================
-
-        productGrid.innerHTML = "";
-
-        // ==========================================
-        // NO PRODUCTS
-        // ==========================================
-
-        if (allProducts.length === 0) {
-
-            productGrid.innerHTML = `
-                <div style="
-                    text-align:center;
-                    width:100%;
-                    grid-column:1/-1;
-                    padding:40px;
-                ">
-                    <h3>No Products Available</h3>
-                    <p>
-                        Please check Firebase product collections.
-                    </p>
-                </div>
-            `;
-
-            console.warn(
-                "No products found in Firebase."
-            );
-
-            return;
-        }
-
-        // ==========================================
-        // REMOVE DUPLICATE PRODUCTS
-        // Based on collection + document ID
-        // ==========================================
-
-        const uniqueProducts = [];
-
-        const productKeys = new Set();
-
-        allProducts.forEach(product => {
-
-            const key =
-                product.collection +
-                "_" +
-                product.id;
-
-            if (!productKeys.has(key)) {
-
-                productKeys.add(key);
-
-                uniqueProducts.push(product);
-
-            }
-
-        });
-
-        // ==========================================
-        // CREATE PRODUCT CARDS
-        // ==========================================
-
-        uniqueProducts.forEach((product) => {
-
-            const safeName =
-                product.name
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
-
-            const safeDescription =
-                product.description
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;");
-
-            // ==========================================
-            // CHECK STOCK
-            // IMPORTANT:
-            // Product will NEVER disappear because of stock
-            // ==========================================
-
-            let stockText = "";
-
-            if (product.stock > 0) {
-
-                stockText = `
-                    <p class="stock in-stock">
-                        🟢 In Stock
-                    </p>
-                `;
-
-            } else {
-
-                stockText = `
-                    <p class="stock out-stock">
-                        🔴 Out of Stock
-                    </p>
-                `;
-
-            }
-
-            // ==========================================
-            // CREATE CARD
-            // ==========================================
-
-            const card = document.createElement("div");
-
-            card.className = "card";
-
-            card.setAttribute(
-                "data-product-id",
-                product.id
-            );
-
-            card.setAttribute(
-                "data-collection",
-                product.collection
-            );
-
-            card.innerHTML = `
-
-                <img
-                    src="${product.image}"
-                    alt="${safeName}"
-                    onerror="
-                        this.onerror=null;
-                        this.src='images/IMG-20260710-WA0004.jpg';
-                    "
-                >
-
-                <span
-                    class="wishlist"
-                    onclick="toggleWishlist(this)"
-                >
-                    🤍
-                </span>
-
-                <h3>${safeName}</h3>
-
-                <p class="product-description">
-                    ${safeDescription}
-                </p>
-
-                <h3>
-                    ₹${product.price}
-                </h3>
-
-                ${stockText}
-
-                <div class="quantity-box">
-
-                    <button
-                        onclick="decreaseQty(this)"
+                    <img
+                        src="${image}"
+                        alt="${name}"
+                        onerror="this.src='images/IMG-20260710-WA0004.jpg'"
                     >
-                        −
-                    </button>
 
-                    <span class="qty">
-                        1
+                    <span
+                        class="wishlist"
+                        onclick="toggleWishlist(this)">
+                        🤍
                     </span>
 
+                    <h3>${name}</h3>
+
+                    <p>${description}</p>
+
+                    <h3>₹${price}</h3>
+
+                    <p class="stock ${
+                        stock > 0
+                        ? "in-stock"
+                        : "out-stock"
+                    }">
+
+                        ${
+                            stock > 0
+                            ? "🟢 In Stock"
+                            : "🔴 Out of Stock"
+                        }
+
+                    </p>
+
+                    <div class="quantity-box">
+
+                        <button
+                            onclick="decreaseQty(this)">
+                            −
+                        </button>
+
+                        <span class="qty">
+                            1
+                        </span>
+
+                        <button
+                            onclick="increaseQty(this)">
+                            +
+                        </button>
+
+                    </div>
+
                     <button
-                        onclick="increaseQty(this)"
-                    >
-                        +
+                        class="cart-btn"
+                        onclick="addToCart(
+                            this,
+                            '${safeName}',
+                            ${price}
+                        )">
+
+                        🛒 Add to Cart
+
                     </button>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyNow(
+                            this,
+                            '${safeName}',
+                            ${price}
+                        )">
+
+                        ⚡ Buy Now
+
+                    </button>
+
+                    <p class="delivery-tag">
+
+                        🚚 Delivery Only in Kota
+
+                    </p>
 
                 </div>
 
-                <button
-                    class="cart-btn"
-                    data-product="${safeName}"
-                    data-price="${product.price}"
-                >
-                    🛒 Add to Cart
-                </button>
-
-                <button
-                    class="buy-btn"
-                    data-product="${safeName}"
-                    data-price="${product.price}"
-                >
-                    ⚡ Buy Now
-                </button>
-
-                <p class="delivery-tag">
-                    🚚 Delivery Only in Kota
-                </p>
-
-            `;
-
-            // ==========================================
-            // ADD TO CART BUTTON
-            // ==========================================
-
-            const cartButton =
-                card.querySelector(".cart-btn");
-
-            cartButton.addEventListener(
-                "click",
-                function () {
-
-                    addToCart(
-                        this,
-                        product.name,
-                        product.price
-                    );
-
-                }
-            );
-
-            // ==========================================
-            // BUY NOW BUTTON
-            // ==========================================
-
-            const buyButton =
-                card.querySelector(".buy-btn");
-
-            buyButton.addEventListener(
-                "click",
-                function () {
-
-                    buyNow(
-                        this,
-                        product.name,
-                        product.price
-                    );
-
-                }
-            );
-
-            // ==========================================
-            // ADD CARD TO GRID
-            // ==========================================
-
-            productGrid.appendChild(card);
-
-        });
-
-        // ==========================================
-        // RESTORE WISHLIST
-        // ==========================================
-
-        document
-            .querySelectorAll(
-                "#productGrid .card"
-            )
-            .forEach(card => {
-
-                const nameElement =
-                    card.querySelector("h3");
-
-                const heart =
-                    card.querySelector(".wishlist");
-
-                if (
-                    nameElement &&
-                    heart
-                ) {
-
-                    const name =
-                        nameElement.innerText;
-
-                    if (
-                        localStorage.getItem(name)
-                    ) {
-
-                        heart.innerText =
-                            "❤️";
-
-                    }
-
-                }
+                `;
 
             });
 
-        // ==========================================
-        // UPDATE CART COUNT
-        // ==========================================
+        }
 
         document.getElementById(
             "cartCount"
         ).innerText = cart.length;
 
-        // ==========================================
-        // FINAL CONSOLE
-        // ==========================================
-
         console.log(
-            "================================"
+            "=============================="
         );
 
         console.log(
-            "PRODUCT LOADING COMPLETE"
+            "TOTAL PRODUCTS LOADED:",
+            totalProducts
         );
 
         console.log(
-            "TOTAL PRODUCTS:",
-            uniqueProducts.length
-        );
-
-        console.log(
-            "PRODUCTS:",
-            uniqueProducts
-        );
-
-        console.log(
-            "================================"
+            "=============================="
         );
 
     } catch (error) {
 
         console.error(
-            "Firebase Product Loading Error:",
+            "FIREBASE PRODUCT ERROR:",
             error
         );
 
         productGrid.innerHTML = `
-            <div style="
-                text-align:center;
-                width:100%;
-                grid-column:1/-1;
-                padding:40px;
-                color:red;
-            ">
-                <h3>Unable to Load Products</h3>
 
-                <p>
-                    Please refresh the page.
-                </p>
-            </div>
+        <p style="
+            text-align:center;
+            color:red;
+            width:100%;
+        ">
+
+            Unable to load products.
+
+        </p>
+
         `;
 
     }
 
 }
 
-
-// ==========================================
-// START PRODUCT LOADING
-// ==========================================
-
 loadProducts();
-
-
-// ==========================================
-// START LIVE ORDERS
-// ==========================================
 
 liveOrders();
