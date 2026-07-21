@@ -982,7 +982,8 @@ async function loadProducts() {
         productDoc.id,
         product
     );
-
+console.log("Collection:", collectionName);
+console.log("Name:", product.name);
     console.log("Rendering Product:", product.name);
 
                 // =====================================
