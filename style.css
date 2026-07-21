@@ -185,10 +185,31 @@ color:#6b0000;
 }
 
 .card p{
-font-size:22px;
-font-weight:bold;
-color:#c28b00;
+font-size:14px;
+font-weight:400;
+color:#555;
 margin-bottom:15px;
+}
+
+.card .product-description{
+font-size:14px;
+font-weight:400;
+color:#555;
+margin-bottom:10px;
+}
+
+.card .stock{
+font-size:14px;
+font-weight:600;
+margin:8px 0;
+}
+
+.card .in-stock{
+color:#2e7d32;
+}
+
+.card .out-stock{
+color:#d32f2f;
 }
 
 .contact{
