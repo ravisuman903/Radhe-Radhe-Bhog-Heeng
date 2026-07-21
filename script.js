@@ -980,7 +980,9 @@ async function loadProducts() {
                         </span>
 
                         <h3>${product.name}</h3>
-
+<p class="product-description">
+    ${product.description || ""}
+</p>
                         <p>₹${product.price}</p>
 
                         <p class="stock in-stock">
