@@ -924,56 +924,117 @@ async function loadProducts() {
     const productGrid = document.getElementById("productGrid");
 
     if (!productGrid) {
-        console.error("Product Grid not found!");
+        console.error("productGrid not found!");
         return;
     }
 
+    // IMPORTANT:
+    // Firebase collection names are lowercase
     const productCollections = [
-        "Products",
-        "Products_1",
-        "Products_2",
-        "Products_3"
+        "products",
+        "products_1",
+        "products_2",
+        "products_3"
     ];
 
     try {
 
         productGrid.innerHTML = "";
 
+        let totalProducts = 0;
+
+        // Load all 4 product collections
         for (const collectionName of productCollections) {
+
+            console.log(
+                "Loading collection:",
+                collectionName
+            );
 
             const snapshot = await getDocs(
                 collection(db, collectionName)
+            );
+
+            console.log(
+                collectionName +
+                " found:",
+                snapshot.size
             );
 
             snapshot.forEach((productDoc) => {
 
                 const product = productDoc.data();
 
-                // If active is false, don't show product
+                // ===============================
+                // PRODUCT DATA
+                // ===============================
+
+                const productName =
+                    product.name || "Product";
+
+                const productPrice =
+                    Number(product.price) || 0;
+
+                const productImage =
+                    product.image || "";
+
+                const productDescription =
+                    product.description || "";
+
+                const productStock =
+                    Number(product.stock) || 0;
+
+
+                // ===============================
+                // ACTIVE CHECK
+                // ===============================
+
                 if (product.active === false) {
                     return;
                 }
 
-                const productName = product.name || "Product";
-                const productPrice = Number(product.price) || 0;
-                const productImage = product.image || "";
+
+                totalProducts++;
+
+
+                // ===============================
+                // STOCK STATUS
+                // ===============================
+
+                let stockHTML = "";
+
+                if (productStock > 0) {
+
+                    stockHTML = `
+                        <p class="stock in-stock">
+                            🟢 In Stock
+                        </p>
+                    `;
+
+                } else {
+
+                    stockHTML = `
+                        <p class="stock out-of-stock">
+                            🔴 Out of Stock
+                        </p>
+                    `;
+
+                }
+
+
+                // ===============================
+                // PRODUCT CARD
+                // ===============================
 
                 productGrid.innerHTML += `
-                
-                <div class="card">
 
-                    ${
-                        product.bestseller === true
-                        ? `<span class="badge bestseller">
-                            🔥 Best Seller
-                           </span>`
-                        : ""
-                    }
+                <div class="card">
 
                     <img
                         src="${productImage}"
                         alt="${productName}"
                     >
+
 
                     <span
                         class="wishlist"
@@ -982,17 +1043,30 @@ async function loadProducts() {
                         🤍
                     </span>
 
-                    <h3>${productName}</h3>
 
-                    <p>₹${productPrice}</p>
+                    <h3>
+                        ${productName}
+                    </h3>
 
-                    <p class="stock in-stock">
-                        🟢 In Stock
+
+                    <p>
+                        ${productDescription}
                     </p>
+
+
+                    <h3>
+                        ₹${productPrice}
+                    </h3>
+
+
+                    ${stockHTML}
+
 
                     <div class="quantity-box">
 
-                        <button onclick="decreaseQty(this)">
+                        <button
+                            onclick="decreaseQty(this)"
+                        >
                             −
                         </button>
 
@@ -1000,11 +1074,14 @@ async function loadProducts() {
                             1
                         </span>
 
-                        <button onclick="increaseQty(this)">
+                        <button
+                            onclick="increaseQty(this)"
+                        >
                             +
                         </button>
 
                     </div>
+
 
                     <button
                         class="cart-btn"
@@ -1017,6 +1094,7 @@ async function loadProducts() {
                         🛒 Add to Cart
                     </button>
 
+
                     <button
                         class="buy-btn"
                         onclick="buyNow(
@@ -1027,6 +1105,7 @@ async function loadProducts() {
                     >
                         ⚡ Buy Now
                     </button>
+
 
                     <p class="delivery-tag">
                         🚚 Delivery Only in Kota
@@ -1040,32 +1119,84 @@ async function loadProducts() {
 
         }
 
-        // Restore Wishlist
-        document.querySelectorAll(".product-grid .card").forEach(card => {
 
-            const nameElement = card.querySelector("h3");
-            const heart = card.querySelector(".wishlist");
+        // ===============================
+        // NO PRODUCTS FOUND
+        // ===============================
 
-            if (nameElement && heart) {
+        if (totalProducts === 0) {
 
-                const name = nameElement.innerText;
+            productGrid.innerHTML = `
+                <p
+                    style="
+                        text-align:center;
+                        width:100%;
+                        padding:30px;
+                    "
+                >
+                    No Products Available
+                </p>
+            `;
 
-                if (localStorage.getItem(name)) {
+        }
+
+
+        // ===============================
+        // RESTORE WISHLIST
+        // ===============================
+
+        document
+        .querySelectorAll(".product-grid .card")
+        .forEach(card => {
+
+            const nameElement =
+                card.querySelector("h3");
+
+            const heart =
+                card.querySelector(".wishlist");
+
+            if (
+                nameElement &&
+                heart
+            ) {
+
+                const name =
+                    nameElement.innerText;
+
+                if (
+                    localStorage.getItem(name)
+                ) {
+
                     heart.innerText = "❤️";
+
                 }
 
             }
 
         });
 
-        console.log("All Firebase products loaded successfully!");
+
+        console.log(
+            "SUCCESS: Total Products Loaded =",
+            totalProducts
+        );
+
 
     } catch (error) {
 
-        console.error("Error loading products:", error);
+        console.error(
+            "ERROR LOADING PRODUCTS:",
+            error
+        );
 
         productGrid.innerHTML = `
-            <p style="text-align:center;color:red;">
+            <p
+                style="
+                    text-align:center;
+                    color:red;
+                    padding:30px;
+                "
+            >
                 Unable to load products.
             </p>
         `;
@@ -1076,8 +1207,14 @@ async function loadProducts() {
 
 
 // ===============================
-// START
+// START PRODUCT LOADING
 // ===============================
 
 loadProducts();
+
+
+// ===============================
+// START LIVE ORDERS
+// ===============================
+
 liveOrders();
