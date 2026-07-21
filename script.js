@@ -985,12 +985,6 @@ async function loadProducts() {
 
     console.log("Rendering Product:", product.name);
 
-    // PRODUCT DETAILS
-
-    const productName =
-        String(product.name || "Product");
-
-
                 // =====================================
                 // PRODUCT DETAILS
                 // =====================================
