@@ -919,121 +919,237 @@ window.searchProducts = searchProducts;
 // LOAD ALL PRODUCTS FROM FIREBASE
 // ===============================
 
+// ===============================
+// LOAD ALL PRODUCTS FROM FIREBASE
+// ===============================
+
 async function loadProducts() {
 
     const productGrid = document.getElementById("productGrid");
 
-    if (!productGrid) return;
+    if (!productGrid) {
+        console.error("❌ productGrid not found");
+        return;
+    }
+
+    // Firebase ke 4 product collections
+    const productCollections = [
+        "products",
+        "products_1",
+        "products_2",
+        "products_3"
+    ];
+
+    productGrid.innerHTML = "";
+
+    let totalProducts = 0;
 
     try {
 
-        // All product collections
-        const productCollections = [
-            "products",
-            "products_1",
-            "products_2",
-            "products_3"
-        ];
-
-        productGrid.innerHTML = "";
-
-        let totalProducts = 0;
+        // =====================================
+        // ONE BY ONE ALL COLLECTIONS LOAD
+        // =====================================
 
         for (const collectionName of productCollections) {
+
+            console.log(
+                "Loading Firebase collection:",
+                collectionName
+            );
 
             const snapshot = await getDocs(
                 collection(db, collectionName)
             );
 
+            console.log(
+                collectionName +
+                " documents:",
+                snapshot.size
+            );
+
+
+            // =====================================
+            // LOAD EACH PRODUCT DOCUMENT
+            // =====================================
+
             snapshot.forEach((productDoc) => {
 
                 const product = productDoc.data();
 
-                // Product name check
-                const productName = product.name || "Product";
+                console.log(
+                    "Product:",
+                    collectionName,
+                    productDoc.id,
+                    product
+                );
 
-                // Price convert to number
-                const productPrice = Number(product.price) || 0;
 
-                // Image
-                const productImage =
-                    product.image || "images/IMG-20260710-WA0004.jpg";
+                // =====================================
+                // PRODUCT DETAILS
+                // =====================================
 
-                // Description
+                const productName =
+                    String(product.name || "Product");
+
+                const productPrice =
+                    Number(product.price || 0);
+
                 const productDescription =
-                    product.description || "";
+                    String(product.description || "");
+
+                const productImage =
+                    product.image ||
+                    "images/IMG-20260710-WA0004.jpg";
+
+                const productStock =
+                    Number(product.stock || 0);
+
+
+                // =====================================
+                // ACTIVE CHECK
+                // =====================================
+
+                // Product sirf tab hide hoga
+                // jab active EXACTLY false ho.
+
+                if (product.active === false) {
+
+                    console.log(
+                        "Product inactive:",
+                        productName
+                    );
+
+                    return;
+                }
+
 
                 totalProducts++;
 
+
+                // =====================================
+                // STOCK STATUS
+                // =====================================
+
+                let stockText = "";
+
+                if (productStock > 0) {
+
+                    stockText = `
+                        <p class="stock in-stock">
+                            🟢 In Stock
+                        </p>
+                    `;
+
+                } else {
+
+                    stockText = `
+                        <p class="stock out-stock">
+                            🔴 Out of Stock
+                        </p>
+                    `;
+
+                }
+
+
+                // =====================================
+                // SAFE PRODUCT NAME
+                // =====================================
+
+                const safeProductName =
+                    productName
+                        .replace(/\\/g, "\\\\")
+                        .replace(/'/g, "\\'");
+
+
+                // =====================================
+                // PRODUCT CARD
+                // =====================================
+
                 productGrid.innerHTML += `
 
-                <div class="card">
+                    <div class="card">
 
-                    <img
-                        src="${productImage}"
-                        alt="${productName}"
-                    >
+                        <img
+                            src="${productImage}"
+                            alt="${productName}"
+                        >
 
-                    <span
-                        class="wishlist"
-                        onclick="toggleWishlist(this)"
-                    >
-                        🤍
-                    </span>
-
-                    <h3>${productName}</h3>
-
-                    <p>${productDescription}</p>
-
-                    <h3>₹${productPrice}</h3>
-
-                    <p class="stock in-stock">
-                        🟢 In Stock
-                    </p>
-
-                    <div class="quantity-box">
-
-                        <button onclick="decreaseQty(this)">
-                            −
-                        </button>
-
-                        <span class="qty">
-                            1
+                        <span
+                            class="wishlist"
+                            onclick="toggleWishlist(this)"
+                        >
+                            🤍
                         </span>
 
-                        <button onclick="increaseQty(this)">
-                            +
+
+                        <h3 class="product-name">
+                            ${productName}
+                        </h3>
+
+
+                        <p class="product-description">
+                            ${productDescription}
+                        </p>
+
+
+                        <h3 class="product-price">
+                            ₹${productPrice}
+                        </h3>
+
+
+                        ${stockText}
+
+
+                        <div class="quantity-box">
+
+                            <button
+                                onclick="decreaseQty(this)"
+                            >
+                                −
+                            </button>
+
+                            <span class="qty">
+                                1
+                            </span>
+
+                            <button
+                                onclick="increaseQty(this)"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+
+                        <button
+                            class="cart-btn"
+                            onclick="addToCart(
+                                this,
+                                '${safeProductName}',
+                                ${productPrice}
+                            )"
+                        >
+                            🛒 Add to Cart
                         </button>
 
+
+                        <button
+                            class="buy-btn"
+                            onclick="buyNow(
+                                this,
+                                '${safeProductName}',
+                                ${productPrice}
+                            )"
+                        >
+                            ⚡ Buy Now
+                        </button>
+
+
+                        <p class="delivery-tag">
+                            🚚 Delivery Only in Kota
+                        </p>
+
                     </div>
-
-                    <button
-                        class="cart-btn"
-                        onclick="addToCart(
-                            this,
-                            '${productName.replace(/'/g, "\\'")}',
-                            ${productPrice}
-                        )"
-                    >
-                        🛒 Add to Cart
-                    </button>
-
-                    <button
-                        class="buy-btn"
-                        onclick="buyNow(
-                            this,
-                            '${productName.replace(/'/g, "\\'")}',
-                            ${productPrice}
-                        )"
-                    >
-                        ⚡ Buy Now
-                    </button>
-
-                    <p class="delivery-tag">
-                        🚚 Delivery Only in Kota
-                    </p>
-
-                </div>
 
                 `;
 
@@ -1041,49 +1157,81 @@ async function loadProducts() {
 
         }
 
-        // If no products found
+
+        // =====================================
+        // NO PRODUCT FOUND
+        // =====================================
+
         if (totalProducts === 0) {
 
             productGrid.innerHTML = `
-                <p style="text-align:center;">
+                <p style="
+                    text-align:center;
+                    width:100%;
+                    padding:30px;
+                ">
                     No Products Available
                 </p>
             `;
 
         }
 
-        // Restore Wishlist
-        document.querySelectorAll(".card").forEach(card => {
 
-            const nameElement = card.querySelector("h3");
-            const heart = card.querySelector(".wishlist");
+        // =====================================
+        // RESTORE WISHLIST
+        // =====================================
 
-            if (nameElement && heart) {
+        document
+            .querySelectorAll(".product-name")
+            .forEach(nameElement => {
 
-                const name = nameElement.innerText;
+                const card =
+                    nameElement.closest(".card");
 
-                if (localStorage.getItem(name)) {
+                const heart =
+                    card.querySelector(".wishlist");
+
+                const name =
+                    nameElement.innerText.trim();
+
+                if (
+                    heart &&
+                    localStorage.getItem(name)
+                ) {
+
                     heart.innerText = "❤️";
+
                 }
 
-            }
+            });
 
-        });
+
+        // =====================================
+        // SUCCESS LOG
+        // =====================================
 
         console.log(
-            "All products loaded successfully:",
+            "✅ ALL PRODUCTS LOADED"
+        );
+
+        console.log(
+            "Total Products:",
             totalProducts
         );
 
     } catch (error) {
 
         console.error(
-            "Error loading products:",
+            "❌ PRODUCT LOADING ERROR:",
             error
         );
 
         productGrid.innerHTML = `
-            <p style="text-align:center;color:red;">
+            <p style="
+                color:red;
+                text-align:center;
+                padding:30px;
+            ">
                 Unable to load products.
             </p>
         `;
@@ -1092,7 +1240,13 @@ async function loadProducts() {
 
 }
 
+
+// ===============================
+// START PRODUCT LOADING
+// ===============================
+
 loadProducts();
+
 
 // ===============================
 // START LIVE ORDERS
