@@ -950,8 +950,6 @@ async function loadProducts() {
 
                 const product = productDoc.data();
 
-                if (product.active === false) return;
-
                 const name = product.name || "Product";
                 const price = Number(product.price || 0);
                 const stock = Number(product.stock || 0);
