@@ -938,7 +938,7 @@ async function loadProducts() {
     const collections = [
         "products_1",
         "products_2",
-        "products_3"
+        "products_3",
         "products_5",
     ];
 
