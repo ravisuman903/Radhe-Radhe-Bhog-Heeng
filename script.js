@@ -1014,7 +1014,7 @@ async function loadProducts() {
 
                     <p>${description}</p>
 
-                    <h3>₹${price}</h3>
+                    <h3>₹${price} - ${typeof price}</h3>
 
                     <p class="stock ${
                         stock > 0
