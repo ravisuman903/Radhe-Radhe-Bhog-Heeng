@@ -936,10 +936,10 @@ async function loadProducts() {
     productGrid.innerHTML = "";
 
     const collections = [
-        "products",
         "products_1",
         "products_2",
         "products_3"
+        "products_5",
     ];
 
     let totalProducts = 0;
