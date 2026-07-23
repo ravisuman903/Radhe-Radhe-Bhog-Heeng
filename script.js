@@ -979,7 +979,7 @@ async function loadProducts() {
                 const name = product.name || "Product";
 
                 const price = Number(product.price || 0);
-
+                console.log(name, product.price, price);
                 const stock = Number(product.stock || 0);
 
                 const description =
