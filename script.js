@@ -561,23 +561,91 @@ document.getElementById("closeLogin").onclick = function(){
     document.getElementById("loginModal").style.display = "none";
 }
 
-document.getElementById("loginBtn").onclick = function(){
+let confirmationResult = null;
 
-    let name = document.getElementById("loginName").value;
-    let phone = document.getElementById("loginPhone").value;
+// Send OTP
+document.getElementById("loginBtn").onclick = async function () {
 
-    if(name==="" || phone===""){
-        alert("Please fill all details");
+    const name = document.getElementById("loginName").value.trim();
+    let phone = document.getElementById("loginPhone").value.trim();
+
+    if (name === "" || phone === "") {
+        alert("Please enter your Name and Mobile Number.");
         return;
     }
 
-    localStorage.setItem("customerName", name);
-    localStorage.setItem("customerPhone", phone);
+    if (phone.length !== 10) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return;
+    }
 
-    alert("Login Successful!");
+    phone = "+91" + phone;
 
-    document.getElementById("loginModal").style.display = "none";
-}
+    try {
+
+        // Create reCAPTCHA only once
+        if (!window.recaptchaVerifier) {
+
+            window.recaptchaVerifier = new RecaptchaVerifier(
+                "loginBtn",
+                {
+                    size: "invisible"
+                },
+                auth
+            );
+
+        }
+
+        const appVerifier = window.recaptchaVerifier;
+
+        confirmationResult = await signInWithPhoneNumber(
+            auth,
+            phone,
+            appVerifier
+        );
+
+        // Save name temporarily
+        localStorage.setItem("tempCustomerName", name);
+
+        const otp = prompt("Enter the OTP sent to your mobile number:");
+
+        if (!otp) {
+            return;
+        }
+
+        const result = await confirmationResult.confirm(otp);
+
+        const user = result.user;
+
+        // Login successful
+        localStorage.setItem(
+            "customerPhone",
+            user.phoneNumber
+        );
+
+        localStorage.setItem(
+            "customerName",
+            name
+        );
+
+        alert("✅ Phone Verification Successful!");
+
+        document.getElementById("loginModal").style.display = "none";
+
+        location.reload();
+
+    } catch (error) {
+
+        console.error("Phone Login Error:", error);
+
+        alert(
+            "❌ OTP Verification Failed.\n\n" +
+            error.message
+        );
+
+    }
+
+};
 window.addEventListener("load", function(){
 
     let name = localStorage.getItem("customerName");
