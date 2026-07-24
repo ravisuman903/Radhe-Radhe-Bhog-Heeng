@@ -1015,20 +1015,9 @@ async function loadProducts() {
                     <p>${description}</p>
 
                     <h3>₹${price}</h3>
-                    <p class="stock ${
-                        stock > 0
-                        ? "in-stock"
-                        : "out-stock"
-                    }">
-
-                        ${
-                            stock > 0
-                            ? "🟢 In Stock"
-                            : "🔴 Out of Stock"
-                        }
-
-                    </p>
-
+                    <p class="stock in-stock">
+    🟢 In Stock
+</p>
                     <div class="quantity-box">
 
                         <button
