@@ -45,6 +45,7 @@ const auth = getAuth(app);
 
 // Export everything
 export {
+    app,
     db,
     auth,
     RecaptchaVerifier,
