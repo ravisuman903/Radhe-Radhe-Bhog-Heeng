@@ -584,17 +584,15 @@ document.getElementById("loginBtn").onclick = async function () {
     try {
 
         // Create reCAPTCHA only once
-        if (!window.recaptchaVerifier) {
-
-            window.recaptchaVerifier = new RecaptchaVerifier(
-                "loginBtn",
-                {
-                    size: "invisible"
-                },
-                auth
-            );
-
+       if (!window.recaptchaVerifier) {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "loginBtn",
+        {
+            size: "invisible"
         }
+    );
+}
 
         const appVerifier = window.recaptchaVerifier;
 
