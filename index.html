@@ -472,27 +472,52 @@ Close
 <!-- Login Modal -->
 <div id="loginModal" class="cart-modal" style="display:none;">
   <div class="cart-content">
+
     <h2>👤 Customer Login</h2>
 
+    <!-- Name -->
     <input
       type="text"
       id="loginName"
       class="cart-input"
       placeholder="Enter Your Name">
 
+    <!-- Mobile Number -->
     <input
       type="tel"
       id="loginPhone"
       class="cart-input"
-      placeholder="Enter Mobile Number">
+      placeholder="Enter 10 Digit Mobile Number"
+      maxlength="10">
 
+    <!-- reCAPTCHA -->
+    <div id="recaptcha-container"></div>
+
+    <!-- Send OTP -->
     <button id="loginBtn" class="btn">
-      Login / Sign Up
+      📱 Send OTP
     </button>
+
+    <!-- OTP Section -->
+    <div id="otpSection" style="display:none;">
+
+      <input
+        type="text"
+        id="otpInput"
+        class="cart-input"
+        placeholder="Enter 6 Digit OTP"
+        maxlength="6">
+
+      <button id="verifyOtpBtn" class="btn">
+        ✅ Verify OTP
+      </button>
+
+    </div>
 
     <button id="closeLogin" class="btn">
       Close
     </button>
+
   </div>
 </div>
 <div id="successModal" class="cart-modal" style="display:none;">
