@@ -13,14 +13,6 @@ import {
     updateDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-// Firebase Authentication
-import {
-    getAuth,
-    RecaptchaVerifier,
-    signInWithPhoneNumber
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyDHFc3TuBAjAhAWrmVzQdX5eLFoKTYulmI",
     authDomain: "radhe-radhe-bhog-heeng.firebaseapp.com",
@@ -30,27 +22,12 @@ const firebaseConfig = {
     appId: "1:438530440845:web:c222af6c9319d2690bacc4"
 };
 
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
-// Initialize Firestore
 const db = getFirestore(app);
 
-
-// Initialize Firebase Authentication
-const auth = getAuth(app);
-
-
-// Export everything
 export {
-    app,
     db,
-    auth,
-    RecaptchaVerifier,
-    signInWithPhoneNumber,
-
     collection,
     addDoc,
     getDocs,
