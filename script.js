@@ -11,11 +11,7 @@ import {
     doc,
     updateDoc
 } from "./firebase.js";
-import {
-    getAuth,
-    RecaptchaVerifier,
-    signInWithPhoneNumber
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 const auth = getAuth(app);
 // Smooth scroll for menu links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
