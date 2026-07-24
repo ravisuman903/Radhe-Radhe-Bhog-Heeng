@@ -1,5 +1,4 @@
 import {
-    app,
     db,
     collection,
     addDoc,
@@ -11,8 +10,6 @@ import {
     doc,
     updateDoc
 } from "./firebase.js";
-
-const auth = getAuth(app);
 // Smooth scroll for menu links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 
