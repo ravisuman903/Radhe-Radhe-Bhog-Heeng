@@ -615,7 +615,7 @@ function closeProfile() {
 function openLogin(){
     document.getElementById("loginModal").style.display = "block";
 }
-
+window.openLogin = openLogin;
 const closeLoginBtn = document.getElementById("closeLogin");
 
 if (closeLoginBtn) {
