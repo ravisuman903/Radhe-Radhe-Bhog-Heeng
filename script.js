@@ -574,7 +574,12 @@ function openProfile() {
     document.getElementById("profileModal").style.display =
         "block";
 }
+function closeProfile() {
 
+    document.getElementById("profileModal").style.display =
+        "none";
+
+}
 function openLogin(){
     document.getElementById("loginModal").style.display = "block";
 }
