@@ -555,8 +555,6 @@ setTimeout(showOrderPopup, 3000);
 setInterval(showOrderPopup, 10000);
 
 });
-function openProfile() {
-
     const name = localStorage.getItem("customerName");
     const phone = localStorage.getItem("customerPhone");
     const address = localStorage.getItem("customerAddress");
