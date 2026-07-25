@@ -1069,6 +1069,7 @@ window.closeAdmin = closeAdmin;
 window.exportOrders = exportOrders;
 window.deleteOrder = deleteOrder;
 window.updateOrderStatus = updateOrderStatus;
+window.notifyCustomerWhatsApp = notifyCustomerWhatsApp;
 window.closeSuccess = closeSuccess;
 window.prevSlide = prevSlide;
 window.nextSlide = nextSlide;
