@@ -709,20 +709,69 @@ async function showOrders() {
 
         querySnapshot.forEach((document) => {
 
-            const order = document.data();
+    const order = document.data();
 
-            html += `
-            <div class="cart-item">
-                <div>
-                    <h4>${order.orderId}</h4>
-                    <p>₹${order.total}</p>
-                    <p>${order.date}</p>
-                    <p><b>Status:</b> ${order.status || "Pending"}</p>
-                </div>
-            </div>
+    let itemsHTML = "";
+
+    if (order.items && order.items.length > 0) {
+
+        order.items.forEach((item) => {
+
+            itemsHTML += `
+                <p>
+                    • ${item.product} × ${item.qty}
+                    — ₹${item.price * item.qty}
+                </p>
             `;
 
         });
+
+    } else {
+
+        itemsHTML = `
+            <p style="color:#777;">
+                Product details not available
+            </p>
+        `;
+
+    }
+
+    html += `
+    <div class="cart-item" style="display:block;">
+
+        <h4>📦 ${order.orderId}</h4>
+
+        <p>📅 ${order.date}</p>
+
+        <p>
+            <b>Status:</b>
+            ${order.status || "Pending"}
+        </p>
+
+        <hr style="margin:10px 0;">
+
+        <h4>🛍️ Products</h4>
+
+        ${itemsHTML}
+
+        <hr style="margin:10px 0;">
+
+        <p>
+            💳 Payment: ${order.payment || "Not Available"}
+        </p>
+
+        <p>
+            📍 ${order.address || "Not Available"}
+        </p>
+
+        <h3 style="color:#6b0000;">
+            💰 Total: ₹${order.total}
+        </h3>
+
+    </div>
+    `;
+
+});
 
     }
 
