@@ -574,6 +574,56 @@ function openProfile() {
     document.getElementById("profileModal").style.display =
         "block";
 }
+async function loadProfileStats() {
+
+    const phone = localStorage.getItem("customerPhone");
+
+    if (!phone) {
+        return;
+    }
+
+    try {
+
+        const q = query(
+            collection(db, "orders"),
+            where("phone", "==", phone)
+        );
+
+        const querySnapshot = await getDocs(q);
+
+        let totalOrders = 0;
+        let totalSpent = 0;
+
+        querySnapshot.forEach((document) => {
+
+            const order = document.data();
+
+            totalOrders++;
+
+            totalSpent += Number(
+                order.total || 0
+            );
+
+        });
+
+        document.getElementById(
+            "profileOrderCount"
+        ).innerText = totalOrders;
+
+        document.getElementById(
+            "profileTotalSpent"
+        ).innerText = "₹" + totalSpent;
+
+    } catch (error) {
+
+        console.error(
+            "Profile Stats Error:",
+            error
+        );
+
+    }
+
+}
 function closeProfile() {
 
     document.getElementById("profileModal").style.display =
