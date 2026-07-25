@@ -645,12 +645,12 @@ function openLogin(){
 const closeLoginBtn = document.getElementById("closeLogin");
 
 if (closeLoginBtn) {
-    closeLoginBtn.onclick = function(){
+    closeLoginBtn.onclick = function () {
         document.getElementById("loginModal").style.display = "none";
     };
 }
-    document.getElementById("loginModal").style.display = "none";
-}
+
+document.getElementById("loginModal").style.display = "none";
 
 // ===============================
 // SIMPLE FREE LOGIN
