@@ -547,6 +547,34 @@ setTimeout(showOrderPopup, 3000);
 setInterval(showOrderPopup, 10000);
 
 });
+function openProfile() {
+
+    const name = localStorage.getItem("customerName");
+    const phone = localStorage.getItem("customerPhone");
+    const address = localStorage.getItem("customerAddress");
+
+    if (!name || !phone) {
+        alert("Please Login First");
+        return;
+    }
+
+    document.getElementById("profileName").innerText =
+        name;
+
+    document.getElementById("profilePhone").innerText =
+        phone;
+
+    const addressBox =
+        document.getElementById("profileAddress");
+
+    if (addressBox) {
+        addressBox.value = address || "";
+    }
+
+    document.getElementById("profileModal").style.display =
+        "block";
+}
+
 function openLogin(){
     document.getElementById("loginModal").style.display = "block";
 }
