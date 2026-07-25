@@ -445,15 +445,19 @@ card.style.display = "none";
 const paymentSelect = document.getElementById("paymentMethod");
 const upiBox = document.getElementById("upiBox");
 
-paymentSelect.addEventListener("change", function(){
+if (paymentSelect && upiBox) {
 
-if(paymentSelect.value==="UPI"){
-upiBox.style.display="block";
-}else{
-upiBox.style.display="none";
+    paymentSelect.addEventListener("change", function () {
+
+        if (paymentSelect.value === "UPI") {
+            upiBox.style.display = "block";
+        } else {
+            upiBox.style.display = "none";
+        }
+
+    });
+
 }
-
-});
 function buyNow(btn, product, price){
 
 let qty = parseInt(
