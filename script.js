@@ -1285,7 +1285,61 @@ async function viewOrderDetails(docId) {
         }
 
         let order = orderDoc.docs[0].data();
+// ===============================
+// UPDATE ORDER TRACKING
+// ===============================
 
+const currentStatus = (
+    order.status || "Pending"
+).toLowerCase();
+
+const trackingSteps = {
+    pending: document.getElementById("trackingPending"),
+    packed: document.getElementById("trackingPacked"),
+    shipped: document.getElementById("trackingShipped"),
+    delivered: document.getElementById("trackingDelivered")
+};
+
+// Remove active class first
+Object.values(trackingSteps).forEach(step => {
+
+    if (step) {
+        step.classList.remove("active");
+    }
+
+});
+
+// Activate steps according to order status
+
+if (currentStatus === "pending") {
+
+    trackingSteps.pending?.classList.add("active");
+
+}
+
+else if (currentStatus === "packed") {
+
+    trackingSteps.pending?.classList.add("active");
+    trackingSteps.packed?.classList.add("active");
+
+}
+
+else if (currentStatus === "shipped") {
+
+    trackingSteps.pending?.classList.add("active");
+    trackingSteps.packed?.classList.add("active");
+    trackingSteps.shipped?.classList.add("active");
+
+}
+
+else if (currentStatus === "delivered") {
+
+    trackingSteps.pending?.classList.add("active");
+    trackingSteps.packed?.classList.add("active");
+    trackingSteps.shipped?.classList.add("active");
+    trackingSteps.delivered?.classList.add("active");
+
+}
         let itemsHTML = "";
 
         if (order.items && order.items.length > 0) {
