@@ -897,7 +897,10 @@ function closeOrders(){
 function closeSuccess(){
     document.getElementById("successModal").style.display = "none";
 }
-document.getElementById("invoiceBtn").onclick = function () {
+const invoiceBtn = document.getElementById("invoiceBtn");
+
+if (invoiceBtn) {
+    invoiceBtn.onclick = function () {
 
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
