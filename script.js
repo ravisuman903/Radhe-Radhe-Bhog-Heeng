@@ -642,7 +642,13 @@ function openLogin(){
     document.getElementById("loginModal").style.display = "block";
 }
 
-document.getElementById("closeLogin").onclick = function(){
+const closeLoginBtn = document.getElementById("closeLogin");
+
+if (closeLoginBtn) {
+    closeLoginBtn.onclick = function(){
+        document.getElementById("loginModal").style.display = "none";
+    };
+}
     document.getElementById("loginModal").style.display = "none";
 }
 
