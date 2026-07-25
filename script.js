@@ -626,15 +626,17 @@ window.addEventListener("load", function(){
     if(name){
 
         document.getElementById("loginMenu").innerHTML = `
-        
-        <a href="#" onclick="openProfile(); return false;">
-            👋 ${name}
-        </a>
+            <a href="#" onclick="openProfile(); return false;">
+                👋 ${name}
+            </a>
 
-        <a href="#" onclick="logout(); return false;">
-            🚪 Logout
-        </a>
+            <a href="#" onclick="showOrders(); return false;">
+                📦 My Orders
+            </a>
 
+            <a href="#" onclick="logout(); return false;">
+                🚪 Logout
+            </a>
         `;
 
     }
