@@ -1543,3 +1543,29 @@ function notifyCustomerWhatsApp(phone, orderId, status) {
     );
 
 }
+function saveProfileAddress() {
+
+    const address =
+        document.getElementById("profileAddress").value.trim();
+
+    if (address === "") {
+        alert("Please enter your delivery address.");
+        return;
+    }
+
+    localStorage.setItem(
+        "customerAddress",
+        address
+    );
+
+    // Checkout address field bhi update hoga
+    const checkoutAddress =
+        document.getElementById("customerAddress");
+
+    if (checkoutAddress) {
+        checkoutAddress.value = address;
+    }
+
+    alert("✅ Delivery Address Saved Successfully!");
+
+}
