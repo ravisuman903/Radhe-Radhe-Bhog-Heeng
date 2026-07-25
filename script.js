@@ -771,7 +771,11 @@ async function showOrders() {
         <h3 style="color:#6b0000;">
             💰 Total: ₹${order.total}
         </h3>
-
+<button
+    class="btn"
+    onclick="viewOrderDetails('${document.id}')">
+    👁️ View Details
+</button>
     </div>
     `;
 
