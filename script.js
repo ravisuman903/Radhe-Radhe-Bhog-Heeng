@@ -922,8 +922,12 @@ if (invoiceBtn) {
     doc.text("Thank you for shopping!", 20, y);
 
     doc.save("Invoice.pdf");
+doc.save("Invoice.pdf");
 
-};
+    };   // function close
+
+}       // ✅ if close
+
 async function openAdmin(){
 
     let pass = prompt("Enter Admin Password");
