@@ -520,7 +520,66 @@ Close
 
   </div>
 </div>
-<div id="successModal" class="cart-modal" style="display:none;">
+<!-- CUSTOMER PROFILE MODAL -->
+
+<div id="profileModal" class="cart-modal">
+
+    <div class="cart-content">
+
+        <button
+            onclick="closeProfile()"
+            style="
+                float:right;
+                border:none;
+                background:none;
+                font-size:24px;
+                cursor:pointer;
+            ">
+            ✖
+        </button>
+
+        <h2>👤 My Profile</h2>
+
+        <div class="admin-stats">
+
+            <div class="stat-card">
+                <h3 id="profileName">-</h3>
+                <p>Customer Name</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="profilePhone">-</h3>
+                <p>Mobile Number</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="profileOrderCount">0</h3>
+                <p>Total Orders</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="profileTotalSpent">₹0</h3>
+                <p>Total Spent</p>
+            </div>
+
+        </div>
+
+        <button
+            class="cart-btn"
+            onclick="showOrders(); closeProfile();">
+            📦 View My Orders
+        </button>
+
+        <button
+            class="buy-btn"
+            onclick="logout();">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</div>
+  <div id="successModal" class="cart-modal" style="display:none;">
     <div class="cart-content" style="text-align:center;">
         <h2>🎉 Order Placed Successfully!</h2>
 
