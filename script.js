@@ -332,9 +332,13 @@ document.getElementById("deliveryCharge").innerText =
 cartTotal.innerText = Math.round(finalTotal + delivery);
 
 }
-document.getElementById("checkoutBtn").onclick = function () {
-    showCart();
-};
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+if (checkoutBtn) {
+    checkoutBtn.onclick = function () {
+        showCart();
+    };
+}
 
 function removeItem(index){
 
