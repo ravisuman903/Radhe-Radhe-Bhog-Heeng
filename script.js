@@ -883,6 +883,15 @@ if (order.orderDate === today) {
         <p>📅 ${order.date}</p>
         <p>📍 ${order.address}</p>
         <p>💳 ${order.payment}</p>
+        <button
+    class="btn"
+    onclick="notifyCustomerWhatsApp(
+        '${order.phone}',
+        '${order.orderId}',
+        '${order.status || "Pending"}'
+    )">
+    📱 Notify Customer
+</button>
     </div>
 
     <div>
