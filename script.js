@@ -584,16 +584,24 @@ document.getElementById("loginBtn").onclick = function () {
 
     // Reload website
     location.reload();
-};window.addEventListener("load", function(){
+};
+window.addEventListener("load", function(){
 
     let name = localStorage.getItem("customerName");
 
     if(name){
 
-document.getElementById("loginMenu").innerHTML = `
-<a href="#">👋 ${name}</a>
-<a href="#" onclick="logout(); return false;">🚪 Logout</a>
-`;
+        document.getElementById("loginMenu").innerHTML = `
+        
+        <a href="#" onclick="openProfile(); return false;">
+            👋 ${name}
+        </a>
+
+        <a href="#" onclick="logout(); return false;">
+            🚪 Logout
+        </a>
+
+        `;
 
     }
 
