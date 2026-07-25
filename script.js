@@ -656,7 +656,10 @@ if (closeLoginBtn) {
 // SIMPLE FREE LOGIN
 // ===============================
 
-document.getElementById("loginBtn").onclick = function () {
+const loginBtn = document.getElementById("loginBtn");
+
+if (loginBtn) {
+    loginBtn.onclick = function () {
 
     let name = document.getElementById("loginName").value.trim();
     let phone = document.getElementById("loginPhone").value.trim();
