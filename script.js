@@ -624,7 +624,11 @@ if (closeLoginBtn) {
     };
 }
 
-document.getElementById("loginModal").style.display = "none";
+const loginModal = document.getElementById("loginModal");
+
+if (loginModal) {
+    loginModal.style.display = "none";
+}
 
 // ===============================
 // SIMPLE FREE LOGIN
