@@ -608,6 +608,72 @@ function logout(){
     location.reload();
 
 }
+// ===============================
+// CUSTOMER PROFILE
+// ===============================
+
+async function openProfile() {
+
+    const name = localStorage.getItem("customerName");
+    const phone = localStorage.getItem("customerPhone");
+
+    if (!name || !phone) {
+        alert("Please Login First");
+        return;
+    }
+
+    // Show customer details
+    document.getElementById("profileName").innerText = name;
+    document.getElementById("profilePhone").innerText = phone;
+
+    // Get customer orders from Firebase
+    try {
+
+        const q = query(
+            collection(db, "orders"),
+            where("phone", "==", phone)
+        );
+
+        const snapshot = await getDocs(q);
+
+        let totalSpent = 0;
+
+        snapshot.forEach((orderDoc) => {
+
+            const order = orderDoc.data();
+
+            totalSpent += Number(order.total || 0);
+
+        });
+
+        document.getElementById("profileOrderCount").innerText =
+            snapshot.size;
+
+        document.getElementById("profileTotalSpent").innerText =
+            "₹" + totalSpent;
+
+    } catch (error) {
+
+        console.error("Profile Error:", error);
+
+        document.getElementById("profileOrderCount").innerText = "0";
+
+        document.getElementById("profileTotalSpent").innerText = "₹0";
+
+    }
+
+    // Open Profile Modal
+    document.getElementById("profileModal").style.display = "block";
+}
+
+
+// Close Profile
+function closeProfile() {
+
+    document.getElementById("profileModal").style.display = "none";
+
+}
+
 async function showOrders() {
 
     let phone = localStorage.getItem("customerPhone");
