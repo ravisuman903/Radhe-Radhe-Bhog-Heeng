@@ -756,14 +756,6 @@ async function openProfile() {
     document.getElementById("profileModal").style.display = "block";
 }
 
-
-// Close Profile
-function closeProfile() {
-
-    document.getElementById("profileModal").style.display = "none";
-
-}
-
 async function showOrders() {
 
     let phone = localStorage.getItem("customerPhone");
