@@ -660,6 +660,7 @@ if (loginBtn) {
     // Reload website
     location.reload();
 };
+}   
 window.addEventListener("load", function(){
 
     let name = localStorage.getItem("customerName");
