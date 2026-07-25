@@ -743,10 +743,14 @@ async function showOrders() {
 
         <p>📅 ${order.date}</p>
 
-        <p>
-            <b>Status:</b>
-            ${order.status || "Pending"}
-        </p>
+       <p>
+    <b>Status:</b>
+    <span class="order-status ${(
+        order.status || "Pending"
+    ).toLowerCase()}">
+        ${order.status || "Pending"}
+    </span>
+</p>
 
         <hr style="margin:10px 0;">
 
