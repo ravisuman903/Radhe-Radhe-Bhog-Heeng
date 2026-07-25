@@ -1498,6 +1498,7 @@ else if (currentStatus === "delivered") {
         }
 
         document.getElementById("orderDetailsContent").innerHTML = `
+    <div id="orderInfoContent">
 
             <h3>📦 ${order.orderId}</h3>
 
