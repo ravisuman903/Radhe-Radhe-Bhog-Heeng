@@ -1457,3 +1457,64 @@ function closeOrderDetails() {
     ).style.display = "none";
 
 }
+function notifyCustomerWhatsApp(phone, orderId, status) {
+
+    if (!phone) {
+        alert("Customer phone number not available.");
+        return;
+    }
+
+    // Remove + sign and spaces
+    let cleanPhone = phone
+        .replace("+", "")
+        .replace(/\s/g, "");
+
+    let message =
+        "📦 *Radhe Radhe Bhog Heeng - Order Update*%0A%0A" +
+        "🧾 Order ID: " + orderId + "%0A" +
+        "📊 Status: *" + status + "*%0A%0A";
+
+    if (status === "Pending") {
+
+        message +=
+            "🙏 Your order has been received successfully.%0A" +
+            "We will process it shortly.";
+
+    } else if (status === "Packed") {
+
+        message +=
+            "📦 Your order has been packed successfully.%0A" +
+            "It will be shipped soon.";
+
+    } else if (status === "Shipped") {
+
+        message +=
+            "🚚 Your order has been shipped.%0A" +
+            "Your order is on the way.";
+
+    } else if (status === "Delivered") {
+
+        message +=
+            "🎉 Your order has been delivered successfully.%0A" +
+            "Thank you for shopping with Radhe Radhe Bhog Heeng! ❤️";
+
+    } else if (status === "Cancelled") {
+
+        message +=
+            "❌ Your order has been cancelled.%0A" +
+            "Please contact us if you have any questions.";
+
+    }
+
+    const whatsappURL =
+        "https://wa.me/" +
+        cleanPhone +
+        "?text=" +
+        message;
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
