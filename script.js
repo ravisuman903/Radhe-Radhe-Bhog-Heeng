@@ -1053,6 +1053,8 @@ window.showOrders = showOrders;
 window.openProfile = openProfile;
 window.closeProfile = closeProfile;
 window.closeOrders = closeOrders;
+window.viewOrderDetails = viewOrderDetails;
+window.closeOrderDetails = closeOrderDetails;
 window.openAdmin = openAdmin;
 window.closeAdmin = closeAdmin;
 window.exportOrders = exportOrders;
@@ -1266,3 +1268,129 @@ async function loadProducts() {
 loadProducts();
 
 liveOrders();
+async function viewOrderDetails(docId) {
+
+    try {
+
+        const orderDoc = await getDocs(
+            query(
+                collection(db, "orders"),
+                where("__name__", "==", docId)
+            )
+        );
+
+        if (orderDoc.empty) {
+            alert("Order details not found.");
+            return;
+        }
+
+        let order = orderDoc.docs[0].data();
+
+        let itemsHTML = "";
+
+        if (order.items && order.items.length > 0) {
+
+            order.items.forEach((item) => {
+
+                itemsHTML += `
+                    <div class="cart-item">
+
+                        <div>
+                            <h4>${item.product}</h4>
+                            <p>Quantity: ${item.qty}</p>
+                            <p>Price: ₹${item.price}</p>
+                        </div>
+
+                        <strong>
+                            ₹${item.price * item.qty}
+                        </strong>
+
+                    </div>
+                `;
+
+            });
+
+        } else {
+
+            itemsHTML = `
+                <p>
+                    Product details are not available
+                    for this order.
+                </p>
+            `;
+
+        }
+
+        document.getElementById("orderDetailsContent").innerHTML = `
+
+            <h3>📦 ${order.orderId}</h3>
+
+            <p>
+                <b>📅 Date:</b>
+                ${order.date || "Not Available"}
+            </p>
+
+            <p>
+                <b>📊 Status:</b>
+                ${order.status || "Pending"}
+            </p>
+
+            <hr>
+
+            <h3>🛍️ Products</h3>
+
+            ${itemsHTML}
+
+            <hr>
+
+            <p>
+                <b>👤 Customer:</b>
+                ${order.customer || "Not Available"}
+            </p>
+
+            <p>
+                <b>📞 Mobile:</b>
+                ${order.phone || "Not Available"}
+            </p>
+
+            <p>
+                <b>📍 Address:</b>
+                ${order.address || "Not Available"}
+            </p>
+
+            <p>
+                <b>💳 Payment:</b>
+                ${order.payment || "Not Available"}
+            </p>
+
+            <h2>
+                💰 Grand Total: ₹${order.total}
+            </h2>
+
+        `;
+
+        document.getElementById(
+            "orderDetailsModal"
+        ).style.display = "block";
+
+    } catch (error) {
+
+        console.error(
+            "Order Details Error:",
+            error
+        );
+
+        alert(
+            "Unable to load order details."
+        );
+
+    }
+
+}
+function closeOrderDetails() {
+
+    document.getElementById(
+        "orderDetailsModal"
+    ).style.display = "none";
+
+}
