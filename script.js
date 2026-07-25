@@ -227,6 +227,7 @@ addDoc(collection(db, "orders"), {
     address: address,
     total: Math.round(finalTotal + delivery),
     payment: paymentMethod,
+    items: cart,
     date: new Date().toLocaleString(),
 orderDate: new Date().toISOString().split("T")[0],
 status: "Pending"
