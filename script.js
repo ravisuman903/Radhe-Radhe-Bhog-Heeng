@@ -1037,8 +1037,32 @@ async function updateOrderStatus(docId, status) {
     try {
 
         await updateDoc(doc(db, "orders", docId), {
-            status: status
-        });
+    status: status
+});
+
+if (confirm("✅ Order Status Updated!\n\nNotify Customer on WhatsApp?")) {
+
+    const orderSnap = await getDocs(
+        query(collection(db, "orders"))
+    );
+
+    orderSnap.forEach((d) => {
+
+        if (d.id === docId) {
+
+            const order = d.data();
+
+            notifyCustomerWhatsApp(
+                order.phone,
+                order.orderId,
+                status
+            );
+
+        }
+
+    });
+
+}
 
         alert("Order Status Updated!");
 
