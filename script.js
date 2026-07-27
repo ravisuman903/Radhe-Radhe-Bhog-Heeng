@@ -1674,3 +1674,163 @@ function closeProductManager() {
 // Make functions available to HTML buttons
 window.openProductManager = openProductManager;
 window.closeProductManager = closeProductManager;
+// ===============================
+// LOAD PRODUCTS IN ADMIN PANEL
+// ===============================
+
+async function loadAdminProducts() {
+
+    const productList =
+        document.getElementById("adminProductList");
+
+    if (!productList) return;
+
+    productList.innerHTML =
+        "<p>Loading Products...</p>";
+
+    const collections = [
+        "products_1",
+        "products_2",
+        "products_3",
+        "products_5"
+    ];
+
+    let html = "";
+
+    try {
+
+        for (const collectionName of collections) {
+
+            const snapshot = await getDocs(
+                collection(db, collectionName)
+            );
+
+            snapshot.forEach((productDoc) => {
+
+                const product = productDoc.data();
+
+                const name =
+                    product.name || "Unnamed Product";
+
+                const price =
+                    Number(product.price || 0);
+
+                const stock =
+                    Number(product.stock || 0);
+
+                const description =
+                    product.description || "";
+
+                const image =
+                    product.image ||
+                    "images/IMG-20260710-WA0004.jpg";
+
+                const active =
+                    product.active !== false;
+
+                html += `
+
+                <div class="cart-item"
+                    style="
+                    display:flex;
+                    flex-direction:column;
+                    gap:10px;
+                    margin-bottom:15px;
+                    ">
+
+                    <div>
+
+                        <img
+                            src="${image}"
+                            style="
+                            width:80px;
+                            height:80px;
+                            object-fit:cover;
+                            border-radius:8px;
+                            "
+                        >
+
+                    </div>
+
+                    <h4>
+                        ${name}
+                    </h4>
+
+                    <p>
+                        💰 Price: ₹${price}
+                    </p>
+
+                    <p>
+                        📦 Stock: ${stock}
+                    </p>
+
+                    <p>
+                        📝 ${description}
+                    </p>
+
+                    <p>
+                        ${active
+                            ? "🟢 Active"
+                            : "🔴 Hidden"
+                        }
+                    </p>
+
+                    <p>
+                        📁 Collection:
+                        ${collectionName}
+                    </p>
+
+                    <button
+                        class="btn"
+                        onclick="
+                        editProduct(
+                            '${collectionName}',
+                            '${productDoc.id}'
+                        )">
+
+                        ✏️ Edit Product
+
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="
+                        deleteProduct(
+                            '${collectionName}',
+                            '${productDoc.id}'
+                        )">
+
+                        🗑️ Delete Product
+
+                    </button>
+
+                </div>
+
+                `;
+
+            });
+
+        }
+
+        if (html === "") {
+
+            html =
+                "<p>No Products Found.</p>";
+
+        }
+
+        productList.innerHTML = html;
+
+    } catch (error) {
+
+        console.error(
+            "Admin Product Loading Error:",
+            error
+        );
+
+        productList.innerHTML =
+            "<p style='color:red;'>Unable to load products.</p>";
+
+    }
+
+}
