@@ -1834,3 +1834,91 @@ async function loadAdminProducts() {
     }
 
 }
+// ===============================
+// ADD NEW PRODUCT
+// ===============================
+
+async function addNewProduct() {
+
+    const name =
+        document.getElementById("adminProductName").value.trim();
+
+    const price =
+        Number(document.getElementById("adminProductPrice").value);
+
+    const stock =
+        Number(document.getElementById("adminProductStock").value);
+
+    const image =
+        document.getElementById("adminProductImage").value.trim();
+
+    const description =
+        document.getElementById("adminProductDescription").value.trim();
+
+    const collectionName =
+        document.getElementById("adminProductCollection").value;
+
+    // Validation
+    if (name === "") {
+        alert("Please enter Product Name.");
+        return;
+    }
+
+    if (price <= 0) {
+        alert("Please enter a valid Product Price.");
+        return;
+    }
+
+    if (stock < 0) {
+        alert("Stock cannot be negative.");
+        return;
+    }
+
+    try {
+
+        await addDoc(
+            collection(db, collectionName),
+            {
+                name: name,
+                price: price,
+                stock: stock,
+                image: image,
+                description: description,
+                active: true,
+                createdAt: new Date().toISOString()
+            }
+        );
+
+        alert("✅ Product Added Successfully!");
+
+        // Clear form
+        document.getElementById("adminProductName").value = "";
+        document.getElementById("adminProductPrice").value = "";
+        document.getElementById("adminProductStock").value = "";
+        document.getElementById("adminProductImage").value = "";
+        document.getElementById("adminProductDescription").value = "";
+
+        // Reload product list
+        loadAdminProducts();
+
+        // Reload website products
+        loadProducts();
+
+    } catch (error) {
+
+        console.error(
+            "Add Product Error:",
+            error
+        );
+
+        alert(
+            "❌ Unable to Add Product.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+// Make function available to HTML
+window.addNewProduct = addNewProduct;
