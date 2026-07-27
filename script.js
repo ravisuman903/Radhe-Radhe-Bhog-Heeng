@@ -1653,3 +1653,24 @@ function saveProfileAddress() {
     alert("✅ Delivery Address Saved Successfully!");
 
 }
+// ===============================
+// PRODUCT MANAGEMENT MODAL
+// ===============================
+
+function openProductManager() {
+
+    document.getElementById("productManagerModal").style.display = "block";
+
+    loadAdminProducts();
+
+}
+
+function closeProductManager() {
+
+    document.getElementById("productManagerModal").style.display = "none";
+
+}
+
+// Make functions available to HTML buttons
+window.openProductManager = openProductManager;
+window.closeProductManager = closeProductManager;
