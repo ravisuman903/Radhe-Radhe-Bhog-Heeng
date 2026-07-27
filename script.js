@@ -1727,7 +1727,9 @@ async function loadAdminProducts() {
 
                 const active =
                     product.active !== false;
-
+const visibilityText = active
+    ? "🟢 Product is Active"
+    : "🔴 Product is Hidden";
                 html += `
 
                 <div class="cart-item"
