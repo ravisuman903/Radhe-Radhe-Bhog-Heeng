@@ -739,6 +739,103 @@ font-weight:bold;">
 🔔 New Order Received!
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <!-- PRODUCT MANAGEMENT MODAL -->
+<div id="productManagerModal" class="cart-modal" style="display:none;">
+
+    <div class="cart-content">
+
+        <h2>🛍️ Manage Products</h2>
+
+        <!-- Add Product Form -->
+        <div class="product-admin-form">
+
+            <input
+                type="text"
+                id="adminProductName"
+                class="cart-input"
+                placeholder="Product Name">
+
+            <input
+                type="number"
+                id="adminProductPrice"
+                class="cart-input"
+                placeholder="Product Price">
+
+            <input
+                type="number"
+                id="adminProductStock"
+                class="cart-input"
+                placeholder="Stock Quantity">
+
+            <input
+                type="text"
+                id="adminProductImage"
+                class="cart-input"
+                placeholder="Product Image URL">
+
+            <textarea
+                id="adminProductDescription"
+                class="cart-input"
+                placeholder="Product Description"></textarea>
+
+            <select
+                id="adminProductCollection"
+                class="cart-input">
+
+                <option value="products_1">
+                    Products 1
+                </option>
+
+                <option value="products_2">
+                    Products 2
+                </option>
+
+                <option value="products_3">
+                    Products 3
+                </option>
+
+                <option value="products_5">
+                    Products 5
+                </option>
+
+            </select>
+
+            <button
+                class="btn"
+                onclick="addNewProduct()">
+
+                ➕ Add Product
+
+            </button>
+
+        </div>
+
+        <hr>
+
+        <!-- Existing Products -->
+        <h3>📦 Existing Products</h3>
+
+        <div id="adminProductList">
+
+            <p>
+                Loading Products...
+            </p>
+
+        </div>
+
+        <br>
+
+        <button
+            class="btn"
+            onclick="closeProductManager()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
 <script type="module" src="script.js"></script>
 
 </body>
