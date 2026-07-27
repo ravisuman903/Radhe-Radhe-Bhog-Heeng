@@ -1770,12 +1770,26 @@ const visibilityText = active
                         📝 ${description}
                     </p>
 
-                    <p>
-                        ${active
-                            ? "🟢 Active"
-                            : "🔴 Hidden"
-                        }
-                    </p>
+                   <p>
+    ${visibilityText}
+</p>
+
+<button
+    class="btn"
+    onclick="
+        toggleProductVisibility(
+            '${collectionName}',
+            '${productDoc.id}',
+            ${active}
+        )
+    ">
+
+    ${active
+        ? "🔴 Hide Product"
+        : "🟢 Show Product"
+    }
+
+</button>
 
                     <p>
                         📁 Collection:
