@@ -1922,3 +1922,105 @@ async function addNewProduct() {
 
 // Make function available to HTML
 window.addNewProduct = addNewProduct;
+// ===============================
+// EDIT PRODUCT
+// ===============================
+
+async function editProduct(collectionName, productId) {
+
+    try {
+
+        // Get current product
+        const snapshot = await getDocs(
+            collection(db, collectionName)
+        );
+
+        let productData = null;
+
+        snapshot.forEach((productDoc) => {
+
+            if (productDoc.id === productId) {
+                productData = productDoc.data();
+            }
+
+        });
+
+        if (!productData) {
+            alert("Product not found.");
+            return;
+        }
+
+        // Ask new values
+        const newName = prompt(
+            "Enter Product Name:",
+            productData.name || ""
+        );
+
+        if (newName === null) return;
+
+        const newPrice = prompt(
+            "Enter Product Price:",
+            productData.price || 0
+        );
+
+        if (newPrice === null) return;
+
+        const newStock = prompt(
+            "Enter Stock Quantity:",
+            productData.stock || 0
+        );
+
+        if (newStock === null) return;
+
+        const newDescription = prompt(
+            "Enter Product Description:",
+            productData.description || ""
+        );
+
+        if (newDescription === null) return;
+
+        const newImage = prompt(
+            "Enter Product Image URL:",
+            productData.image || ""
+        );
+
+        if (newImage === null) return;
+
+        // Update Firebase
+        await updateDoc(
+            doc(db, collectionName, productId),
+            {
+                name: newName.trim(),
+                price: Number(newPrice),
+                stock: Number(newStock),
+                description: newDescription.trim(),
+                image: newImage.trim()
+            }
+        );
+
+        alert("✅ Product Updated Successfully!");
+
+        // Refresh Admin Product List
+        loadAdminProducts();
+
+        // Refresh Website Product List
+        loadProducts();
+
+    } catch (error) {
+
+        console.error(
+            "Edit Product Error:",
+            error
+        );
+
+        alert(
+            "❌ Unable to Update Product.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+// Make function available to HTML
+window.editProduct = editProduct;
