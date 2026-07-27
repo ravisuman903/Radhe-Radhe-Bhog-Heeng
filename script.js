@@ -2024,3 +2024,49 @@ async function editProduct(collectionName, productId) {
 
 // Make function available to HTML
 window.editProduct = editProduct;
+// ===============================
+// DELETE PRODUCT
+// ===============================
+
+async function deleteProduct(collectionName, productId) {
+
+    const confirmDelete = confirm(
+        "⚠️ Are you sure you want to delete this product?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    try {
+
+        await deleteDoc(
+            doc(db, collectionName, productId)
+        );
+
+        alert("✅ Product Deleted Successfully!");
+
+        // Refresh Admin Product List
+        loadAdminProducts();
+
+        // Refresh Website Product List
+        loadProducts();
+
+    } catch (error) {
+
+        console.error(
+            "Delete Product Error:",
+            error
+        );
+
+        alert(
+            "❌ Unable to Delete Product.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+// Make function available to HTML
+window.deleteProduct = deleteProduct;
