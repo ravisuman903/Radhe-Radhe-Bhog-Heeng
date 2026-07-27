@@ -1730,6 +1730,58 @@ async function loadAdminProducts() {
 const visibilityText = active
     ? "🟢 Product is Active"
     : "🔴 Product is Hidden";
+                // ===============================
+// TOGGLE PRODUCT VISIBILITY
+// ===============================
+
+async function toggleProductVisibility(
+    collectionName,
+    productId,
+    currentStatus
+) {
+
+    try {
+
+        const newStatus = !currentStatus;
+
+        await updateDoc(
+            doc(db, collectionName, productId),
+            {
+                active: newStatus
+            }
+        );
+
+        alert(
+            newStatus
+                ? "🟢 Product is now Active!"
+                : "🔴 Product has been Hidden!"
+        );
+
+        // Refresh Admin Product List
+        loadAdminProducts();
+
+        // Refresh Website Products
+        loadProducts();
+
+    } catch (error) {
+
+        console.error(
+            "Product Visibility Error:",
+            error
+        );
+
+        alert(
+            "❌ Unable to change product visibility.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+// Make function available to HTML
+window.toggleProductVisibility =
+    toggleProductVisibility;
                 html += `
 
                 <div class="cart-item"
