@@ -1328,17 +1328,32 @@ if (stock <= 0) {
 
                     </div>
 
-                    <button
-                        class="cart-btn"
-                        onclick="addToCart(
-                            this,
-                            '${safeName}',
-                            ${price}
-                        )">
+                  ${stock > 0 ? `
+    <button
+        class="cart-btn"
+        onclick="addToCart(
+            this,
+            '${safeName}',
+            ${price}
+        )">
 
-                        🛒 Add to Cart
+        🛒 Add to Cart
 
-                    </button>
+    </button>
+ : 
+    <button
+        class="cart-btn"
+        disabled
+        style="
+            background:#999;
+            cursor:not-allowed;
+            opacity:0.7;
+        ">
+
+        🔴 Out of Stock
+
+    </button>
+`}
 
                     <button
                         class="buy-btn"
