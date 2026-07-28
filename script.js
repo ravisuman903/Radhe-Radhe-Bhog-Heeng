@@ -1908,6 +1908,126 @@ const visibilityText = active
 
 }
 // ===============================
+// TOGGLE PRODUCT VISIBILITY
+// ===============================
+
+async function toggleProductVisibility(
+    collectionName,
+    productId,
+    currentStatus
+) {
+
+    try {
+
+        const newStatus = !currentStatus;
+
+        await updateDoc(
+            doc(db, collectionName, productId),
+            {
+                active: newStatus
+            }
+        );
+
+        alert(
+            newStatus
+                ? "🟢 Product is now Active!"
+                : "🔴 Product has been Hidden!"
+        );
+
+        // Refresh Admin Product List
+        await loadAdminProducts();
+
+        // Refresh Website Product List
+        await loadProducts();
+
+    } catch (error) {
+
+        console.error(
+            "Product Visibility Error:",
+            error
+        );
+
+        alert(
+            "❌ Unable to change product visibility.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+window.toggleProductVisibility =
+    toggleProductVisibility;
+
+
+// ===============================
+// ADMIN PRODUCT SEARCH & FILTER
+// ===============================
+
+function filterAdminProducts() {
+
+    const searchInput =
+        document.getElementById("adminProductSearch");
+
+    const statusFilter =
+        document.getElementById("adminProductStatusFilter");
+
+    const searchText =
+        searchInput
+            ? searchInput.value.toLowerCase().trim()
+            : "";
+
+    const selectedStatus =
+        statusFilter
+            ? statusFilter.value
+            : "all";
+
+    const productCards =
+        document.querySelectorAll(
+            "#adminProductList .cart-item"
+        );
+
+    productCards.forEach(card => {
+
+        const productText =
+            card.innerText.toLowerCase();
+
+        const isActive =
+            productText.includes("🟢 product is active");
+
+        const isHidden =
+            productText.includes("🔴 product is hidden");
+
+        const matchesSearch =
+            productText.includes(searchText);
+
+        let matchesStatus = true;
+
+        if (selectedStatus === "active") {
+            matchesStatus = isActive;
+        }
+
+        if (selectedStatus === "hidden") {
+            matchesStatus = isHidden;
+        }
+
+        if (matchesSearch && matchesStatus) {
+
+            card.style.display = "flex";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+window.filterAdminProducts =
+    filterAdminProducts;
+// ===============================
 // ADD NEW PRODUCT
 // ===============================
 
