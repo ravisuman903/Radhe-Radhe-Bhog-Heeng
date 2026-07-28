@@ -1247,7 +1247,33 @@ async function loadProducts() {
                 const price = Number(product.price || 0);
                 console.log(name, product.price, price);
                 const stock = Number(product.stock || 0);
+let stockHTML = "";
 
+if (stock <= 0) {
+
+    stockHTML = `
+        <p class="stock out-of-stock">
+            🔴 Out of Stock
+        </p>
+    `;
+
+} else if (stock <= 10) {
+
+    stockHTML = `
+        <p class="stock low-stock">
+            🟡 Only ${stock} left
+        </p>
+    `;
+
+} else {
+
+    stockHTML = `
+        <p class="stock in-stock">
+            🟢 In Stock
+        </p>
+    `;
+
+}
                 const description =
                     product.description || "";
 
