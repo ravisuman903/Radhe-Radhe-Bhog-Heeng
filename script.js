@@ -1328,7 +1328,7 @@ if (stock <= 0) {
 
                     </div>
 
-                ${stock > 0 ? `
+              ${stock > 0 ? `
     <button
         class="cart-btn"
         onclick="addToCart(
@@ -1372,8 +1372,7 @@ ${stock > 0 ? `
         ">
         🔴 Out of Stock
     </button>
-`}
-                    <p class="delivery-tag">
+`}                    <p class="delivery-tag">
 
                         🚚 Delivery Only in Kota
 
