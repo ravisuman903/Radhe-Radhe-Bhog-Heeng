@@ -194,7 +194,46 @@ id="searchProduct"
 placeholder="🔍 Search Products..."
 onkeyup="searchProducts()"
 class="search-box">
-  
+<!-- PRODUCT CATEGORY FILTER -->
+<div class="category-filter">
+
+    <button
+        class="category-btn active"
+        onclick="filterProductsByCategory('all')">
+        🛍️ All
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterProductsByCategory('Heeng')">
+        🌿 Heeng
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterProductsByCategory('Kachori')">
+        🥟 Kachori
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterProductsByCategory('Masala')">
+        🌶️ Masala
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterProductsByCategory('Combo')">
+        🎁 Combo
+    </button>
+
+    <button
+        class="category-btn"
+        onclick="filterProductsByCategory('Other')">
+        📦 Other
+    </button>
+
+</div> 
 <div class="product-grid" id="productGrid">
     <!-- Products will load automatically from Firebase -->
 </div>
