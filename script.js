@@ -2023,6 +2023,7 @@ const category =
                 stock: stock,
                 image: image,
                 description: description,
+                category: category,
                 active: true,
                 createdAt: new Date().toISOString()
             }
