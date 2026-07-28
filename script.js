@@ -1309,9 +1309,7 @@ if (stock <= 0) {
     📂 Category: ${product.category || "Other"}
 </p>
                     <h3>₹${price}</h3>
-                    <p class="stock in-stock">
-    🟢 In Stock
-</p>
+                  ${stockHTML}
                     <div class="quantity-box">
 
                         <button
