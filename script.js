@@ -1355,17 +1355,32 @@ if (stock <= 0) {
     </button>
 `}
 
-                    <button
-                        class="buy-btn"
-                        onclick="buyNow(
-                            this,
-                            '${safeName}',
-                            ${price}
-                        )">
+                   ${stock > 0 ? `
+    <button
+        class="buy-btn"
+        onclick="buyNow(
+            this,
+            '${safeName}',
+            ${price}
+        )">
 
-                        ⚡ Buy Now
+        ⚡ Buy Now
 
-                    </button>
+    </button>
+ : 
+    <button
+        class="buy-btn"
+        disabled
+        style="
+            background:#999;
+            cursor:not-allowed;
+            opacity:0.7;
+        ">
+
+        🔴 Out of Stock
+
+    </button>
+`}
 
                     <p class="delivery-tag">
 
