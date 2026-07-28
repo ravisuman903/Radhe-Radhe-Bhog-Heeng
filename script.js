@@ -1328,7 +1328,7 @@ if (stock <= 0) {
 
                     </div>
 
-                  ${stock > 0 ? `
+                ${stock > 0 ? `
     <button
         class="cart-btn"
         onclick="addToCart(
@@ -1336,9 +1336,7 @@ if (stock <= 0) {
             '${safeName}',
             ${price}
         )">
-
         🛒 Add to Cart
-
     </button>
  : 
     <button
@@ -1349,13 +1347,11 @@ if (stock <= 0) {
             cursor:not-allowed;
             opacity:0.7;
         ">
-
         🔴 Out of Stock
-
     </button>
 `}
 
-                   ${stock > 0 ? `
+${stock > 0 ? `
     <button
         class="buy-btn"
         onclick="buyNow(
@@ -1363,9 +1359,7 @@ if (stock <= 0) {
             '${safeName}',
             ${price}
         )">
-
         ⚡ Buy Now
-
     </button>
  : 
     <button
@@ -1376,12 +1370,9 @@ if (stock <= 0) {
             cursor:not-allowed;
             opacity:0.7;
         ">
-
         🔴 Out of Stock
-
     </button>
 `}
-
                     <p class="delivery-tag">
 
                         🚚 Delivery Only in Kota
