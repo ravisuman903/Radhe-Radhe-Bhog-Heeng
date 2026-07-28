@@ -1214,7 +1214,10 @@ async function loadProducts() {
 
         for (const collectionName of collections) {
 
-            console.log("Loading collection:", collectionName);
+            console.log(
+                "Loading collection:",
+                collectionName
+            );
 
             const snapshot = await getDocs(
                 collection(db, collectionName)
@@ -1242,38 +1245,59 @@ async function loadProducts() {
                     return;
                 }
 
-                const name = product.name || "Product";
+                const name =
+                    product.name || "Product";
 
-                const price = Number(product.price || 0);
-                console.log(name, product.price, price);
-                const stock = Number(product.stock || 0);
-let stockHTML = "";
+                const price =
+                    Number(product.price || 0);
 
-if (stock <= 0) {
+                console.log(
+                    name,
+                    product.price,
+                    price
+                );
 
-    stockHTML = `
-        <p class="stock out-of-stock">
-            🔴 Out of Stock
-        </p>
-    `;
+                const stock =
+                    Number(product.stock || 0);
 
-} else if (stock <= 10) {
 
-    stockHTML = `
-        <p class="stock low-stock">
-            🟡 Only ${stock} left
-        </p>
-    `;
+                // =========================
+                // STOCK STATUS
+                // =========================
 
-} else {
+                let stockHTML = "";
 
-    stockHTML = `
-        <p class="stock in-stock">
-            🟢 In Stock
-        </p>
-    `;
+                if (stock <= 0) {
 
-}
+                    stockHTML = `
+                        <p class="stock out-of-stock">
+                            🔴 Out of Stock
+                        </p>
+                    `;
+
+                } else if (stock <= 10) {
+
+                    stockHTML = `
+                        <p class="stock low-stock">
+                            🟡 Only ${stock} left
+                        </p>
+                    `;
+
+                } else {
+
+                    stockHTML = `
+                        <p class="stock in-stock">
+                            🟢 In Stock
+                        </p>
+                    `;
+
+                }
+
+
+                // =========================
+                // PRODUCT DETAILS
+                // =========================
+
                 const description =
                     product.description || "";
 
@@ -1281,104 +1305,154 @@ if (stock <= 0) {
                     product.image ||
                     "images/IMG-20260710-WA0004.jpg";
 
+                const category =
+                    product.category || "Other";
+
                 totalProducts++;
 
+
+                // Escape apostrophe for onclick
                 const safeName =
                     name.replace(/'/g, "\\'");
 
+
+                // =========================
+                // PRODUCT CARD
+                // =========================
+
                 productGrid.innerHTML += `
 
-                <div class="card">
+                    <div class="card">
 
-                    <img
-                        src="${image}"
-                        alt="${name}"
-                        onerror="this.src='images/IMG-20260710-WA0004.jpg'"
-                    >
+                        <img
+                            src="${image}"
+                            alt="${name}"
+                            onerror="this.src='images/IMG-20260710-WA0004.jpg'"
+                        >
 
-                    <span
-                        class="wishlist"
-                        onclick="toggleWishlist(this)">
-                        🤍
-                    </span>
-
-                    <h3>${name}</h3>
-
-                    <p>${description}</p>
-<p class="product-category">
-    📂 Category: ${product.category || "Other"}
-</p>
-                    <h3>₹${price}</h3>
-                  ${stockHTML}
-                    <div class="quantity-box">
-
-                        <button
-                            onclick="decreaseQty(this)">
-                            −
-                        </button>
-
-                        <span class="qty">
-                            1
+                        <span
+                            class="wishlist"
+                            onclick="toggleWishlist(this)">
+                            🤍
                         </span>
 
-                        <button
-                            onclick="increaseQty(this)">
-                            +
-                        </button>
+                        <h3>
+                            ${name}
+                        </h3>
+
+                        <p>
+                            ${description}
+                        </p>
+
+                        <p class="product-category">
+                            📂 Category: ${category}
+                        </p>
+
+                        <h3>
+                            ₹${price}
+                        </h3>
+
+                        ${stockHTML}
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="quantity-box">
+
+                            <button
+                                onclick="decreaseQty(this)">
+                                −
+                            </button>
+
+                            <span class="qty">
+                                1
+                            </span>
+
+                            <button
+                                onclick="increaseQty(this)">
+                                +
+                            </button>
+
+                        </div>
+
+
+                        <!-- ADD TO CART -->
+
+                        ${stock > 0 ? `
+
+                            <button
+                                class="cart-btn"
+                                onclick="addToCart(
+                                    this,
+                                    '${safeName}',
+                                    ${price}
+                                )">
+
+                                🛒 Add to Cart
+
+                            </button>
+
+                         : 
+
+                            <button
+                                class="cart-btn"
+                                disabled
+                                style="
+                                    background:#999;
+                                    cursor:not-allowed;
+                                    opacity:0.7;
+                                ">
+
+                                🔴 Out of Stock
+
+                            </button>
+
+                        `}
+
+
+                        <!-- BUY NOW -->
+
+                        ${stock > 0 ? `
+
+                            <button
+                                class="buy-btn"
+                                onclick="buyNow(
+                                    this,
+                                    '${safeName}',
+                                    ${price}
+                                )">
+
+                                ⚡ Buy Now
+
+                            </button>
+
+                         : 
+
+                            <button
+                                class="buy-btn"
+                                disabled
+                                style="
+                                    background:#999;
+                                    cursor:not-allowed;
+                                    opacity:0.7;
+                                ">
+
+                                🔴 Out of Stock
+
+                            </button>
+
+                        `}
+
+
+                        <!-- DELIVERY -->
+
+                        <p class="delivery-tag">
+
+                            🚚 Delivery Only in Kota
+
+                        </p>
 
                     </div>
-
-              ${stock > 0 ? `
-    <button
-        class="cart-btn"
-        onclick="addToCart(
-            this,
-            '${safeName}',
-            ${price}
-        )">
-        🛒 Add to Cart
-    </button>
- : 
-    <button
-        class="cart-btn"
-        disabled
-        style="
-            background:#999;
-            cursor:not-allowed;
-            opacity:0.7;
-        ">
-        🔴 Out of Stock
-    </button>
-`}
-
-${stock > 0 ? `
-    <button
-        class="buy-btn"
-        onclick="buyNow(
-            this,
-            '${safeName}',
-            ${price}
-        )">
-        ⚡ Buy Now
-    </button>
- : 
-    <button
-        class="buy-btn"
-        disabled
-        style="
-            background:#999;
-            cursor:not-allowed;
-            opacity:0.7;
-        ">
-        🔴 Out of Stock
-    </button>
-`}                    <p class="delivery-tag">
-
-                        🚚 Delivery Only in Kota
-
-                    </p>
-
-                </div>
 
                 `;
 
@@ -1386,9 +1460,19 @@ ${stock > 0 ? `
 
         }
 
+
+        // =========================
+        // CART COUNT
+        // =========================
+
         document.getElementById(
             "cartCount"
         ).innerText = cart.length;
+
+
+        // =========================
+        // CONSOLE LOG
+        // =========================
 
         console.log(
             "=============================="
@@ -1403,12 +1487,17 @@ ${stock > 0 ? `
             "=============================="
         );
 
+
     } catch (error) {
 
         console.error(
             "FIREBASE PRODUCT ERROR:",
             error
         );
+
+    }
+
+}
 
         productGrid.innerHTML = `
 
