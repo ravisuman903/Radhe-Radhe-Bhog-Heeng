@@ -1782,6 +1782,76 @@ async function toggleProductVisibility(
 // Make function available to HTML
 window.toggleProductVisibility =
     toggleProductVisibility;
+                // ===============================
+// ADMIN PRODUCT SEARCH & FILTER
+// ===============================
+
+function filterAdminProducts() {
+
+    const searchInput =
+        document.getElementById("adminProductSearch");
+
+    const statusFilter =
+        document.getElementById("adminProductStatusFilter");
+
+    const searchText =
+        searchInput
+            ? searchInput.value.toLowerCase().trim()
+            : "";
+
+    const selectedStatus =
+        statusFilter
+            ? statusFilter.value
+            : "all";
+
+    const productCards =
+        document.querySelectorAll(
+            "#adminProductList .cart-item"
+        );
+
+    productCards.forEach(card => {
+
+        const productName =
+            card.innerText.toLowerCase();
+
+        const isActive =
+            productName.includes("🟢");
+
+        const isHidden =
+            productName.includes("🔴");
+
+        const matchesSearch =
+            productName.includes(searchText);
+
+        let matchesStatus = true;
+
+        if (selectedStatus === "active") {
+            matchesStatus = isActive;
+        }
+
+        if (selectedStatus === "hidden") {
+            matchesStatus = isHidden;
+        }
+
+        if (
+            matchesSearch &&
+            matchesStatus
+        ) {
+
+            card.style.display = "flex";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+window.filterAdminProducts =
+    filterAdminProducts;
                 html += `
 
                 <div class="cart-item"
