@@ -822,7 +822,38 @@ font-weight:bold;">
 
         <!-- Existing Products -->
         <h3>📦 Existing Products</h3>
+<!-- PRODUCT SEARCH & FILTER -->
+<div class="product-admin-filter">
 
+    <input
+        type="text"
+        id="adminProductSearch"
+        class="cart-input"
+        placeholder="🔍 Search Product..."
+        onkeyup="filterAdminProducts()"
+    >
+
+    <select
+        id="adminProductStatusFilter"
+        class="cart-input"
+        onchange="filterAdminProducts()"
+    >
+
+        <option value="all">
+            All Products
+        </option>
+
+        <option value="active">
+            🟢 Active Products
+        </option>
+
+        <option value="hidden">
+            🔴 Hidden Products
+        </option>
+
+    </select>
+
+</div>
         <div id="adminProductList">
 
             <p>
