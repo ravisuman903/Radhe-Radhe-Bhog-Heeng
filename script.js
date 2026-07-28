@@ -2212,3 +2212,70 @@ async function deleteProduct(collectionName, productId) {
 
 // Make function available to HTML
 window.deleteProduct = deleteProduct;
+// ===============================
+// WEBSITE PRODUCT CATEGORY FILTER
+// ===============================
+
+function filterProductsByCategory(category) {
+
+    const productCards =
+        document.querySelectorAll(
+            "#productGrid .card"
+        );
+
+    productCards.forEach(card => {
+
+        const categoryText =
+            card.querySelector(".product-category");
+
+        // Agar product mein category available nahi hai
+        if (!categoryText) {
+
+            if (category === "all") {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+
+            return;
+        }
+
+        const productCategory =
+            categoryText.innerText
+                .replace("📂 Category:", "")
+                .trim();
+
+        if (
+            category === "all" ||
+            productCategory.toLowerCase() ===
+            category.toLowerCase()
+        ) {
+
+            card.style.display = "block";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    // Active button change
+    document
+        .querySelectorAll(".category-btn")
+        .forEach(button => {
+
+            button.classList.remove("active");
+
+        });
+
+    // Clicked button ko active banana
+    event.currentTarget.classList.add("active");
+
+}
+
+
+// HTML onclick ke liye function available
+window.filterProductsByCategory =
+    filterProductsByCategory;
