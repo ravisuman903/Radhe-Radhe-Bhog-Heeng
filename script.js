@@ -1279,7 +1279,9 @@ async function loadProducts() {
                     <h3>${name}</h3>
 
                     <p>${description}</p>
-
+<p>
+    📂 Category: ${product.category || "Other"}
+</p>
                     <h3>₹${price}</h3>
                     <p class="stock in-stock">
     🟢 In Stock
