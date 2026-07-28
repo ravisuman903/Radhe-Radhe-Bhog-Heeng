@@ -1995,7 +1995,8 @@ async function addNewProduct() {
 
     const collectionName =
         document.getElementById("adminProductCollection").value;
-
+const category =
+    document.getElementById("adminProductCategory").value;
     // Validation
     if (name === "") {
         alert("Please enter Product Name.");
