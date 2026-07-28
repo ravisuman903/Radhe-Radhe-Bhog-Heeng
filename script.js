@@ -1181,14 +1181,6 @@ window.closeSuccess = closeSuccess;
 window.prevSlide = prevSlide;
 window.nextSlide = nextSlide;
 window.searchProducts = searchProducts;
-// ===============================
-// LOAD ALL PRODUCTS FROM FIREBASE
-// ===============================
-
-// ===============================
-// LOAD ALL PRODUCTS FROM FIREBASE
-// ===============================
-
 // ==========================================
 // LOAD ALL PRODUCTS FROM FIREBASE
 // ==========================================
@@ -1205,7 +1197,7 @@ async function loadProducts() {
         "products_1",
         "products_2",
         "products_3",
-        "products_5",
+        "products_5"
     ];
 
     let totalProducts = 0;
@@ -1245,20 +1237,30 @@ async function loadProducts() {
                     return;
                 }
 
+                // =========================
+                // PRODUCT BASIC DETAILS
+                // =========================
+
                 const name =
                     product.name || "Product";
 
                 const price =
                     Number(product.price || 0);
 
-                console.log(
-                    name,
-                    product.price,
-                    price
-                );
-
                 const stock =
                     Number(product.stock || 0);
+
+                const description =
+                    product.description || "";
+
+                const image =
+                    product.image ||
+                    "images/IMG-20260710-WA0004.jpg";
+
+                const category =
+                    product.category || "Other";
+
+                totalProducts++;
 
 
                 // =========================
@@ -1295,23 +1297,9 @@ async function loadProducts() {
 
 
                 // =========================
-                // PRODUCT DETAILS
+                // SAFE PRODUCT NAME
                 // =========================
 
-                const description =
-                    product.description || "";
-
-                const image =
-                    product.image ||
-                    "images/IMG-20260710-WA0004.jpg";
-
-                const category =
-                    product.category || "Other";
-
-                totalProducts++;
-
-
-                // Escape apostrophe for onclick
                 const safeName =
                     name.replace(/'/g, "\\'");
 
@@ -1378,70 +1366,70 @@ async function loadProducts() {
 
                         <!-- ADD TO CART -->
 
-                        ${stock > 0 ? `
+                        ${
+                            stock > 0
+                                ? `
+                                    <button
+                                        class="cart-btn"
+                                        onclick="addToCart(
+                                            this,
+                                            '${safeName}',
+                                            ${price}
+                                        )">
 
-                            <button
-                                class="cart-btn"
-                                onclick="addToCart(
-                                    this,
-                                    '${safeName}',
-                                    ${price}
-                                )">
+                                        🛒 Add to Cart
 
-                                🛒 Add to Cart
+                                    </button>
+                                `
+                                : `
+                                    <button
+                                        class="cart-btn"
+                                        disabled
+                                        style="
+                                            background:#999;
+                                            cursor:not-allowed;
+                                            opacity:0.7;
+                                        ">
 
-                            </button>
+                                        🔴 Out of Stock
 
-                         : 
-
-                            <button
-                                class="cart-btn"
-                                disabled
-                                style="
-                                    background:#999;
-                                    cursor:not-allowed;
-                                    opacity:0.7;
-                                ">
-
-                                🔴 Out of Stock
-
-                            </button>
-
-                        `}
+                                    </button>
+                                `
+                        }
 
 
                         <!-- BUY NOW -->
 
-                        ${stock > 0 ? `
+                        ${
+                            stock > 0
+                                ? `
+                                    <button
+                                        class="buy-btn"
+                                        onclick="buyNow(
+                                            this,
+                                            '${safeName}',
+                                            ${price}
+                                        )">
 
-                            <button
-                                class="buy-btn"
-                                onclick="buyNow(
-                                    this,
-                                    '${safeName}',
-                                    ${price}
-                                )">
+                                        ⚡ Buy Now
 
-                                ⚡ Buy Now
+                                    </button>
+                                `
+                                : `
+                                    <button
+                                        class="buy-btn"
+                                        disabled
+                                        style="
+                                            background:#999;
+                                            cursor:not-allowed;
+                                            opacity:0.7;
+                                        ">
 
-                            </button>
+                                        🔴 Out of Stock
 
-                         : 
-
-                            <button
-                                class="buy-btn"
-                                disabled
-                                style="
-                                    background:#999;
-                                    cursor:not-allowed;
-                                    opacity:0.7;
-                                ">
-
-                                🔴 Out of Stock
-
-                            </button>
-
-                        `}
+                                    </button>
+                                `
+                        }
 
 
                         <!-- DELIVERY -->
@@ -1465,9 +1453,15 @@ async function loadProducts() {
         // CART COUNT
         // =========================
 
-        document.getElementById(
-            "cartCount"
-        ).innerText = cart.length;
+        const cartCountElement =
+            document.getElementById("cartCount");
+
+        if (cartCountElement) {
+
+            cartCountElement.innerText =
+                cart.length;
+
+        }
 
 
         // =========================
@@ -1495,21 +1489,17 @@ async function loadProducts() {
             error
         );
 
-    }
-
-}
-
         productGrid.innerHTML = `
 
-        <p style="
-            text-align:center;
-            color:red;
-            width:100%;
-        ">
+            <p style="
+                text-align:center;
+                color:red;
+                width:100%;
+            ">
 
-            Unable to load products.
+                Unable to load products.
 
-        </p>
+            </p>
 
         `;
 
@@ -1517,10 +1507,11 @@ async function loadProducts() {
 
 }
 
+// Load Products
 loadProducts();
 
-liveOrders();
-async function viewOrderDetails(docId) {
+// Start Live Orders
+liveOrders();async function viewOrderDetails(docId) {
 
     try {
 
