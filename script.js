@@ -2149,6 +2149,84 @@ const visibilityText = active
 
 }
 // ===============================
+// CHANGE PRODUCT STOCK
+// ===============================
+
+async function changeProductStock(
+    collectionName,
+    productId,
+    change
+) {
+
+    try {
+
+        const productRef =
+            doc(db, collectionName, productId);
+
+        const snapshot =
+            await getDocs(
+                collection(db, collectionName)
+            );
+
+        let currentStock = 0;
+
+        snapshot.forEach((productDoc) => {
+
+            if (productDoc.id === productId) {
+
+                const product =
+                    productDoc.data();
+
+                currentStock =
+                    Number(product.stock || 0);
+
+            }
+
+        });
+
+        let newStock =
+            currentStock + change;
+
+        if (newStock < 0) {
+            newStock = 0;
+        }
+
+        await updateDoc(
+            productRef,
+            {
+                stock: newStock
+            }
+        );
+
+        console.log(
+            "Stock Updated:",
+            productId,
+            newStock
+        );
+
+        await loadAdminProducts();
+
+        await loadProducts();
+
+    } catch (error) {
+
+        console.error(
+            "Stock Update Error:",
+            error
+        );
+
+        alert(
+            "❌ Unable to update stock.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+window.changeProductStock =
+    changeProductStock;
+// ===============================
 // TOGGLE PRODUCT VISIBILITY
 // ===============================
 
