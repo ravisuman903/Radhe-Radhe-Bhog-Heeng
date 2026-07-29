@@ -147,7 +147,7 @@ qty.innerText = parseInt(qty.innerText) - 1;
 }
 }
 async function reduceProductStock() {
-
+console.log("CART BEFORE STOCK UPDATE:", cart);
     try {
 
         for (const item of cart) {
