@@ -1475,11 +1475,13 @@ async function loadProducts() {
                                 ? `
                                     <button
                                         class="cart-btn"
-                                        onclick="addToCart(
-                                            this,
-                                            '${safeName}',
-                                            ${price}
-                                        )">
+                                      onclick="addToCart(
+    this,
+    '${safeName}',
+    ${price},
+    '${collectionName}',
+    '${productDoc.id}'
+)">
 
                                         🛒 Add to Cart
 
