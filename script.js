@@ -1520,10 +1520,12 @@ async function loadProducts() {
                                     <button
                                         class="buy-btn"
                                         onclick="buyNow(
-                                            this,
-                                            '${safeName}',
-                                            ${price}
-                                        )">
+    this,
+    '${safeName}',
+    ${price},
+    '${collectionName}',
+    '${productDoc.id}'
+)">
 
                                         ⚡ Buy Now
 
