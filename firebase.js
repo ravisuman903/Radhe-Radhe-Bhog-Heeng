@@ -36,5 +36,6 @@ export {
     where,
     deleteDoc,
     doc,
-    updateDoc
+    updateDoc,
+    runTransaction
 };
