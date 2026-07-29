@@ -2010,9 +2010,59 @@ const visibilityText = active
                         💰 Price: ₹${price}
                     </p>
 
-                    <p>
-                        📦 Stock: ${stock}
-                    </p>
+                   <div class="inventory-control">
+
+    <p>
+        📦 Stock:
+        <strong>
+            ${stock}
+        </strong>
+    </p>
+
+    <button
+        class="btn"
+        onclick="
+            changeProductStock(
+                '${collectionName}',
+                '${productDoc.id}',
+                -1
+            )
+        "
+        ${stock <= 0 ? "disabled" : ""}>
+
+        ➖
+
+    </button>
+
+    <button
+        class="btn"
+        onclick="
+            changeProductStock(
+                '${collectionName}',
+                '${productDoc.id}',
+                1
+            )
+        ">
+
+        ➕
+
+    </button>
+
+    <button
+        class="btn"
+        onclick="
+            editProductStock(
+                '${collectionName}',
+                '${productDoc.id}',
+                ${stock}
+            )
+        ">
+
+        ✏️ Edit Stock
+
+    </button>
+
+</div>
 
                     <p>
                         📝 ${description}
