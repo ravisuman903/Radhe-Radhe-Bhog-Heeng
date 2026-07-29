@@ -2151,7 +2151,71 @@ const visibilityText = active
 // ===============================
 // CHANGE PRODUCT STOCK
 // ===============================
+async function changeProductStock(
+    collectionName,
+    productId,
+    change
+) {
+    try {
+        const productRef = doc(
+            db,
+            collectionName,
+            productId
+        );
 
+        const productSnapshot =
+            await getDoc(productRef);
+
+        if (!productSnapshot.exists()) {
+            alert("Product not found.");
+            return;
+        }
+
+        const productData =
+            productSnapshot.data();
+
+        const currentStock =
+            Number(productData.stock || 0);
+
+        const newStock =
+            currentStock + change;
+
+        if (newStock < 0) {
+            alert("Stock cannot be negative.");
+            return;
+        }
+
+        await updateDoc(
+            productRef,
+            {
+                stock: newStock
+            }
+        );
+
+        console.log(
+            "Stock Updated:",
+            newStock
+        );
+
+        await loadAdminProducts();
+        await loadProducts();
+
+    } catch (error) {
+        console.error(
+            "Change Stock Error:",
+            error
+        );
+
+        alert(
+            "Unable to update stock.\n\n" +
+            error.message
+        );
+    }
+}
+
+// Make function available to HTML
+window.changeProductStock =
+    changeProductStock;
 async function changeProductStock(
     collectionName,
     productId,
