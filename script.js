@@ -562,7 +562,13 @@ if (paymentSelect && upiBox) {
     });
 
 }
-function buyNow(btn, product, price){
+function buyNow(
+    btn,
+    product,
+    price,
+    collectionName,
+    productId
+){
 
 let qty = parseInt(
 btn.parentElement.querySelector(".qty").innerText
