@@ -227,7 +227,7 @@ async function reduceProductStock() {
     }
 
 }
-function showCart(){
+async function showCart(){
 
 if(cart.length===0){
 alert("Your cart is empty!");
