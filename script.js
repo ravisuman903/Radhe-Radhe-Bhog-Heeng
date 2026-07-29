@@ -123,7 +123,87 @@ if(parseInt(qty.innerText) > 1){
 qty.innerText = parseInt(qty.innerText) - 1;
 }
 }
+async function reduceProductStock() {
 
+    try {
+
+        for (const item of cart) {
+
+            if (!item.collectionName || !item.productId) {
+                console.warn(
+                    "Product ID or Collection Name missing:",
+                    item
+                );
+                continue;
+            }
+
+            const productRef = doc(
+                db,
+                item.collectionName,
+                item.productId
+            );
+
+            await runTransaction(db, async (transaction) => {
+
+                const productSnapshot =
+                    await transaction.get(productRef);
+
+                if (!productSnapshot.exists()) {
+                    throw new Error(
+                        "Product not found: " + item.product
+                    );
+                }
+
+                const productData =
+                    productSnapshot.data();
+
+                const currentStock =
+                    Number(productData.stock || 0);
+
+                if (currentStock < item.qty) {
+                    throw new Error(
+                        item.product +
+                        " has insufficient stock."
+                    );
+                }
+
+                const newStock =
+                    currentStock - item.qty;
+
+                transaction.update(
+                    productRef,
+                    {
+                        stock: newStock
+                    }
+                );
+
+            });
+
+        }
+
+        console.log(
+            "✅ Product stock updated successfully!"
+        );
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "❌ Stock Update Error:",
+            error
+        );
+
+        alert(
+            "Unable to update product stock.\n\n" +
+            error.message
+        );
+
+        return false;
+
+    }
+
+}
 function showCart(){
 
 if(cart.length===0){
