@@ -86,29 +86,52 @@ observer.observe(el);
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let discount = 0;
 
-function addToCart(button, product, price){
+function addToCart(
+    button,
+    product,
+    price,
+    collectionName,
+    productId
+) {
 
-let qty = parseInt(
-button.parentElement.querySelector(".qty").innerText
-);
+    let qty = parseInt(
+        button.parentElement.querySelector(".qty").innerText
+    );
 
-let existingItem = cart.find(item => item.product === product);
+    let existingItem = cart.find(
+        item => item.productId === productId
+    );
 
-if(existingItem){
-existingItem.qty += qty;
-}else{
-cart.push({
-product: product,
-price: price,
-qty: qty
-});
-}
+    if (existingItem) {
 
-document.getElementById("cartCount").innerText = cart.length;
+        existingItem.qty += qty;
 
-alert(product + " x " + qty + " added to cart!");
-updateCartPopup();
-saveCart();
+    } else {
+
+        cart.push({
+            product: product,
+            price: price,
+            qty: qty,
+            collectionName: collectionName,
+            productId: productId
+        });
+
+    }
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
+    alert(
+        product +
+        " x " +
+        qty +
+        " added to cart!"
+    );
+
+    updateCartPopup();
+
+    saveCart();
+
 }
 
 function increaseQty(btn){
