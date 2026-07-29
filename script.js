@@ -2227,6 +2227,90 @@ async function changeProductStock(
 window.changeProductStock =
     changeProductStock;
 // ===============================
+// EDIT PRODUCT STOCK
+// ===============================
+
+async function editProductStock(
+    collectionName,
+    productId,
+    currentStock
+) {
+
+    const newStock = prompt(
+        "Enter New Stock Quantity:",
+        currentStock
+    );
+
+    // Cancel button press kiya
+    if (newStock === null) {
+        return;
+    }
+
+    // Empty value check
+    if (newStock.trim() === "") {
+        alert("Please enter stock quantity.");
+        return;
+    }
+
+    // Number check
+    const stockNumber = Number(newStock);
+
+    if (isNaN(stockNumber)) {
+        alert("Please enter a valid number.");
+        return;
+    }
+
+    // Negative stock allowed nahi hai
+    if (stockNumber < 0) {
+        alert("Stock cannot be negative.");
+        return;
+    }
+
+    try {
+
+        await updateDoc(
+            doc(
+                db,
+                collectionName,
+                productId
+            ),
+            {
+                stock: stockNumber
+            }
+        );
+
+        alert(
+            "✅ Stock Updated Successfully!\n\n" +
+            "New Stock: " +
+            stockNumber
+        );
+
+        // Refresh Admin Product List
+        await loadAdminProducts();
+
+        // Refresh Website Product List
+        await loadProducts();
+
+    } catch (error) {
+
+        console.error(
+            "Edit Stock Error:",
+            error
+        );
+
+        alert(
+            "❌ Unable to update stock.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+// Make function available to HTML
+window.editProductStock =
+    editProductStock;
+// ===============================
 // TOGGLE PRODUCT VISIBILITY
 // ===============================
 
