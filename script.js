@@ -577,9 +577,11 @@ btn.parentElement.querySelector(".qty").innerText
 cart = [];
 
 cart.push({
-product: product,
-price: price,
-qty: qty
+    product: product,
+    price: price,
+    qty: qty,
+    collectionName: collectionName,
+    productId: productId
 });
 
 document.getElementById("cartCount").innerText = 1;
