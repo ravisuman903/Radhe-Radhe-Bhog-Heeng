@@ -315,6 +315,11 @@ delivery = 50;
 message += "🚚 Delivery Charge = ₹" + delivery + "%0A";
 
 message += "💰 *Grand Total = ₹" + Math.round(finalTotal + delivery) + "*";
+const stockUpdated = await reduceProductStock();
+
+if (!stockUpdated) {
+    return;
+}
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 orders.push({
