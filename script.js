@@ -228,6 +228,66 @@ console.log("CART BEFORE STOCK UPDATE:", cart);
     }
 
 }
+async function saveCODOrder(orderData) {
+
+    try {
+
+        // Save COD Order in Firebase
+        await addDoc(
+            collection(db, "orders"),
+            {
+                orderId: orderData.orderId,
+                customer: orderData.customer,
+                phone: orderData.phone,
+                address: orderData.address,
+                total: orderData.total,
+                payment: "Cash on Delivery",
+                items: orderData.items,
+                date: new Date().toLocaleString(),
+                orderDate: new Date().toISOString().split("T")[0],
+                status: "Pending"
+            }
+        );
+
+        console.log("✅ COD Order Saved in Firebase");
+
+
+        // Open WhatsApp
+        window.open(
+            "https://wa.me/917733816532?text=" +
+            orderData.message,
+            "_blank"
+        );
+
+
+        // Show Success Modal
+        document.getElementById(
+            "successModal"
+        ).style.display = "block";
+
+
+        alert(
+            "✅ Order Placed Successfully!\n\n" +
+            "Payment Method: Cash on Delivery"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "COD Order Error:",
+            error
+        );
+
+        alert(
+            "Unable to place COD order.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
 async function startRazorpayPayment(amount, orderData) {
 
     try {
