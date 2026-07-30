@@ -253,7 +253,7 @@ async function startRazorpayPayment(amount) {
         // Step 2: Razorpay Checkout Options
         const options = {
 
-            key: "YOUR_RAZORPAY_KEY_ID",
+            key: "rzp_live_TJdYPzdq7h3o5A",
 
             amount: data.order.amount,
 
