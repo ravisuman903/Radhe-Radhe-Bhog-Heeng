@@ -265,20 +265,34 @@ async function startRazorpayPayment(amount) {
 
             order_id: data.order.id,
 
-            handler: function (paymentResponse) {
+           handler: async function (paymentResponse) {
 
-                console.log(
-                    "Payment Successful:",
-                    paymentResponse
-                );
+    console.log(
+        "Payment Successful:",
+        paymentResponse
+    );
 
-                alert(
-                    "✅ Payment Successful!\n\n" +
-                    "Payment ID: " +
-                    paymentResponse.razorpay_payment_id
-                );
+    alert(
+        "✅ Payment Successful!\n\n" +
+        "Payment ID: " +
+        paymentResponse.razorpay_payment_id
+    );
 
-            },
+    // Payment successful hone ke baad stock reduce hoga
+    const stockUpdated = await reduceProductStock();
+
+    if (!stockUpdated) {
+        alert(
+            "Payment successful, but stock update failed. Please contact us."
+        );
+        return;
+    }
+
+    console.log(
+        "✅ Payment successful and stock updated."
+    );
+
+},
 
             prefill: {
 
