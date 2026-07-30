@@ -569,7 +569,7 @@ message += "🚚 Delivery Charge = ₹" + delivery + "%0A";
 
 message += "💰 *Grand Total = ₹" + Math.round(finalTotal + delivery) + "*";
 console.log("Final Payment Amount:", Math.round(finalTotal + delivery));
-const cartModal = document.getElementById("cartModal");
+
 const closeCart = document.getElementById("closeCart");
 const cartIcon = document.querySelector(".cart-icon");
 
