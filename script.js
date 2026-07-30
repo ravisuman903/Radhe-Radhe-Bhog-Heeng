@@ -570,55 +570,6 @@ message += "🚚 Delivery Charge = ₹" + delivery + "%0A";
 
 message += "💰 *Grand Total = ₹" + Math.round(finalTotal + delivery) + "*";
 console.log("Final Payment Amount:", Math.round(finalTotal + delivery));
-/*
-const stockUpdated = await reduceProductStock();
-
-if (!stockUpdated) {
-    return;
-}
-const paymentAmount = Math.round(finalTotal + delivery);
-
-const orderData = {
-    orderId: orderId,
-    customer: name,
-    phone: phone,
-    address: address,
-    total: paymentAmount,
-    items: cart,
-    message: message
-};
-
-// COD ORDER
-if (paymentMethod === "Cash on Delivery") {
-
-    await saveCODOrder(orderData);
-
-    return;
-}
-
-// ONLINE PAYMENT
-if (paymentMethod === "Online Payment") {
-
-    await startRazorpayPayment(
-        paymentAmount,
-        orderData
-    );
-
-    return;
-}
-
-// UPI PAYMENT
-if (paymentMethod === "UPI") {
-
-    await startRazorpayPayment(
-        paymentAmount,
-        orderData
-    );
-
-    return;
-}
-
-}
 const cartModal = document.getElementById("cartModal");
 const closeCart = document.getElementById("closeCart");
 const cartIcon = document.querySelector(".cart-icon");
@@ -640,6 +591,47 @@ window.addEventListener("click", function (e) {
         cartModal.style.display = "none";
     }
 });
+const paymentAmount = Math.round(finalTotal + delivery);
+
+const orderData = {
+    orderId: orderId,
+    customer: name,
+    phone: phone,
+    address: address,
+    total: paymentAmount,
+    items: cart,
+    message: message
+};
+
+// COD ORDER
+if (paymentMethod === "Cash on Delivery") {
+
+    const stockUpdated = await reduceProductStock();
+
+    if (!stockUpdated) {
+        return;
+    }
+
+    await saveCODOrder(orderData);
+
+    return;
+}
+
+// ONLINE PAYMENT / UPI
+if (
+    paymentMethod === "Online Payment" ||
+    paymentMethod === "UPI"
+) {
+
+    await startRazorpayPayment(
+        paymentAmount,
+        orderData
+    );
+
+    return;
+}
+
+}
 
 function updateCartPopup(){
 
