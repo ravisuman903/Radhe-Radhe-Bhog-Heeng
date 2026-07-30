@@ -228,6 +228,99 @@ console.log("CART BEFORE STOCK UPDATE:", cart);
     }
 
 }
+async function startRazorpayPayment(amount) {
+
+    try {
+
+        // Step 1: Create Razorpay Order
+        const response = await fetch("/api/create-order", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                amount: amount
+            })
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+            alert("Unable to create payment order.");
+            return;
+        }
+
+        // Step 2: Razorpay Checkout Options
+        const options = {
+
+            key: "YOUR_RAZORPAY_KEY_ID",
+
+            amount: data.order.amount,
+
+            currency: "INR",
+
+            name: "Radhe Radhe Bhog Heeng",
+
+            description: "Order Payment",
+
+            order_id: data.order.id,
+
+            handler: function (paymentResponse) {
+
+                console.log(
+                    "Payment Successful:",
+                    paymentResponse
+                );
+
+                alert(
+                    "✅ Payment Successful!\n\n" +
+                    "Payment ID: " +
+                    paymentResponse.razorpay_payment_id
+                );
+
+            },
+
+            prefill: {
+
+                name: document.getElementById(
+                    "customerName"
+                )?.value || "",
+
+                contact: document.getElementById(
+                    "customerPhone"
+                )?.value || ""
+
+            },
+
+            theme: {
+
+                color: "#6b0000"
+
+            }
+
+        };
+
+        // Step 3: Open Razorpay Checkout
+        const razorpay =
+            new Razorpay(options);
+
+        razorpay.open();
+
+    } catch (error) {
+
+        console.error(
+            "Razorpay Error:",
+            error
+        );
+
+        alert(
+            "Unable to start payment.\n\n" +
+            error.message
+        );
+
+    }
+
+}
 async function showCart(){
 
 if(cart.length===0){
