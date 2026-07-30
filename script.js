@@ -435,15 +435,6 @@ const paymentAmount = Math.round(finalTotal + delivery);
 
 startRazorpayPayment(paymentAmount);
 return;
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-orders.push({
-    id: orderId,
-    total: Math.round(finalTotal + delivery),
-    date: new Date().toLocaleString()
-});
-
-localStorage.setItem("orders", JSON.stringify(orders));
 addDoc(collection(db, "orders"), {
     orderId: orderId,
     customer: name,
