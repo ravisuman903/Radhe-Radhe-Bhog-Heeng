@@ -228,7 +228,7 @@ console.log("CART BEFORE STOCK UPDATE:", cart);
     }
 
 }
-async function startRazorpayPayment(amount) {
+async function startRazorpayPayment(amount, orderData) {
 
     try {
 
@@ -265,44 +265,133 @@ async function startRazorpayPayment(amount) {
 
             order_id: data.order.id,
 
-           handler: async function (paymentResponse) {
+            handler: async function (paymentResponse) {
 
-    console.log(
-        "Payment Successful:",
-        paymentResponse
-    );
+                console.log(
+                    "Payment Successful:",
+                    paymentResponse
+                );
 
-    alert(
-        "✅ Payment Successful!\n\n" +
-        "Payment ID: " +
-        paymentResponse.razorpay_payment_id
-    );
+                try {
 
-    // Payment successful hone ke baad stock reduce hoga
-    const stockUpdated = await reduceProductStock();
+                    // Payment successful hone ke baad stock reduce hoga
+                    const stockUpdated =
+                        await reduceProductStock();
 
-    if (!stockUpdated) {
-        alert(
-            "Payment successful, but stock update failed. Please contact us."
-        );
-        return;
-    }
+                    if (!stockUpdated) {
 
-    console.log(
-        "✅ Payment successful and stock updated."
-    );
+                        alert(
+                            "Payment successful, but stock update failed. Please contact us."
+                        );
 
-},
+                        return;
+                    }
+
+                    console.log(
+                        "✅ Payment successful and stock updated."
+                    );
+
+
+                    // ==============================
+                    // SAVE ORDER IN FIREBASE
+                    // ==============================
+
+                    await addDoc(
+                        collection(db, "orders"),
+                        {
+
+                            orderId: orderData.orderId,
+
+                            customer: orderData.customer,
+
+                            phone: orderData.phone,
+
+                            address: orderData.address,
+
+                            total: orderData.total,
+
+                            payment: "Razorpay",
+
+                            items: orderData.items,
+
+                            date: new Date().toLocaleString(),
+
+                            orderDate:
+                                new Date()
+                                .toISOString()
+                                .split("T")[0],
+
+                            status: "Pending",
+
+                            razorpayPaymentId:
+                                paymentResponse
+                                .razorpay_payment_id,
+
+                            razorpayOrderId:
+                                paymentResponse
+                                .razorpay_order_id
+
+                        }
+                    );
+
+
+                    console.log(
+                        "✅ Order Saved in Firebase"
+                    );
+
+
+                    // ==============================
+                    // OPEN WHATSAPP
+                    // ==============================
+
+                    window.open(
+                        "https://wa.me/917733816532?text=" +
+                        orderData.message,
+                        "_blank"
+                    );
+
+
+                    // ==============================
+                    // SUCCESS MODAL
+                    // ==============================
+
+                    document
+                        .getElementById("successModal")
+                        .style.display = "block";
+
+
+                    alert(
+                        "✅ Payment Successful!\n\n" +
+                        "Your order has been placed successfully."
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Order Save Error:",
+                        error
+                    );
+
+                    alert(
+                        "Payment successful, but order saving failed. Please contact us."
+                    );
+
+                }
+
+            },
 
             prefill: {
 
-                name: document.getElementById(
-                    "customerName"
-                )?.value || "",
+                name:
+                    document
+                    .getElementById("customerName")
+                    ?.value || "",
 
-                contact: document.getElementById(
-                    "customerPhone"
-                )?.value || ""
+                contact:
+                    document
+                    .getElementById("customerPhone")
+                    ?.value || ""
 
             },
 
@@ -314,11 +403,14 @@ async function startRazorpayPayment(amount) {
 
         };
 
+
         // Step 3: Open Razorpay Checkout
+
         const razorpay =
             new Razorpay(options);
 
         razorpay.open();
+
 
     } catch (error) {
 
@@ -334,8 +426,7 @@ async function startRazorpayPayment(amount) {
 
     }
 
-}
-async function showCart(){
+}async function showCart(){
 
 if(cart.length===0){
 alert("Your cart is empty!");
