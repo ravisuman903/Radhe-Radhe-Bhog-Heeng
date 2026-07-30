@@ -539,38 +539,6 @@ startRazorpayPayment(
     orderData
 );
 
-return;
-addDoc(collection(db, "orders"), {
-    orderId: orderId,
-    customer: name,
-    phone: phone,
-    address: address,
-    total: Math.round(finalTotal + delivery),
-    payment: paymentMethod,
-    items: cart,
-    date: new Date().toLocaleString(),
-orderDate: new Date().toISOString().split("T")[0],
-status: "Pending"
-})
-.then(() => {
-    console.log("Order Saved");
-
-    window.open(
-        "https://wa.me/917733816532?text=" + message,
-        "_blank"
-    );
-
-    document.getElementById("successModal").style.display = "block";
-})
-.catch((error) => {
-    console.error(error);
-
-    // Firebase fail ho tab bhi WhatsApp open hoga
-    window.open(
-        "https://wa.me/917733816532?text=" + message,
-        "_blank"
-    );
-});
 }
 const cartModal = document.getElementById("cartModal");
 const closeCart = document.getElementById("closeCart");
