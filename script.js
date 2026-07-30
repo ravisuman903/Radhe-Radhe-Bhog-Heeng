@@ -521,7 +521,6 @@ const stockUpdated = await reduceProductStock();
 if (!stockUpdated) {
     return;
 }
-*/
 const paymentAmount = Math.round(finalTotal + delivery);
 
 const orderData = {
@@ -534,10 +533,35 @@ const orderData = {
     message: message
 };
 
-startRazorpayPayment(
-    paymentAmount,
-    orderData
-);
+// COD ORDER
+if (paymentMethod === "Cash on Delivery") {
+
+    await saveCODOrder(orderData);
+
+    return;
+}
+
+// ONLINE PAYMENT
+if (paymentMethod === "Online Payment") {
+
+    await startRazorpayPayment(
+        paymentAmount,
+        orderData
+    );
+
+    return;
+}
+
+// UPI PAYMENT
+if (paymentMethod === "UPI") {
+
+    await startRazorpayPayment(
+        paymentAmount,
+        orderData
+    );
+
+    return;
+}
 
 }
 const cartModal = document.getElementById("cartModal");
