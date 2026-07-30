@@ -410,11 +410,17 @@ message += "🚚 Delivery Charge = ₹" + delivery + "%0A";
 
 message += "💰 *Grand Total = ₹" + Math.round(finalTotal + delivery) + "*";
 console.log("Final Payment Amount:", Math.round(finalTotal + delivery));
+/*
 const stockUpdated = await reduceProductStock();
 
 if (!stockUpdated) {
     return;
 }
+*/
+const paymentAmount = Math.round(finalTotal + delivery);
+
+startRazorpayPayment(paymentAmount);
+return;
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 orders.push({
