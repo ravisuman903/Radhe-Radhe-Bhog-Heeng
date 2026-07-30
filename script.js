@@ -524,7 +524,21 @@ if (!stockUpdated) {
 */
 const paymentAmount = Math.round(finalTotal + delivery);
 
-startRazorpayPayment(paymentAmount);
+const orderData = {
+    orderId: orderId,
+    customer: name,
+    phone: phone,
+    address: address,
+    total: paymentAmount,
+    items: cart,
+    message: message
+};
+
+startRazorpayPayment(
+    paymentAmount,
+    orderData
+);
+
 return;
 addDoc(collection(db, "orders"), {
     orderId: orderId,
