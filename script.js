@@ -520,9 +520,6 @@ message += "👤 Name: " + name + "%0A";
 message += "📱 Mobile: " + phone + "%0A";
 message += "📍 Address: " + address + "%0A%0A";
 message += "💳 Payment: " + paymentMethod + "%0A%0A";
-if(paymentMethod==="UPI"){
-message += "💸 Transaction ID: " + transactionId + "%0A%0A";
-}
 let orderId = "RRBH-" + Date.now();
 
 message += "🧾 Order ID: " + orderId + "%0A%0A";
