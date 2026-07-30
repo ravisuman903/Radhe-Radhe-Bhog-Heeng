@@ -409,6 +409,7 @@ delivery = 50;
 message += "🚚 Delivery Charge = ₹" + delivery + "%0A";
 
 message += "💰 *Grand Total = ₹" + Math.round(finalTotal + delivery) + "*";
+console.log("Final Payment Amount:", Math.round(finalTotal + delivery));
 const stockUpdated = await reduceProductStock();
 
 if (!stockUpdated) {
