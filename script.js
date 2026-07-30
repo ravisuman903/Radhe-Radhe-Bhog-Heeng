@@ -443,10 +443,6 @@ localStorage.setItem("customerAddress", address);
 let paymentMethod = document.getElementById("paymentMethod").value;
 let transactionId = document.getElementById("transactionId").value;
 
-if(paymentMethod==="UPI" && transactionId.trim()===""){
-alert("Please enter your UPI Transaction ID.");
-return;
-}
 if(name.trim()===""){
 alert("Please enter your name.");
 return;
