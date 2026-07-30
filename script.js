@@ -486,8 +486,10 @@ async function startRazorpayPayment(amount, orderData) {
 
     }
 
-}async function showCart(){
-
+}
+async function showCart(){
+const cartModal = document.getElementById("cartModal");
+cartModal.style.display = "block";
 if(cart.length===0){
 alert("Your cart is empty!");
 return;
