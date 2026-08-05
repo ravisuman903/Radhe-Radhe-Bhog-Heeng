@@ -751,6 +751,60 @@ id="adminSearch"
 class="cart-input"
 placeholder="🔍 Search Order..."
 onkeyup="searchAdminOrders()">
+        <hr>
+
+<h3>🎟️ Coupon Management</h3>
+
+<input type="text"
+id="couponCodeAdmin"
+class="cart-input"
+placeholder="Coupon Code">
+
+<select
+id="couponTypeAdmin"
+class="cart-input">
+
+<option value="flat">Flat Discount (₹)</option>
+<option value="percentage">Percentage (%)</option>
+
+</select>
+
+<input
+type="number"
+id="couponValueAdmin"
+class="cart-input"
+placeholder="Discount Value">
+
+<input
+type="number"
+id="couponMinAdmin"
+class="cart-input"
+placeholder="Minimum Order">
+
+<input
+type="date"
+id="couponExpiryAdmin"
+class="cart-input">
+
+<input
+type="number"
+id="couponLimitAdmin"
+class="cart-input"
+placeholder="Usage Limit">
+
+<button
+class="btn"
+onclick="saveCoupon()">
+➕ Save Coupon
+</button>
+
+<br><br>
+
+<div id="couponList">
+Loading Coupons...
+</div>
+
+<hr>
         <div id="adminOrders"></div>
 <button class="btn" onclick="exportOrders()">
     📥 Export Orders to Excel
