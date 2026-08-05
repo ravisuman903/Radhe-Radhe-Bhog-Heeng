@@ -496,6 +496,11 @@ function openCart() {
     document.getElementById("cartModal").style.display = "flex";
 
 }
+function closeCart() {
+
+    document.getElementById("cartModal").style.display = "none";
+
+}
 async function showCart(){
 const cartModal = document.getElementById("cartModal");
 cartModal.style.display = "block";
