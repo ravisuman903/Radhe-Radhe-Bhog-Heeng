@@ -3056,3 +3056,14 @@ async function editCoupon(code){
     couponLimitAdmin.value = c.usageLimit;
 
 }
+const closeCartBtn = document.getElementById("closeCart");
+
+if (closeCartBtn) {
+
+    closeCartBtn.addEventListener("click", function () {
+
+        document.getElementById("cartModal").style.display = "none";
+
+    });
+
+}
