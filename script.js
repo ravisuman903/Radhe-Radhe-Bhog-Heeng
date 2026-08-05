@@ -489,6 +489,13 @@ async function startRazorpayPayment(amount, orderData) {
     }
 
 }
+function openCart() {
+
+    updateCartPopup();
+
+    document.getElementById("cartModal").style.display = "flex";
+
+}
 async function showCart(){
 const cartModal = document.getElementById("cartModal");
 cartModal.style.display = "block";
