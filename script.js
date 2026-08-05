@@ -134,7 +134,7 @@ function addToCart(
     updateCartPopup();
 
     saveCart();
-document.getElementById("cartModal").style.display = "block";
+
 }
 
 function increaseQty(btn){
