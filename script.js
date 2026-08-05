@@ -10,7 +10,9 @@ import {
     deleteDoc,
     doc,
     updateDoc,
-    runTransaction
+    runTransaction,
+setDoc,
+orderBy
 } from "./firebase.js";
 // Smooth scroll for menu links
 document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -2957,3 +2959,51 @@ function filterProductsByCategory(category) {
 // HTML onclick ke liye function available
 window.filterProductsByCategory =
     filterProductsByCategory;
+async function saveCoupon(){
+
+    const code = document.getElementById("couponCodeAdmin").value.toUpperCase().trim();
+
+    if(code===""){
+        alert("Enter Coupon Code");
+        return;
+    }
+
+    await setDoc(doc(db,"coupons",code),{
+
+        code: code,
+        type: document.getElementById("couponTypeAdmin").value,
+        value: Number(document.getElementById("couponValueAdmin").value),
+        minimumOrder: Number(document.getElementById("couponMinAdmin").value),
+        active: true,
+        expiry: document.getElementById("couponExpiryAdmin").value,
+        usageLimit: Number(document.getElementById("couponLimitAdmin").value),
+        used:0
+
+    });
+
+    alert("Coupon Saved Successfully");
+
+    loadCoupons();
+}
+
+async function loadCoupons(){
+
+    const snapshot = await getDocs(collection(db,"coupons"));
+
+    let html="";
+
+    snapshot.forEach((document)=>{
+
+        const c = document.data();
+
+        html += `
+        <div class="cart-item">
+            <div>
+                <h4>${c.code}</h4>
+                <p>${c.type} - ${c.value}</p>
+            </div>
+        </div>`;
+    });
+
+    document.getElementById("couponList").innerHTML = html;
+}
