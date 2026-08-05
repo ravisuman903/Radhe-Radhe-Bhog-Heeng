@@ -41,5 +41,7 @@ export {
     deleteDoc,
     doc,
     updateDoc,
-    runTransaction
+    runTransaction,
+    setDoc,
+    orderBy
 };
