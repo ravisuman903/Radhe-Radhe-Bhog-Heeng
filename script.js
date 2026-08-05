@@ -1356,6 +1356,7 @@ document.getElementById("todaySales").innerText = "₹" + todaySales;
     document.getElementById("adminOrders").innerHTML = html;
 
     document.getElementById("adminModal").style.display = "block";
+    loadCoupons();
 }
 function liveOrders() {
 
