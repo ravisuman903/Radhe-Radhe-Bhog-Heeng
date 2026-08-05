@@ -2999,14 +2999,58 @@ async function loadCoupons(){
 
         const c = document.data();
 
-        html += `
-        <div class="cart-item">
-            <div>
-                <h4>${c.code}</h4>
-                <p>${c.type} - ${c.value}</p>
-            </div>
-        </div>`;
+       html += `
+<div class="cart-item">
+    <div>
+        <h4>${c.code}</h4>
+        <p>
+            ${c.type} - ${c.value}<br>
+            Min Order : ₹${c.minimumOrder}<br>
+            Used : ${c.used}/${c.usageLimit}
+        </p>
+    </div>
+
+    <div style="display:flex;gap:8px;">
+
+        <button class="btn"
+        onclick="editCoupon('${c.code}')">
+        ✏️
+        </button>
+
+        <button class="btn"
+        onclick="deleteCoupon('${c.code}')">
+        🗑️
+        </button>
+
+    </div>
+</div>
+`;
     });
 
     document.getElementById("couponList").innerHTML = html;
+}
+async function deleteCoupon(code){
+
+    if(!confirm("Delete Coupon?")) return;
+
+    await deleteDoc(doc(db,"coupons",code));
+
+    alert("Coupon Deleted");
+
+    loadCoupons();
+}
+
+async function editCoupon(code){
+
+    const snap = await getDoc(doc(db,"coupons",code));
+
+    const c = snap.data();
+
+    couponCodeAdmin.value = c.code;
+    couponTypeAdmin.value = c.type;
+    couponValueAdmin.value = c.value;
+    couponMinAdmin.value = c.minimumOrder;
+    couponExpiryAdmin.value = c.expiry;
+    couponLimitAdmin.value = c.usageLimit;
+
 }
