@@ -12,7 +12,9 @@ import {
     deleteDoc,
     doc,
     updateDoc,
-    runTransaction
+    runTransaction,
+    setDoc,
+    orderBy
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 const firebaseConfig = {
     apiKey: "AIzaSyDHFc3TuBAjAhAWrmVzQdX5eLFoKTYulmI",
