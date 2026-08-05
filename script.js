@@ -1535,6 +1535,8 @@ window.nextSlide = nextSlide;
 window.searchProducts = searchProducts;
 window.saveCoupon = saveCoupon;
 window.loadCoupons = loadCoupons;
+window.editCoupon = editCoupon;
+window.deleteCoupon = deleteCoupon;
 // ==========================================
 // LOAD ALL PRODUCTS FROM FIREBASE
 // ==========================================
