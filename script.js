@@ -1533,6 +1533,8 @@ window.closeSuccess = closeSuccess;
 window.prevSlide = prevSlide;
 window.nextSlide = nextSlide;
 window.searchProducts = searchProducts;
+window.saveCoupon = saveCoupon;
+window.loadCoupons = loadCoupons;
 // ==========================================
 // LOAD ALL PRODUCTS FROM FIREBASE
 // ==========================================
