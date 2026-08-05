@@ -1549,6 +1549,8 @@ window.saveCoupon = saveCoupon;
 window.loadCoupons = loadCoupons;
 window.editCoupon = editCoupon;
 window.deleteCoupon = deleteCoupon;
+window.openCart = openCart;
+window.closeCart = closeCart;
 // ==========================================
 // LOAD ALL PRODUCTS FROM FIREBASE
 // ==========================================
