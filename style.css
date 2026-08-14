@@ -683,7 +683,9 @@ transform:scale(1.03);
 .hero-slider{
 position:relative;
 }
-
+.hero-slider{
+display:none;
+}
 .slider-btn{
 position:absolute;
 top:50%;
