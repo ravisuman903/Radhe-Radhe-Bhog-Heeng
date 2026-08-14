@@ -69,11 +69,20 @@ color:#FFD700;
 }
 
 .hero{
-height:100vh;
-background:url("images/website-poster.png") center/cover no-repeat;
-display:flex;
-align-items:center;
-justify-content:center;
+    min-height: auto;
+    height: auto;
+    background-color: #faf7f2;
+    background-image: url("images/website-poster.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+
+    padding-top: 66.67%;
+    position:relative;
 }
 
 .hero-overlay{
