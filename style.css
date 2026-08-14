@@ -546,20 +546,6 @@ opacity:1;
 transform:translateY(0);
 }
 
-@keyframes heroZoom{
-0%{
-transform:scale(1);
-}
-
-100%{
-transform:scale(1.08);
-}
-}
-
-.hero{
-animation:heroZoom 10s ease-in-out infinite alternate;
-}
-
 .cart-icon{
 background:#FFD700;
 color:#222;
