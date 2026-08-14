@@ -1062,3 +1062,32 @@ font-weight:bold;
 @media(max-width:500px){
 
     .order-tr
+@media (max-width: 768px){
+
+    .hero{
+        padding-top: 66.67%;
+        background-size: 100% auto;
+        background-position: top center;
+        min-height: 0;
+    }
+
+    .hero-overlay{
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
+        height:auto;
+        padding:15px;
+        background:transparent;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+        gap:8px;
+    }
+
+    .hero-buttons .btn{
+        padding:9px 15px;
+        font-size:12px;
+    }
+}
