@@ -1046,9 +1046,6 @@ font-weight:bold;
     background:#2e7d32;
 }
 
-@media(max-width:500px){
-
-    .order-tr
 @media (max-width: 768px){
 
     .hero{
