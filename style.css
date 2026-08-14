@@ -1077,3 +1077,19 @@ font-weight:bold;
         font-size:12px;
     }
 }
+.hero{
+    height:auto !important;
+    min-height:0 !important;
+    padding-top:66.67% !important;
+    background-size:100% auto !important;
+    background-position:center top !important;
+    background-repeat:no-repeat !important;
+    transform:none !important;
+}
+    @media (max-width:768px){
+    .hero{
+        padding-top:66.67% !important;
+        background-size:100% auto !important;
+        background-position:center top !important;
+    }
+}
