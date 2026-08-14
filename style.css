@@ -69,20 +69,21 @@ color:#FFD700;
 }
 
 .hero{
-    min-height: auto;
-    height: auto;
-    background-color: #faf7f2;
-    background-image: url("images/website-poster.png");
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: 100% auto;
-
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-
-    padding-top: 66.67%;
+    width:100%;
+    margin:0;
+    padding:0;
+    background:#faf7f2;
     position:relative;
+    overflow:hidden;
+}
+
+.hero-poster{
+    display:block;
+    width:100%;
+    height:auto;
+    max-width:100%;
+    object-fit:contain;
+    margin:0;
 }
 
 .hero-overlay{
